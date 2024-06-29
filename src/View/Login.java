@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @author rsw
  */
 public class Login extends JFrame implements ActionListener, ItemListener {
-    JLabel[] jlab = {new JLabel("学号："), new JLabel("姓名："), new JLabel("性别："), new JLabel("读者类型："), new JLabel("院系："),
+    JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("性别："), new JLabel("读者类型："), new JLabel("院系："),
             new JLabel("班级："), new JLabel("手机号码："), new JLabel("电子邮箱："), new JLabel("密保："), new JLabel("密码："),
             new JLabel("确认密码：")};// 声明标签数组
     JButton jbt = new JButton("确定");

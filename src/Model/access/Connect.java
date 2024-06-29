@@ -10,9 +10,9 @@ import java.util.Vector;
  */
 public class Connect {
 	private static String driver = "com.mysql.cj.jdbc.Driver";
-	private static String url = "jdbc:mysql://localhost:3306/bookms?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true";
+	private static String url = "jdbc:mysql://localhost:3306/gasdms?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true";
 	private static String user = "root";
-	private static String password = "159357asd";
+	private static String password = "123123";
 	private static Connection conn = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;

@@ -9,6 +9,8 @@ import Tool.PubJdialog;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,24 +18,22 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-/**
- * 登录界面
- *
- * @author rsw
- */
+
 public class Main extends JFrame implements ActionListener {
+
+    final int WIDTH = 700, HEIGHT = 530;//页面参数
+    boolean identity;// 确定是否为用户 identity身份
     boolean isuser = true;
     String count;
-    final int WIDTH = 700, HEIGHT = 530;
-    boolean identity;// 确定是否为用户 identity身份
     int type;
     JPanel panel = new JPanel();
     JTextField jtext = new JTextField();
     JPasswordField jpassword = new JPasswordField();
     JLabel backImage;
-    JLabel[] jlab = {new JLabel("账号："), new JLabel("密码：")};// 声明标签数组
-    Font fnt = new Font("Microsoft YaHei", Font.BOLD, 20);
+    JLabel[] jlab = {new JLabel("账号："), new JLabel("密码：")};//声明标签数组
+    Font fnt = new Font("Microsoft YaHei", Font.BOLD, 20);//创建字体对象
     ImageIcon img_lading = new ImageIcon("src/Images/lading.jpg");
+    ImageIcon img_laded = new ImageIcon("src/Images/laded.jpg");
     ImageIcon img_login = new ImageIcon("src/Images/login.jpg");
     ImageIcon img_forgetPass = new ImageIcon("src/Images/forgetPass.jpg");
     JButton jbt_lading, jbt_login, jbt_forgetPass;
@@ -43,9 +43,6 @@ public class Main extends JFrame implements ActionListener {
     Administrator admi = new Administrator();
     ReaderCon readercon = new ReaderCon();
 
-    /*
-     * 登录界面
-     */
     public Main() {
         ButtonGroup grp = new ButtonGroup();// 实例化单选按钮组
         backImage = new JLabel(new ImageIcon("src/Images/LadingInterface.jpg"));
@@ -53,8 +50,10 @@ public class Main extends JFrame implements ActionListener {
         jbt_lading = new JButton(img_lading);// 登录按钮
         jbt_login = new JButton(img_login);// 注册按钮
         jbt_forgetPass = new JButton(img_forgetPass);
+        ImageIcon icon = new ImageIcon("src/Images/icon.png");
+        this.setIconImage(icon.getImage());
         this.setLayout(null);
-        this.setTitle("图书管理系统");
+        this.setTitle("煤气送气管理系统");
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);// 设置窗体居中显示
         this.setResizable(false);// 窗口不能改变大小
@@ -103,7 +102,31 @@ public class Main extends JFrame implements ActionListener {
         jbt_forgetPass.addActionListener(this);
         jtext.addActionListener(this);// 设置账号监听者
         jpassword.addActionListener(this);// 设置密码监听者
-        jtext.addFocusListener(new InputLimit(jtext, "11位的学号"));// 设置文诓提示的外部类监听
+        jpassword.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateButtonIcon();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateButtonIcon();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateButtonIcon();
+            }
+
+            private void updateButtonIcon() {
+                if (jpassword.getPassword().length > 0) {
+                    jbt_lading.setIcon(img_laded);
+                } else {
+                    jbt_lading.setIcon(img_lading);
+                }
+            }
+        });
+        jtext.addFocusListener(new InputLimit(jtext, "11位账号"));// 设置文诓提示的外部类监听
         // 点击结束程序时，弹出对话框
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -133,7 +156,7 @@ public class Main extends JFrame implements ActionListener {
             panel.add(jbt_forgetPass);
             jbt_login.repaint();
             jbt_forgetPass.repaint();
-            jtext.addFocusListener(new InputLimit(jtext, "11位学号"));// 设置文诓提示的外部类监听
+            jtext.addFocusListener(new InputLimit(jtext, "11位账号"));// 设置文诓提示的外部类监听
         } else if (obj == jrb2) {
             isuser = false;
             jbt_login.setVisible(false);
@@ -171,14 +194,14 @@ public class Main extends JFrame implements ActionListener {
             }
         } else if (obj == jbt_login) {
             try {
-                new Login();
+                new Login(); 
                 this.dispose();
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         } else if (obj == jbt_forgetPass) {
-            JLabel[] jlab_forget = {new JLabel("学号："), new JLabel("密保：")};
+            JLabel[] jlab_forget = {new JLabel("账号："), new JLabel("密保：")};
             JTextField[] jtext_forget = new JTextField[2];
             try {
                 new PubJdialog(jlab_forget, jtext_forget).setVisible(true);
@@ -193,3 +216,4 @@ public class Main extends JFrame implements ActionListener {
         new Main();
     }
 }
+

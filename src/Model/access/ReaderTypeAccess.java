@@ -20,7 +20,7 @@ public class ReaderTypeAccess {
 	 */
 	public Object[][] queryReaderType() throws SQLException{
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT * from bookms.readertype";
+		String sql = "SELECT * from gasdms.readertype";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		int len = 0;
@@ -44,7 +44,7 @@ public class ReaderTypeAccess {
 	 */
 	public int queryReaderTypeID(String reader_type) throws SQLException {
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT rt_id from bookms.readertype WHERE rt_name=?";
+		String sql = "SELECT rt_id from gasdms.readertype WHERE rt_name=?";
 		PreparedStatement ptmt = conn.prepareStatement(sql);
 		ptmt.setString(1, reader_type);
 		ResultSet rs = ptmt.executeQuery();
@@ -60,8 +60,8 @@ public class ReaderTypeAccess {
 	 */
 	public Vector<Vector<Object>> queryPersonalType(String count) throws SQLException {
 		int column=3;
-		String sql="SELECT rt_name,maxcount,maxday FROM bookms.readertype "
-				+ "WHERE rt_id IN ( SELECT reader_type FROM bookms.reader WHERE number=? )";
+		String sql="SELECT rt_name,maxcount,maxday FROM gasdms.readertype "
+				+ "WHERE rt_id IN ( SELECT reader_type FROM gasdms.reader WHERE number=? )";
 		return Connect.queryExact_public(sql,count);	
 	}	
 	/**
@@ -69,21 +69,21 @@ public class ReaderTypeAccess {
 	 * @throws SQLException 
 	 */
 	public void insertReaderType(String rt_name,int maxcont,int maxday) throws SQLException {
-		String sql = "INSERT INTO bookms.readertype(rt_name,maxcount,maxday) VALUES(?,?,?)";
+		String sql = "INSERT INTO gasdms.readertype(rt_name,maxcount,maxday) VALUES(?,?,?)";
 		Connect.update_public(sql, rt_name,maxcont,maxday);
 	}
 	/**
 	 *删除读者类型
 	 */
 	public void deleteRederType(int rt_id) throws SQLException {
-		String sql = "DELETE FROM bookms.readertype WHERE rt_id=?";
+		String sql = "DELETE FROM gasdms.readertype WHERE rt_id=?";
 		Connect.update_public(sql, rt_id);
 	}
 	/**
 	 * 修改读者类型
 	 */
 	public void updateRederType(String readerType,int maxcount,int maxday,int rt_id) throws SQLException {
-		String sql = "UPDATE bookms.readertype SET rt_name=?,maxcount=?,maxday=? WHERE rt_id=?";
+		String sql = "UPDATE gasdms.readertype SET rt_name=?,maxcount=?,maxday=? WHERE rt_id=?";
 		Connect.update_public(sql,readerType,maxcount ,maxday,rt_id);
 	}
 }

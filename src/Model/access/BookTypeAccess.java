@@ -23,7 +23,7 @@ public class BookTypeAccess {
 	 */
 	public int queryBTid(String bt_name) throws SQLException {
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT bt_id from bookms.booktype WHERE bt_name=?";
+		String sql = "SELECT bt_id from gasdms.booktype WHERE bt_name=?";
 		PreparedStatement pr = conn.prepareStatement(sql);
 		pr.setString(1, bt_name);
 		ResultSet rs = pr.executeQuery();
@@ -41,7 +41,7 @@ public class BookTypeAccess {
 	public List<BookType> queryBookType() throws SQLException {
 		List<BookType> bookTypeData = new ArrayList<BookType>();
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT * FROM bookms.booktype ORDER BY bt_id ASC";//查询并排序（升序）
+		String sql = "SELECT * FROM gasdms.booktype ORDER BY bt_id ASC";//查询并排序（升序）
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -57,12 +57,12 @@ public class BookTypeAccess {
 	 * 新增图书类型
 	 */
 	public int insertBookType(String bt_name) throws SQLException {
-		String sql = "INSERT INTO bookms.booktype(bt_name) VALUES(?);";
+		String sql = "INSERT INTO gasdms.booktype(bt_name) VALUES(?);";
 		Connect.update_public(sql, bt_name);
 	
 		int id=0;
 		Connection conn = Connect.connectMySQL();
-		String insterID="SELECT bt_id FROM bookms.booktype WHERE bt_name=?";
+		String insterID="SELECT bt_id FROM gasdms.booktype WHERE bt_name=?";
 		PreparedStatement pr = conn.prepareStatement(insterID);
 		pr.setString(1, bt_name);
 		ResultSet rs = pr.executeQuery();
@@ -75,7 +75,7 @@ public class BookTypeAccess {
 	 * 删除图书类型
 	 */
 	public void deleteBookType(int bt_id) throws SQLException {
-		String sql = "DELETE FROM bookms.booktype WHERE bt_id=?";
+		String sql = "DELETE FROM gasdms.booktype WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
 	/**
@@ -83,7 +83,7 @@ public class BookTypeAccess {
 	 * 修改图书类型
 	 */
 	public void updateBookType(String input_bookType,int bt_id) throws SQLException {
-		String sql = "UPDATE bookms.booktype SET bt_name='"+input_bookType+"' WHERE bt_id=?";
+		String sql = "UPDATE gasdms.booktype SET bt_name='"+input_bookType+"' WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
 }

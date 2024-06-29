@@ -19,7 +19,7 @@ public class ReaderAccess {
 	 */
 	public void insertReader(String r_number, String r_name, String gender, int reader_type, String dept,
 			String classes, String r_tele, String r_email, String keeppass, String r_password) throws SQLException {
-		String sql = "INSERT INTO bookms.reader(number,name,gender,reader_type,dept,classes,tele,email,keeppass,password) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO gasdms.reader(number,name,gender,reader_type,dept,classes,tele,email,keeppass,password) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		Connect.update_public(sql, r_number, r_name, gender, reader_type, dept, classes, r_tele, r_email, keeppass,
 				r_password);
 	}
@@ -28,7 +28,7 @@ public class ReaderAccess {
 	 * 查询账号是否存在 用于用户注册和新增读者（保证账号唯一性）
 	 */
 	public boolean isNumber(String r_number) throws SQLException {
-		String sql = "SELECT number FROM bookms.reader WHERE number=?";
+		String sql = "SELECT number FROM gasdms.reader WHERE number=?";
 		return Connect.exist(sql, r_number);
 	}
 
@@ -36,7 +36,7 @@ public class ReaderAccess {
 	 * 查询账号密码是否存在
 	 */
 	public boolean queryRerader(String r_number, String r_password) throws SQLException {
-		String sql = "SELECT number,password FROM bookms.reader WHERE number=? AND password=?";
+		String sql = "SELECT number,password FROM gasdms.reader WHERE number=? AND password=?";
 		return Connect.exist(sql, r_number, r_password);
 	}
 
@@ -44,7 +44,7 @@ public class ReaderAccess {
 	 * 查询个人信息
 	 */
 	public Vector<Vector<Object>> queryReaderInfo(String count) throws SQLException {
-		String sql = "SELECT * FROM bookms.reader WHERE number=?";
+		String sql = "SELECT * FROM gasdms.reader WHERE number=?";
 		return Connect.queryExact_public(sql, count);
 	}
 
@@ -53,7 +53,7 @@ public class ReaderAccess {
 	 */
 	public void updateReader(String dept, String classes, String tele, String email, String number)
 			throws SQLException {
-		String sql = "UPDATE bookms.reader SET dept=?,classes=?,tele=?,email=? WHERE number=?";
+		String sql = "UPDATE gasdms.reader SET dept=?,classes=?,tele=?,email=? WHERE number=?";
 		Connect.update_public(sql, dept, classes, tele, email, number);
 	}
 
@@ -64,7 +64,7 @@ public class ReaderAccess {
 	 */
 	public void updateReaderPass(String alterPass, String r_number, String r_password, String r_keepPass)
 			throws SQLException {
-		String sql = "UPDATE bookms.reader SET password='" + alterPass
+		String sql = "UPDATE gasdms.reader SET password='" + alterPass
 				+ "' WHERE number=? AND password=? AND keeppass=?";
 		Connect.update_public(sql, r_number, r_password, r_keepPass);
 	}
@@ -73,7 +73,7 @@ public class ReaderAccess {
 	 * 查询 全部读者
 	 */
 	public Vector<Vector<Object>> seleReader() throws SQLException {
-		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from bookms.reader,bookms.readertype where bookms.reader.reader_type=bookms.readertype.rt_id";
+		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from gasdms.reader,gasdms.readertype where gasdms.reader.reader_type=gasdms.readertype.rt_id";
 		return Connect.queryExact_public(sql);
 	}
 
@@ -82,8 +82,8 @@ public class ReaderAccess {
 	 */
 	public Vector<Vector<Object>> queryReaderInfo(String number, String name, String dept, String classes)
 			throws SQLException {
-		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from bookms.reader,bookms.readertype "
-				+ "where bookms.reader.reader_type=bookms.readertype.rt_id AND (number LIKE ? OR name LIKE ? OR dept LIKE ? OR classes LIKE ?)";
+		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from gasdms.reader,gasdms.readertype "
+				+ "where gasdms.reader.reader_type=gasdms.readertype.rt_id AND (number LIKE ? OR name LIKE ? OR dept LIKE ? OR classes LIKE ?)";
 		return Connect.queryDim_public(sql, number, name, dept, classes);
 	}
 
@@ -92,8 +92,8 @@ public class ReaderAccess {
 	 */
 	public Vector<Vector<Object>> seleReaderInfo(String number, String name, String dept, String classes,
 			String reader_type) throws SQLException {
-		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from bookms.reader,bookms.readertype "
-				+ "where bookms.reader.reader_type=bookms.readertype.rt_id AND (number LIKE ? OR name LIKE ? OR dept LIKE ? OR classes LIKE ?) AND rt_name=?";
+		String sql = "SELECT number,name,gender,rt_name,dept,classes,tele,email,logindate from gasdms.reader,gasdms.readertype "
+				+ "where gasdms.reader.reader_type=gasdms.readertype.rt_id AND (number LIKE ? OR name LIKE ? OR dept LIKE ? OR classes LIKE ?) AND rt_name=?";
 		Vector<Vector<Object>> dataVector = new Vector<Vector<Object>>(); // 存储所有数据，里面每个小的Vector是存单行的
 		Connection conn = Connect.connectMySQL();// 调用数据库的连接方法
 		PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class ReaderAccess {
 	 * 删除读者信息
 	 */
 	public void dropReader(String studentNumber) throws SQLException {
-		String sql = "DELETE FROM bookms.reader WHERE number=?";
+		String sql = "DELETE FROM gasdms.reader WHERE number=?";
 		Connect.update_public(sql, studentNumber);
 	}
 
@@ -127,7 +127,7 @@ public class ReaderAccess {
 	 * 忘记密码 密保验证
 	 */
 	public boolean queryKeeppass(String forgetPass, String count) throws SQLException {
-		String sql = "SELECT keeppass FROM bookms.reader WHERE keeppass=? AND number=?";
+		String sql = "SELECT keeppass FROM gasdms.reader WHERE keeppass=? AND number=?";
 		return Connect.exist(sql, forgetPass, count);
 	}
 
@@ -135,7 +135,7 @@ public class ReaderAccess {
 	 * 忘记密码后重置密码
 	 */
 	public void resetPass(String forgetPass, String count, String newPass) throws SQLException {
-		String sql = "UPDATE bookms.reader SET password='" + newPass + "' WHERE keeppass=? AND number=? ";
+		String sql = "UPDATE gasdms.reader SET password='" + newPass + "' WHERE keeppass=? AND number=? ";
 		Connect.update_public(sql, forgetPass, count);
 	}
 
@@ -143,7 +143,7 @@ public class ReaderAccess {
 	 * 查询是否有读者具备此读者类型 删除类读者类型前，保证没有读者应用此读者类型
 	 */
 	public boolean existReadertype(int rt_id) throws SQLException {
-		String sql = "SELECT reader_type FROM bookms.reader WHERE reader_type=?";
+		String sql = "SELECT reader_type FROM gasdms.reader WHERE reader_type=?";
 		return Connect.exist(sql, rt_id);
 
 	}

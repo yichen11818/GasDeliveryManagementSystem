@@ -21,7 +21,7 @@ public class BorrowAccess {
 	public boolean insertBorrow(String number, int b_name, int borrowdate, int duedate,int b_id){
 		boolean isCommit=false;
 		Connection conn = Connect.connectMySQL();
-		String sql = "INSERT INTO bookms.borrow(r_number,borrow_b_id,borrowdate,duedate,isreturn) VALUES(?,?,?,?,'0')";
+		String sql = "INSERT INTO gasdms.borrow(r_number,borrow_b_id,borrowdate,duedate,isreturn) VALUES(?,?,?,?,'0')";
 		try {
 			conn.setAutoCommit(false);//将自动提交设置为false 
 			PreparedStatement ptmt1 = conn.prepareStatement(sql);
@@ -31,7 +31,7 @@ public class BorrowAccess {
 			ptmt1.setLong(4, duedate);
 			ptmt1.executeUpdate();
 			
-			String updateInvebtorySql="UPDATE bookms.book SET inventory=inventory-1 WHERE b_id=?;";
+			String updateInvebtorySql="UPDATE gasdms.book SET inventory=inventory-1 WHERE b_id=?;";
 			PreparedStatement ptmt2 = conn.prepareStatement(updateInvebtorySql);
 			ptmt2.setInt(1, b_id);
 			ptmt2.executeUpdate();
@@ -60,14 +60,14 @@ public class BorrowAccess {
 		boolean isCommit=false;
 		Connection conn = Connect.connectMySQL();
 		try {
-			String sql = "UPDATE bookms.borrow SET returndate=?,isreturn='1' WHERE borrow_id=?";
+			String sql = "UPDATE gasdms.borrow SET returndate=?,isreturn='1' WHERE borrow_id=?";
 			conn.setAutoCommit(false);//将自动提交设置为false 
 			PreparedStatement ptmt1 = conn.prepareStatement(sql);
 			ptmt1.setInt(1, returndate);
 			ptmt1.setInt(2, borrow_id);
 			ptmt1.executeUpdate();
 			
-			String updateInvebtorySql="UPDATE bookms.book SET inventory=inventory+1 WHERE b_id=?;";
+			String updateInvebtorySql="UPDATE gasdms.book SET inventory=inventory+1 WHERE b_id=?;";
 			PreparedStatement ptmt2 = conn.prepareStatement(updateInvebtorySql);
 			ptmt2.setInt(1, b_id);
 			ptmt2.executeUpdate();
@@ -93,8 +93,8 @@ public class BorrowAccess {
 	 * @throws SQLException 
 	 */
 	public Vector<Vector<Object>> queryBorrowInfo(String number1,String number2,boolean isreturn) throws SQLException {
-		String sql ="SELECT borrow_id,ISBN,book.b_name,bt_name,author,borrowdate,duedate,returndate FROM bookms.book,bookms.booktype,bookms.borrow WHERE bookms.book.booktype=bookms.booktype.bt_id" + 
-				" AND borrow.r_number=? AND borrow.borrow_b_id=book.b_id AND book.b_id IN (SELECT borrow.borrow_b_id FROM bookms.borrow WHERE r_number=? ) AND borrow.isreturn=? ORDER BY borrowdate DESC";
+		String sql ="SELECT borrow_id,ISBN,book.b_name,bt_name,author,borrowdate,duedate,returndate FROM gasdms.book,gasdms.booktype,gasdms.borrow WHERE gasdms.book.booktype=gasdms.booktype.bt_id" + 
+				" AND borrow.r_number=? AND borrow.borrow_b_id=book.b_id AND book.b_id IN (SELECT borrow.borrow_b_id FROM gasdms.borrow WHERE r_number=? ) AND borrow.isreturn=? ORDER BY borrowdate DESC";
 		return Connect.queryExact_public(sql,number1,number2,isreturn);
 	}
 	/**
@@ -102,14 +102,14 @@ public class BorrowAccess {
 	 * @throws SQLException 
 	 */
 	public boolean queryExistBook(int borrow_b_id) throws SQLException {
-		String sql="SELECT borrow_b_id FROM bookms.borrow WHERE borrow_b_id=? AND isreturn='0'";
+		String sql="SELECT borrow_b_id FROM gasdms.borrow WHERE borrow_b_id=? AND isreturn='0'";
 		return Connect.exist(sql, borrow_b_id);
 	}
 	/**
 	 * 查询此书是否被借阅
 	 */
 	public boolean queryIsBorrowBook(int borrow_b_id,String count)throws SQLException {
-		String sql="SELECT borrow_b_id FROM bookms.borrow WHERE borrow_b_id=? AND r_number=? AND isreturn='0'";
+		String sql="SELECT borrow_b_id FROM gasdms.borrow WHERE borrow_b_id=? AND r_number=? AND isreturn='0'";
 		return Connect.exist(sql, borrow_b_id,count);
 	}
 }
