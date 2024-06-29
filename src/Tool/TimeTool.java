@@ -5,10 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * 公共的时间转换类
- * @author rsw
- */
 public class TimeTool {
 	static SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 可以方便修改日期格式
 

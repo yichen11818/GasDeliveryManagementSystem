@@ -21,7 +21,16 @@ import java.text.ParseException;
 
 public class Main extends JFrame implements ActionListener {
 
+    AdmiCon admiCon = new AdmiCon();
+    Administrator admi = new Administrator();
+    ReaderCon readercon = new ReaderCon();
+
     final int WIDTH = 700, HEIGHT = 530;//页面参数
+    ImageIcon img_lading = new ImageIcon("src/Images/lading.jpg");
+    ImageIcon img_laded = new ImageIcon("src/Images/laded.jpg");
+    ImageIcon img_login = new ImageIcon("src/Images/login.jpg");
+    ImageIcon img_forgetPass = new ImageIcon("src/Images/forgetPass.jpg");
+
     boolean identity;// 确定是否为用户 identity身份
     boolean isuser = true;
     String count;
@@ -32,24 +41,22 @@ public class Main extends JFrame implements ActionListener {
     JLabel backImage;
     JLabel[] jlab = {new JLabel("账号："), new JLabel("密码：")};//声明标签数组
     Font fnt = new Font("Microsoft YaHei", Font.BOLD, 20);//创建字体对象
-    ImageIcon img_lading = new ImageIcon("src/Images/lading.jpg");
-    ImageIcon img_laded = new ImageIcon("src/Images/laded.jpg");
-    ImageIcon img_login = new ImageIcon("src/Images/login.jpg");
-    ImageIcon img_forgetPass = new ImageIcon("src/Images/forgetPass.jpg");
     JButton jbt_lading, jbt_login, jbt_forgetPass;
     JRadioButton jrb1 = new JRadioButton("用户");
     JRadioButton jrb2 = new JRadioButton("管理员");
-    AdmiCon admiCon = new AdmiCon();
-    Administrator admi = new Administrator();
-    ReaderCon readercon = new ReaderCon();
+
+
 
     public Main() {
         ButtonGroup grp = new ButtonGroup();// 实例化单选按钮组
         backImage = new JLabel(new ImageIcon("src/Images/LadingInterface.jpg"));
+
         panel.setLayout(null);// 取消默认布局管理器
+
         jbt_lading = new JButton(img_lading);// 登录按钮
         jbt_login = new JButton(img_login);// 注册按钮
         jbt_forgetPass = new JButton(img_forgetPass);
+        // 窗体属性
         ImageIcon icon = new ImageIcon("src/Images/icon.png");
         this.setIconImage(icon.getImage());
         this.setLayout(null);
@@ -59,18 +66,21 @@ public class Main extends JFrame implements ActionListener {
         this.setResizable(false);// 窗口不能改变大小
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);// 关闭窗口不执行任何操作
         this.setVisible(true);// 使窗口显示
+
+        // 文本框和密码框
         jtext.setBounds(250, 200, 250, 40);
         jpassword.setBounds(250, 260, 250, 40);
         jtext.setFont(fnt);
         jpassword.setFont(fnt);
         jtext.setDocument(new InputLimit(16));
-        jpassword.setDocument(new InputLimit(16));// 匿名调用工具类——“限制输入”工具，限制输入16位
+        jpassword.setDocument(new InputLimit(16));// 限制输入16位
 
         panel.setBounds(0, 0, WIDTH, HEIGHT);
         jbt_lading.setBounds(280, 330, 200, 40);
         jbt_login.setBounds(500, 200, 100, 40);
         jbt_forgetPass.setBounds(500, 260, 100, 40);
         jbt_login.setFocusable(false);// 去焦点
+        // 标签
         jlab[0].setBounds(180, 200, 80, 40);
         jlab[1].setBounds(180, 260, 80, 40);
         jlab[0].setFont(fnt);
@@ -78,11 +88,13 @@ public class Main extends JFrame implements ActionListener {
         backImage.setSize(WIDTH, HEIGHT);
         jlab[0].setHorizontalAlignment(0);// 设置水平对齐方式 0居中
         jlab[1].setHorizontalAlignment(0);
+
         jrb1.setBounds(270, 150, 80, 40);
         jrb2.setBounds(370, 150, 80, 40);
         jrb1.setSelected(true);//设置用户单选按钮默认被选中
         grp.add(jrb1);// 将单选按钮添加到单选按钮组中（保证单选）
         grp.add(jrb2);
+
         panel.add(jrb1);
         panel.add(jrb2);
         panel.add(jtext);

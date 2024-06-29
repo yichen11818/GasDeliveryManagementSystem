@@ -5,11 +5,7 @@ import java.util.Vector;
 
 import Model.access.AdmiAccess;
 
-/**
- * 管理员表的控制器
- * @author rsw
- *
- */
+
 public class AdmiCon {
 	AdmiAccess admiDao = new AdmiAccess();
 
