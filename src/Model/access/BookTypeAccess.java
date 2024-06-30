@@ -21,7 +21,7 @@ public class BookTypeAccess {
 	 * 查询图书类型的id
 	 * @throws SQLException 
 	 */
-	public int queryBTid(String bt_name) throws SQLException {
+	public int queryGasTypeid(String bt_name) throws SQLException {
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT bt_id from gasdms.booktype WHERE bt_name=?";
 		PreparedStatement pr = conn.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class BookTypeAccess {
 	/**
 	 * 查询图书类型及其序号
 	 */
-	public List<BookType> queryBookType() throws SQLException {
+	public List<BookType> queryGasType() throws SQLException {
 		List<BookType> bookTypeData = new ArrayList<BookType>();
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT * FROM gasdms.booktype ORDER BY bt_id ASC";//查询并排序（升序）
@@ -56,7 +56,7 @@ public class BookTypeAccess {
 	/**
 	 * 新增图书类型
 	 */
-	public int insertBookType(String bt_name) throws SQLException {
+	public int insertGasType(String bt_name) throws SQLException {
 		String sql = "INSERT INTO gasdms.booktype(bt_name) VALUES(?);";
 		Connect.update_public(sql, bt_name);
 	
@@ -74,7 +74,7 @@ public class BookTypeAccess {
 	/**
 	 * 删除图书类型
 	 */
-	public void deleteBookType(int bt_id) throws SQLException {
+	public void deleteGasType(int bt_id) throws SQLException {
 		String sql = "DELETE FROM gasdms.booktype WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
@@ -82,7 +82,7 @@ public class BookTypeAccess {
 	 * 
 	 * 修改图书类型
 	 */
-	public void updateBookType(String input_bookType,int bt_id) throws SQLException {
+	public void updateGasType(String input_bookType, int bt_id) throws SQLException {
 		String sql = "UPDATE gasdms.booktype SET bt_name='"+input_bookType+"' WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
