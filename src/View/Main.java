@@ -13,6 +13,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -140,6 +142,8 @@ public class Main extends JFrame implements ActionListener {
         });
         jtext.addFocusListener(new InputLimit(jtext, "11位账号"));// 设置文诓提示的外部类监听
         // 点击结束程序时，弹出对话框
+
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -149,6 +153,23 @@ public class Main extends JFrame implements ActionListener {
                 }
             }
         });
+        jtext.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jbt_lading.doClick();
+                }
+            }
+        });
+        jpassword.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jbt_lading.doClick();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -180,13 +201,14 @@ public class Main extends JFrame implements ActionListener {
         /*
          * 判断登录的账号密码信息 加入正则验证
          */
+
         if (obj == jbt_lading) {// 登录按钮
             try {
                 if (number.equals("") || password.equals("")) { // 判断输入是否为空
                     JOptionPane.showMessageDialog(null, "输入数据为空", "输入错误", JOptionPane.ERROR_MESSAGE);
                 } else if (resurt) {
                     if (readercon.queryRerader(number, password) && isuser == true) {
-                        count = number;// 将登录正确的账号传回数据库，方便查询信息，确保是哪个用户
+                        count = number;// 账号传回数据库
                         new UserFace(count);
                         this.dispose();
                     } else if (admiCon.queryAdmi(number, password) && isuser == false) {
