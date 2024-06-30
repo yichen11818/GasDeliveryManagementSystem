@@ -18,7 +18,7 @@ public class ReaderTypeAccess {
 	 * 查询读者类型
 	 * @throws SQLException 
 	 */
-	public Object[][] queryReaderType() throws SQLException{
+	public Object[][] queryUserType() throws SQLException{
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT * from gasdms.readertype";
 		Statement stmt = conn.createStatement();
@@ -42,7 +42,7 @@ public class ReaderTypeAccess {
 	/**
 	 * 查询读者类型的ID
 	 */
-	public int queryReaderTypeID(String reader_type) throws SQLException {
+	public int queryUserTypeID(String reader_type) throws SQLException {
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT rt_id from gasdms.readertype WHERE rt_name=?";
 		PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -68,21 +68,21 @@ public class ReaderTypeAccess {
 	 * 新增读者类型
 	 * @throws SQLException 
 	 */
-	public void insertReaderType(String rt_name,int maxcont,int maxday) throws SQLException {
+	public void insertUserType(String rt_name, int maxcont, int maxday) throws SQLException {
 		String sql = "INSERT INTO gasdms.readertype(rt_name,maxcount,maxday) VALUES(?,?,?)";
 		Connect.update_public(sql, rt_name,maxcont,maxday);
 	}
 	/**
 	 *删除读者类型
 	 */
-	public void deleteRederType(int rt_id) throws SQLException {
+	public void deleteUserType(int rt_id) throws SQLException {
 		String sql = "DELETE FROM gasdms.readertype WHERE rt_id=?";
 		Connect.update_public(sql, rt_id);
 	}
 	/**
 	 * 修改读者类型
 	 */
-	public void updateRederType(String readerType,int maxcount,int maxday,int rt_id) throws SQLException {
+	public void updateUserType(String readerType, int maxcount, int maxday, int rt_id) throws SQLException {
 		String sql = "UPDATE gasdms.readertype SET rt_name=?,maxcount=?,maxday=? WHERE rt_id=?";
 		Connect.update_public(sql,readerType,maxcount ,maxday,rt_id);
 	}
