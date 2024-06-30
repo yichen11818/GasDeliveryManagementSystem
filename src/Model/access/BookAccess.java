@@ -5,11 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
-
-import Model.table.Book;
 
 /**
  * 图书信息表的增删改查
@@ -30,7 +26,7 @@ public class BookAccess {
 	/**
 	 * 查询全部图书
 	 */
-	public Vector<Vector<Object>> seleBook() throws SQLException {
+	public Vector<Vector<Object>> seleGas() throws SQLException {
 		String sql = "SELECT b_id,ISBN,b_name,bt_name,author,press,price,inventory from gasdms.book LEFT JOIN gasdms.booktype "
 				+ "ON gasdms.book.booktype=gasdms.booktype.bt_id ";
 		return Connect.queryExact_public(sql);
@@ -39,7 +35,7 @@ public class BookAccess {
 	/**
 	 * 精确查询、模糊查询（包含图书类型）
 	 */
-	public Vector<Vector<Object>> queryBook(String ISBN, String b_name, String author, String b_type)
+	public Vector<Vector<Object>> queryGas(String ISBN, String b_name, String author, String b_type)
 			throws SQLException {
 		String sql = "SELECT b_id,ISBN,b_name,bt_name,author,press,price,inventory from gasdms.book LEFT JOIN gasdms.booktype  "
 				+ " ON gasdms.book.booktype=gasdms.booktype.bt_id WHERE (ISBN LIKE ? OR b_name LIKE ? OR author LIKE ? ) AND bt_name=? ";
@@ -66,7 +62,7 @@ public class BookAccess {
 	/**
 	 * 查询图书类型
 	 */
-	public Vector<String> seleB_type() throws SQLException {
+	public Vector<String> seleGas_type() throws SQLException {
 		Connection conn = Connect.connectMySQL();
 		Vector<String> bt_name = new Vector<String>();
 		String sql = "SELECT bt_name from gasdms.booktype ORDER BY bt_id ASC";
@@ -82,7 +78,7 @@ public class BookAccess {
 	/**
 	 * 查询图书类型id
 	 */
-	public int seleB_name(String name) throws SQLException {
+	public int seleGas_name(String name) throws SQLException {
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT b_id from gasdms.book WHERE b_name=?";
 		int count = 0;
@@ -99,7 +95,7 @@ public class BookAccess {
 	/**
 	 * 删除图书
 	 */
-	public void dropBook(int b_id) throws SQLException {
+	public void dropGas(int b_id) throws SQLException {
 		String sql = "DELETE FROM gasdms.book WHERE b_id=?";
 		Connect.update_public(sql, b_id);
 	}
@@ -107,8 +103,8 @@ public class BookAccess {
 	/**
 	 * 新增图书
 	 */
-	public void insterBook(String ISBN, String b_name, int booktype, String author, String press, double price,
-			int inventory) throws SQLException {
+	public void insterGas(String ISBN, String b_name, int booktype, String author, String press, double price,
+						  int inventory) throws SQLException {
 		String sql = "INSERT INTO gasdms.book(ISBN,b_name,booktype,author,press,price,inventory) VALUES(?,?,?,?,?,?,?)";
 		Connect.update_public(sql, ISBN, b_name, booktype, author, press, price, inventory);
 	}
@@ -116,8 +112,8 @@ public class BookAccess {
 	/**
 	 * 修改图书信息
 	 */
-	public void updateBook(String ISBN, String b_name, String author, String press, double price, int inventory,
-			int b_id) throws SQLException {
+	public void updateGas(String ISBN, String b_name, String author, String press, double price, int inventory,
+						  int b_id) throws SQLException {
 		String sql = "UPDATE gasdms.book SET ISBN=?,b_name=?,author=?,press=?,price=?,inventory=? WHERE b_id=?";
 		Connect.update_public(sql, ISBN, b_name, author, press, price, inventory, b_id);
 	}
@@ -125,7 +121,7 @@ public class BookAccess {
 	/**
 	 * 查询是否有图书具备此图书类型 删除类图书类型前，保证没有图书应用此图书类型
 	 */
-	public boolean existBooktype(int bt_id) throws SQLException {
+	public boolean existGastype(int bt_id) throws SQLException {
 		String sql = "SELECT booktype FROM gasdms.book WHERE booktype=?";
 		return Connect.exist(sql, bt_id);
 	}

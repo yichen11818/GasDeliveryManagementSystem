@@ -5,8 +5,6 @@ import java.util.Vector;
 
 /**
  * 管理员信息表的增删改查
- * @author rsw
- *
  */
 public class AdmiAccess {
 	/**

@@ -9,14 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /**
- * ç”¨æˆ·ç«¯ç•Œé¢
+ * ÓÃ»§¶Ë½çÃæ
  * @author rsw
  *
  */
 public class UserFace extends JFrame {
 	final int WIDTH = 1000, HEIGHT = 730;
 	static String count;
-	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// åˆ›å»ºé€‰é¡¹å¡çª—æ ¼ï¼Œé€‰é¡¹å¡æ ‡é¢˜åœ¨ä¸Šæ–¹
+	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// ´´½¨Ñ¡Ïî¿¨´°¸ñ£¬Ñ¡Ïî¿¨±êÌâÔÚÉÏ·½
 	JPanel[] jpan = new JPanel[5];
 	UserBook userBook=new UserBook();
 	UserReturn userReturn=new UserReturn();
@@ -24,28 +24,28 @@ public class UserFace extends JFrame {
 	public UserFace(String count) throws SQLException {
 		this.count = count;
 		this.setLayout(null);
-		this.setTitle("å›¾ä¹¦ç®¡ç†ç³»ç»Ÿï¼ˆç”¨æˆ·ç«¯ï¼‰");
+		this.setTitle("Í¼Êé¹ÜÀíÏµÍ³£¨ÓÃ»§¶Ë£©");
 		this.setSize(WIDTH, HEIGHT);
-		this.setLocationRelativeTo(null);// è®¾ç½®çª—ä½“å±…ä¸­æ˜¾ç¤º
-		this.setResizable(false);// çª—å£ä¸èƒ½æ”¹å˜å¤§å°
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);// å•å‡»çª—å£å…³é—­æŒ‰é’®ï¼Œç»“æŸç¨‹åº
-		this.setVisible(true);// ä½¿çª—å£æ˜¾ç¤º
+		this.setLocationRelativeTo(null);// ÉèÖÃ´°Ìå¾ÓÖĞÏÔÊ¾
+		this.setResizable(false);// ´°¿Ú²»ÄÜ¸Ä±ä´óĞ¡
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);// µ¥»÷´°¿Ú¹Ø±Õ°´Å¥£¬½áÊø³ÌĞò
+		this.setVisible(true);// Ê¹´°¿ÚÏÔÊ¾
 		jtab.setSize(WIDTH, HEIGHT);
 		
 		jpan[0] = userBook.addPanel0();
-		jtab.addTab("å›¾ä¹¦æŸ¥è¯¢å€Ÿé˜…", jpan[0]);
+		jtab.addTab("Í¼Êé²éÑ¯½èÔÄ", jpan[0]);
 		jtab.setSelectedIndex(0);
 		
 		jpan[1] = userReturn.addPanel1();
-		jtab.addTab("å€Ÿé˜…å½’è¿˜ä¿¡æ¯ç®¡ç†", jpan[1]);
+		jtab.addTab("½èÔÄ¹é»¹ĞÅÏ¢¹ÜÀí", jpan[1]);
 
 		jpan[2] = userMessage.addPanel2();
-		jtab.addTab("ä¸ªäººä¿¡æ¯ç®¡ç†", jpan[2]);
+		jtab.addTab("¸öÈËĞÅÏ¢¹ÜÀí", jpan[2]);
 		this.add(jtab);
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int c = JOptionPane.showConfirmDialog(null, "æ˜¯å¦è¦é€€å‡ºç³»ç»Ÿç¨‹åº", "æ“ä½œéªŒè¯", JOptionPane.YES_NO_OPTION);
+				int c = JOptionPane.showConfirmDialog(null, "ÊÇ·ñÒªÍË³öÏµÍ³³ÌĞò", "²Ù×÷ÑéÖ¤", JOptionPane.YES_NO_OPTION);
 				if (c == JOptionPane.YES_OPTION) {
 						System.exit(0);
 				}

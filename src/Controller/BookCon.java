@@ -25,14 +25,14 @@ public class BookCon {
 	 * 查询全部图书
 	 */
 	public Vector<Vector<Object>> seleBook() throws SQLException {
-		return bd.seleBook();
+		return bd.seleGas();
 	}
 
 	/**
 	 * 精确查询、模糊查询（包含图书类型）
 	 */
 	public Vector<Vector<Object>> getBook(String ISBN,String b_name, String author, String b_type) throws SQLException {
-		Vector<Vector<Object>> bookData = bd.queryBook(ISBN,b_name, author, b_type);
+		Vector<Vector<Object>> bookData = bd.queryGas(ISBN,b_name, author, b_type);
 		return bookData;
 	}
 
@@ -40,7 +40,7 @@ public class BookCon {
 	 * 查询图书类型
 	 */
 	public Vector<String> getB_type() throws SQLException {
-		Vector<String> bt_name = bd.seleB_type();
+		Vector<String> bt_name = bd.seleGas_type();
 		return bt_name;
 	}
 
@@ -48,7 +48,7 @@ public class BookCon {
 	 * 查询图书类型id
 	 */
 	public int seleB_name(String name) throws SQLException {
-		int count = bd.seleB_name(name);
+		int count = bd.seleGas_name(name);
 		return count;
 	}
 
@@ -56,7 +56,7 @@ public class BookCon {
 	 * 删除图书
 	 */
 	public void dropBook(int b_id) throws SQLException {
-		bd.dropBook(b_id);
+		bd.dropGas(b_id);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class BookCon {
 	 */
 	public void insterBook(String ISBN, String b_name, int booktype, String author, String press, double price,
 			int inventory) throws SQLException {
-		bd.insterBook(ISBN, b_name, booktype, author, press, price, inventory);
+		bd.insterGas(ISBN, b_name, booktype, author, press, price, inventory);
 	}
 
 	/**
@@ -72,14 +72,14 @@ public class BookCon {
 	 */
 	public void updateBook(String ISBN, String b_name, String author, String press, double price, int inventory,
 			int b_id) throws SQLException {
-		bd.updateBook(ISBN, b_name, author, press, price, inventory, b_id);
+		bd.updateGas(ISBN, b_name, author, press, price, inventory, b_id);
 	}
 
 	/**
 	 * 查询是否有图书具备此图书类型 删除类图书类型前，保证没有图书应用此图书类型
 	 */
 	public boolean existBooktype(int bt_id) throws SQLException {
-		return bd.existBooktype(bt_id);
+		return bd.existGastype(bt_id);
 	}
 	
 
