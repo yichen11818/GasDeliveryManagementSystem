@@ -12,7 +12,7 @@ import java.util.Vector;
  * @author rsw
  *
  */
-public class ReaderAccess {
+public class UserAccess {
 
 	/**
 	 * 注册时向reader表中添加信息S

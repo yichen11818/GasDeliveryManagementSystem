@@ -15,7 +15,7 @@ import Model.table.BookType;
  * @author rsw
  *
  */
-public class BookTypeAccess {
+public class GasTypeAccess {
 	
 	/**
 	 * 查询图书类型的id

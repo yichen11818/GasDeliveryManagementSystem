@@ -13,7 +13,7 @@ import java.util.Vector;
  * @author rsw
  *
  */
-public class BookAccess {
+public class GasAccess {
 	/**
 	   * 精确查询、模糊查询（不包含图书类型）
 	 */

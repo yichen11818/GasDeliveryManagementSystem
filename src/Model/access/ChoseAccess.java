@@ -2,9 +2,7 @@ package Model.access;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 
 /**
@@ -12,7 +10,7 @@ import java.util.Vector;
  * @author rsw
  *
  */
-public class BorrowAccess {
+public class ChoseAccess {
 
 	/**
 	 * ΩË È

@@ -2,7 +2,7 @@ package Controller;
 
 import java.sql.SQLException;
 
-import Model.access.BookTypeAccess;
+import Model.access.GasTypeAccess;
 import Model.table.BookType;
 
 /**
@@ -12,7 +12,7 @@ import Model.table.BookType;
  *
  */
 public class BookTypeCon {
-	BookTypeAccess bookTypeDao = new BookTypeAccess();
+	GasTypeAccess bookTypeDao = new GasTypeAccess();
 
 	/**
 	 * 查询图书类型id

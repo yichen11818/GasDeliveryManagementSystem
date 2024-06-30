@@ -3,7 +3,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import Model.access.BookAccess;
+import Model.access.GasAccess;
 
 /**
  * 图书信息表的控制器
@@ -11,7 +11,7 @@ import Model.access.BookAccess;
  *
  */
 public class BookCon {
-	BookAccess bd = new BookAccess();
+	GasAccess bd = new GasAccess();
 
 	/**
 	 * 精确查询、模糊查询（不包含图书类型）

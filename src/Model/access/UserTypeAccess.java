@@ -12,7 +12,7 @@ import java.util.Vector;
  * @author rsw
  *
  */
-public class ReaderTypeAccess {
+public class UserTypeAccess {
 
 	/**
 	 * 查询读者类型

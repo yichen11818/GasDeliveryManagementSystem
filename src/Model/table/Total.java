@@ -1,9 +1,6 @@
 package Model.table;
 
-/**
- * ±Ìµƒ”≥…‰
- * @author rsw
- */
+// ±Ì”≥…‰
 public class Total {
 	private Book book;
 	private BookType booktype;

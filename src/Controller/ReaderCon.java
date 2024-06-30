@@ -3,13 +3,13 @@ package Controller;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import Model.access.ReaderAccess;
+import Model.access.UserAccess;
 
 /**
  * 用户信息表控制器
  */
 public class ReaderCon {
-	ReaderAccess readerDao = new ReaderAccess();
+	UserAccess readerDao = new UserAccess();
 
 	// 向reader表中添加信息 注册新用户
 	public void insertReader(String r_number, String r_name, String gender, int reader_type, String dept,

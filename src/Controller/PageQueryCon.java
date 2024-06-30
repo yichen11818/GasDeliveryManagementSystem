@@ -2,7 +2,7 @@ package Controller;
 
 import java.util.Vector;
 
-import Model.access.BookAccess;
+import Model.access.GasAccess;
 
 /*
  * 分页查询控制器
@@ -15,7 +15,7 @@ public class PageQueryCon {
 	protected int recordCount; // 总记录条数
 	protected static Vector<Vector<Object>> bigPageVector = new Vector<Vector<Object>>();
 	protected Vector<Vector<Object>> smallPageVector = new Vector<Vector<Object>>();
-	BookAccess bookDao = new BookAccess();
+	GasAccess bookDao = new GasAccess();
 
 	public PageQueryCon(){
 		

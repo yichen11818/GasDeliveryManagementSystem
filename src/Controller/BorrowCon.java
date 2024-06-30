@@ -1,9 +1,8 @@
 package Controller;
 
 import java.sql.SQLException;
-import java.util.Vector;
 
-import Model.access.BorrowAccess;
+import Model.access.ChoseAccess;
 import Tool.TimeTool;
 
 /**
@@ -12,7 +11,7 @@ import Tool.TimeTool;
  *
  */
 public class BorrowCon {
-	BorrowAccess borrowdao = new BorrowAccess();
+	ChoseAccess borrowdao = new ChoseAccess();
 
 	public boolean insertBorrow(String number, int b_name, int borrowdate, int duedate,int b_id) throws SQLException {
 		return borrowdao.insertBorrow(number, b_name, borrowdate, duedate,b_id);

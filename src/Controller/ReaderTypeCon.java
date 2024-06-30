@@ -3,7 +3,7 @@ package Controller;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import Model.access.ReaderTypeAccess;
+import Model.access.UserTypeAccess;
 
 /**
  * 读者类型表的控制器
@@ -11,7 +11,7 @@ import Model.access.ReaderTypeAccess;
  *
  */
 public class ReaderTypeCon {
-	ReaderTypeAccess readerTypeDao = new ReaderTypeAccess();
+	UserTypeAccess readerTypeDao = new UserTypeAccess();
 
 	/**
 	 * 查询读者类型表的全部数据
