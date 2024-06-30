@@ -10,7 +10,7 @@ import Model.access.GasAccess;
  * @author rsw
  *
  */
-public class BookCon {
+public class GasCon {
 	GasAccess bd = new GasAccess();
 
 	/**

@@ -15,7 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.BookCon;
+import Controller.GasCon;
 import Controller.BorrowCon;
 import Tool.TableTool;
 import Tool.TimeTool;
@@ -26,7 +26,7 @@ import Tool.TimeTool;
  *
  */
 public class UserReturn {
-	BookCon bookcon = new BookCon();
+	GasCon bookcon = new GasCon();
 	BorrowCon borrowcon = new BorrowCon();
 	UserBook userBook =new UserBook();
 	Object[][] borrowDate = null;

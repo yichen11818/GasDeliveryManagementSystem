@@ -20,21 +20,19 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.AdmiCon;
-import Controller.BookCon;
-import Controller.BookTypeCon;
-import Controller.ReaderCon;
-import Controller.ReaderTypeCon;
-import Tool.InputLimit;
-import Tool.MD5Tool;
+import Controller.GasCon;
+import Controller.GasTypeCon;
+import Controller.UserCon;
+import Controller.UserTypeCon;
 
 /**
  * 公共的对话框类
  */
 public class PubJdialog extends JDialog {
-	ReaderCon readercon = new ReaderCon();
-	BookCon bookCon = new BookCon();
-	BookTypeCon bookTypeCon = new BookTypeCon();
-	ReaderTypeCon readerTypeCon = new ReaderTypeCon();
+	UserCon readercon = new UserCon();
+	GasCon gasCon = new GasCon();
+	GasTypeCon gasTypeCon = new GasTypeCon();
+	UserTypeCon userTypeCon = new UserTypeCon();
 	AdmiCon admiCon = new AdmiCon();
 	String number, b_type;// r_number 读者账号 b_type 图书类型
 	int booktype = 1, a;// 图书类型的id
@@ -131,8 +129,8 @@ public class PubJdialog extends JDialog {
 			jtext_insterBook[i].addFocusListener(new InputLimit(jtext_insterBook[i], hint[i]));// 设置文诓提示的外部类监听
 		}
 		jcb_bookType.setBounds(120, 100, 100, 30);
-		for (int k = 0; k < bookCon.getB_type().size(); k++) {
-			jcb_bookType.addItem(bookCon.getB_type().get(k));
+		for (int k = 0; k < gasCon.getB_type().size(); k++) {
+			jcb_bookType.addItem(gasCon.getB_type().get(k));
 		}
 		jcb_bookType.setVisible(true);
 		jbt_interBook.setBounds(150, 330, 100, 40);
@@ -145,7 +143,7 @@ public class PubJdialog extends JDialog {
 				b_type = jcb_bookType.getSelectedItem().toString();
 				try {
 					if (e.getStateChange() == ItemEvent.SELECTED) {// 防止下拉框选中两次
-						booktype = bookTypeCon.queryBTid(b_type);
+						booktype = gasTypeCon.queryBTid(b_type);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -173,8 +171,8 @@ public class PubJdialog extends JDialog {
 						}
 						if (message.equals("")) {// 进行正则验证
 							// ISBN不存在才可以新增
-							if (!bookCon.isISBN(jtext_insterBook[0].getText())) {
-								bookCon.insterBook(jtext_insterBook[0].getText(), jtext_insterBook[1].getText(),
+							if (!gasCon.isISBN(jtext_insterBook[0].getText())) {
+								gasCon.insterBook(jtext_insterBook[0].getText(), jtext_insterBook[1].getText(),
 										booktype, jtext_insterBook[2].getText(), jtext_insterBook[3].getText(),
 										Double.valueOf(jtext_insterBook[4].getText()),
 										Integer.parseInt(jtext_insterBook[5].getText()));
@@ -243,7 +241,7 @@ public class PubJdialog extends JDialog {
 								}
 							}
 							if (message.equals("")) {
-								readerTypeCon.insertReaderType(jtext_readerType[0].getText().toString(),
+								userTypeCon.insertReaderType(jtext_readerType[0].getText().toString(),
 										Integer.parseInt(jtext_readerType[1].getText()),
 										Integer.parseInt(jtext_readerType[2].getText()));
 								success=true;
@@ -554,7 +552,7 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									bookCon.updateBook(jtext_update[1].getText().toString(),
+									gasCon.updateBook(jtext_update[1].getText().toString(),
 											jtext_update[2].getText().toString(), jtext_update[3].getText().toString(),
 											jtext_update[4].getText().toString(),
 											Double.valueOf(jtext_update[5].getText().toString()),
@@ -613,7 +611,7 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									readerTypeCon.updateRederType(jtext_update[1].getText(),
+									userTypeCon.updateRederType(jtext_update[1].getText(),
 											Integer.valueOf(jtext_update[2].getText()),
 											Integer.valueOf(jtext_update[3].getText()),
 											Integer.valueOf(jtext_update[0].getText()));

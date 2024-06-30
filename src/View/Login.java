@@ -1,7 +1,7 @@
 package View;
 
-import Controller.ReaderCon;
-import Controller.ReaderTypeCon;
+import Controller.UserCon;
+import Controller.UserTypeCon;
 import Model.table.Reader;
 import Tool.InputLimit;
 import Tool.MD5Tool;
@@ -12,15 +12,13 @@ import java.sql.SQLException;
 
 /**
  * 注册界面
- *
- * @author rsw
  */
 public class Login extends JFrame implements ActionListener, ItemListener {
     JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("性别："), new JLabel("读者类型："), new JLabel("院系："),
             new JLabel("班级："), new JLabel("手机号码："), new JLabel("电子邮箱："), new JLabel("密保："), new JLabel("密码："),
             new JLabel("确认密码：")};// 声明标签数组
     JButton jbt = new JButton("确定");
-    ReaderCon readercon = new ReaderCon();
+    UserCon readercon = new UserCon();
     JTextField jtext[] = new JTextField[7];
     JComboBox<String> jcb_readerType = new JComboBox<String>();
     JComboBox<String> jcb_gender = new JComboBox<String>();
@@ -28,7 +26,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
     String r_type = "本科", gender = "男";
     String[] hint = {"20开头的11位数字", "中文汉字", "中文汉字", "中文汉字加数字", "手机号格式", "邮箱格式", "任意输入"};
     Reader reader = new Reader();
-    ReaderTypeCon readerTypeCon = new ReaderTypeCon();
+    UserTypeCon userTypeCon = new UserTypeCon();
 
     public Login() throws SQLException {
         int[] inuput_int = {11, 5, 10, 10, 11, 20, 15};// 输入框限制输入位数
@@ -48,7 +46,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         jcb_readerType.setBounds(150, 140, 80, 30);
         jcb_gender.addItem("男");
         jcb_gender.addItem("女");
-        String[] readerType = readerTypeCon.getReaderType();
+        String[] readerType = userTypeCon.getReaderType();
         for (int k = 0; k < readerType.length; k++) {
             jcb_readerType.addItem(readerType[k]);
         }
@@ -67,7 +65,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         }
         jbt.setBounds(160, 500, 100, 40);
         this.setLayout(null);
-        this.setTitle("图书管理系统");
+        this.setTitle("煤气送气管理系统");
         this.setSize(400, 600);
         this.setLocationRelativeTo(null);// 设置窗体居中显示
         this.setResizable(false);// 窗口不能改变大小
@@ -77,7 +75,6 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         this.add(jbt);
         this.add(jcb_readerType);
         this.add(jcb_gender);
-
         // 添加监听
         jbt.addActionListener(this);// 设置按钮的监听者
         jcb_readerType.addItemListener(this);
@@ -94,15 +91,14 @@ public class Login extends JFrame implements ActionListener, ItemListener {
             }
         });
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String[] regex = {InputLimit.STUDENTNUMBER, InputLimit.NAME, InputLimit.CHINESE, InputLimit.CHINESEMATH,
-                InputLimit.TELE, InputLimit.EMAIL, InputLimit.PASSWORD};// 验证学号（以20开头的11
-        // 位数字）、验证姓名（中文）、验证手机号、验证邮箱、验证密码（6-16位数字或者字母）
+                InputLimit.TELE, InputLimit.EMAIL, InputLimit.PASSWORD};
+        // 验证账号（以20开头的11位数字）、验证姓名（中文）、验证手机号、验证邮箱、验证密码（6-16位数字或者字母）
         String[] input = {jtext[0].getText(), jtext[1].getText(), jtext[2].getText(), jtext[3].getText(),
                 jtext[4].getText(), jtext[5].getText(), new String(jpassword[0].getPassword())};
-        String[] hintError = {"学号格式错误", "姓名格式错误", "院系格式出错", "班级格式出错", "手机号格式错误", "邮箱格式错误", "密码格式错误（6-16位数字或字母）"};
+        String[] hintError = {"账号格式错误", "姓名格式错误", "院系格式出错", "班级格式出错", "手机号格式错误", "邮箱格式错误", "密码格式错误（6-16位数字或字母）"};
         String message = "";
         boolean result[] = InputLimit.regular(regex, input);
         Object obj = e.getSource();
@@ -127,7 +123,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
                         // 检查账号是否被注册
                         if (! readercon.isNumber(jtext[0].getText())) {
                             readercon.insertReader(jtext[0].getText(), jtext[1].getText(), gender,
-                                    readerTypeCon.queryReaderTypeID(r_type), jtext[2].getText(), jtext[3].getText(),
+                                    userTypeCon.queryReaderTypeID(r_type), jtext[2].getText(), jtext[3].getText(),
                                     jtext[4].getText(), jtext[5].getText(), jtext[6].getText(),
                                     MD5Tool.string2MD5(new String(jpassword[0].getPassword())));
                             // 将密码进行MD5加密后在添加信息
@@ -139,7 +135,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
                                 new Main().jtext.setText(jtext[0].getText());// 将刚注册的账号set进登录页面
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "此账号已经被注册\n请更换学号后再进行注册", "操作失败",
+                            JOptionPane.showMessageDialog(null, "此账号已经被注册\n请更换账号后再进行注册", "操作失败",
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     } else {

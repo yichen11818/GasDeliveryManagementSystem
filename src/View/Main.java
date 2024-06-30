@@ -1,7 +1,7 @@
 package View;
 
 import Controller.AdmiCon;
-import Controller.ReaderCon;
+import Controller.UserCon;
 import Model.table.Administrator;
 import Tool.InputLimit;
 import Tool.MD5Tool;
@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener {
 
     AdmiCon admiCon = new AdmiCon();
     Administrator admi = new Administrator();
-    ReaderCon readercon = new ReaderCon();
+    UserCon readercon = new UserCon();
 
     final int WIDTH = 700, HEIGHT = 530;//Ò³Ãæ²ÎÊý
     ImageIcon img_lading = new ImageIcon("src/Images/lading.jpg");

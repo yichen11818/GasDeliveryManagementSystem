@@ -39,7 +39,7 @@ public class ManageBorrowInfo {
 			jpanup_borrow.add(jbt_borrow[i]);
 		}
 		jtext_borrow.setBounds(60, 20, 200, 30);
-		jtext_borrow.addFocusListener(new InputLimit(jtext_borrow, "学号"));// 设置文诓提示的外部类监听
+		jtext_borrow.addFocusListener(new InputLimit(jtext_borrow, "账号"));// 设置文诓提示的外部类监听
 		DefaultTableModel dfttableBorrow = new DefaultTableModel();
 		JTable table_borrow = new JTable(dfttableBorrow) {
 			public boolean isCellEditable(int row, int column) {
@@ -60,8 +60,8 @@ public class ManageBorrowInfo {
 			public void actionPerformed(ActionEvent e) {
 				adm_count = jtext_borrow.getText();
 				try {
-					if (adm_count.equals("学号") || adm_count.equals("")) {
-						JOptionPane.showMessageDialog(null, "请输入学号！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					if (adm_count.equals("账号") || adm_count.equals("")) {
+						JOptionPane.showMessageDialog(null, "请输入账号！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 					} else {
 						dfttableBorrow.setDataVector(borrowcon.queryBorrowInfo(adm_count, adm_count, false),
 								columnBorrow);
@@ -77,8 +77,8 @@ public class ManageBorrowInfo {
 			public void actionPerformed(ActionEvent e) {
 				adm_count = jtext_borrow.getText();
 				try {
-					if (adm_count.equals("学号") || adm_count.equals("")) {
-						JOptionPane.showMessageDialog(null, "请输入学号！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					if (adm_count.equals("账号") || adm_count.equals("")) {
+						JOptionPane.showMessageDialog(null, "请输入账号！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 					} else {
 						dfttableBorrow.setDataVector(borrowcon.queryBorrowReturnDate(adm_count, adm_count, true),
 								columnBorrow);

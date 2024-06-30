@@ -8,16 +8,13 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.ReaderCon;
-import Controller.ReaderTypeCon;
+import Controller.UserCon;
+import Controller.UserTypeCon;
 import Tool.PubJdialog;
 import Tool.TableTool;
 
@@ -30,8 +27,8 @@ import Tool.TableTool;
 public class UserMessage {
 	boolean isAlter = false;
 	JButton alterX, alterM;
-	ReaderCon readercon = new ReaderCon();
-	ReaderTypeCon readerTypeCon = new ReaderTypeCon();
+	UserCon readercon = new UserCon();
+	UserTypeCon userTypeCon = new UserTypeCon();
 
 	/**
 	 * 注释
@@ -49,7 +46,7 @@ public class UserMessage {
 		panel.setLayout(null);
 
 		Vector<Vector<Object>> readerInfo = readercon.queryReaderInfo(UserFace.count);
-		String[] columnReader = { "学号", "姓名", "性别", "院系", "班级", "手机号码", "电子邮箱" };
+		String[] columnReader = { "账号", "姓名", "性别", "院系", "班级", "手机号码", "电子邮箱" };
 		String[] columnReaderType = { "读者类型", "最大可借阅数量", "最大可借阅天数" };
 		Vector<String> columnNameReader = new Vector<String>();// 字段名
 		Vector<String> columnNameReaderType = new Vector<String>();// 字段名
@@ -60,7 +57,7 @@ public class UserMessage {
 			columnNameReaderType.add(columnReaderType[k]);
 		}
 		DefaultTableModel dfttable_reader = new DefaultTableModel(readerInfo, columnNameReader);
-		DefaultTableModel dfttable_readerType = new DefaultTableModel(readerTypeCon.queryPersonalType(UserFace.count),
+		DefaultTableModel dfttable_readerType = new DefaultTableModel(userTypeCon.queryPersonalType(UserFace.count),
 				columnNameReaderType);
 
 		JTable table_reader = new JTable(dfttable_reader) {
@@ -98,7 +95,7 @@ public class UserMessage {
 		//修改个人信息
 		alterX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JLabel[] jlab_reader = { new JLabel("学号："), new JLabel("院系："), new JLabel("班级："), new JLabel("手机号："),
+				JLabel[] jlab_reader = { new JLabel("账号："), new JLabel("院系："), new JLabel("班级："), new JLabel("手机号："),
 						new JLabel("邮箱：") };
 				JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("中文汉字"), new JLabel("中文汉字加数字"),
 						new JLabel("13、14、15、17、18开头"), new JLabel("邮箱格式") };

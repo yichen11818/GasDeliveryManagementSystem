@@ -12,8 +12,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 /**
- * 限制输入内容及信息提示
- * @author rsw
+ * 公共工具限制输入内容及信息提示
  *
  */
 public class InputLimit extends PlainDocument implements FocusListener {

@@ -3,10 +3,7 @@ package Tool;
 import java.security.MessageDigest;
 
 /**
- * MD5加密及解密
- * 
- * @author rsw
- *
+ * 公共工具 MD5加密及解密
  */
 public class MD5Tool {
 	/***

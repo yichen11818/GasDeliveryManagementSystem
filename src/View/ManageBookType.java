@@ -17,8 +17,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.BookCon;
-import Controller.BookTypeCon;
+import Controller.GasCon;
+import Controller.GasTypeCon;
 import Tool.InputLimit;
 import Tool.TableTool;
 
@@ -27,8 +27,8 @@ import Tool.TableTool;
  * @author rsw
  */
 public class ManageBookType {
-	BookTypeCon bookTypeCon = new BookTypeCon();
-	BookCon bookCon = new BookCon();
+	GasTypeCon gasTypeCon = new GasTypeCon();
+	GasCon gasCon = new GasCon();
 	int bt_id = -1;
 	String bt_name;
 
@@ -45,7 +45,7 @@ public class ManageBookType {
 		}
 
 		String[] columnBook = { "序号", "图书类型" };
-		Object[][] bookTypeData = bookTypeCon.queryBookType();
+		Object[][] bookTypeData = gasTypeCon.queryBookType();
 		DefaultTableModel dfttable_bookType = new DefaultTableModel(bookTypeData, columnBook);
 		JTable table_bookType = new JTable(dfttable_bookType) {
 			public boolean isCellEditable(int row, int column) {
@@ -81,8 +81,8 @@ public class ManageBookType {
 							int c = JOptionPane.showConfirmDialog(null, "是否确定新增此图书类型", "验证操作",
 									JOptionPane.YES_NO_OPTION);
 							if (c == JOptionPane.YES_OPTION) {
-								bookTypeCon.insertBookType(input_bookType);
-								Object[] obj= {bookTypeCon.insertBookType(input_bookType),input_bookType};
+								gasTypeCon.insertBookType(input_bookType);
+								Object[] obj= {gasTypeCon.insertBookType(input_bookType),input_bookType};
 								dfttable_bookType.addRow(obj);
 								JOptionPane.showMessageDialog(null, "新增图书类型——"+input_bookType, "操作成功", JOptionPane.ERROR_MESSAGE);
 							}
@@ -105,11 +105,11 @@ public class ManageBookType {
 					if (bt_id != -1) {
 						int c = JOptionPane.showConfirmDialog(null, "是否确定删除此图书类型", "验证操作", JOptionPane.YES_NO_OPTION);
 						if (c == JOptionPane.YES_OPTION) {
-							if (bookCon.existBooktype(bt_id)) {
+							if (gasCon.existBooktype(bt_id)) {
 								JOptionPane.showMessageDialog(null, "此图书类型已经有图书使用，请尝试将此图书类型的图书删除后在删除此图书类型！！！", "操作失败",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
-								bookTypeCon.deleteBookType(bt_id);
+								gasTypeCon.deleteBookType(bt_id);
 								dfttable_bookType.removeRow(table_bookType.getSelectedRow());
 							}
 						}
@@ -136,7 +136,7 @@ public class ManageBookType {
 								int c = JOptionPane.showConfirmDialog(null, "是否确定修改此图书类型", "验证操作",
 										JOptionPane.YES_NO_OPTION);
 								if (c == JOptionPane.YES_OPTION) {
-									bookTypeCon.updateBookType(input_bookType, bt_id);
+									gasTypeCon.updateBookType(input_bookType, bt_id);
 									dfttable_bookType.setValueAt(input_bookType, table_bookType.getSelectedRow(), 1);// 将修改的信息放进表格
 								}
 

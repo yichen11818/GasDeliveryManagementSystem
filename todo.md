@@ -20,7 +20,7 @@
 - 使用MySQL数据库存储数据，并使用JDBC技术进行数据库连接
 ## 数据库设计
 - 设计学生表(student)
-- 包含学号(id)、姓名(name)、性别(gender)、年龄(age)、专业(major)等字段设计用户表(user)，包含用户名(username)、密码(password)、角色(role)等字段
+- 包含账号(id)、姓名(name)、性别(gender)、年龄(age)、专业(major)等字段设计用户表(user)，包含用户名(username)、密码(password)、角色(role)等字段
 # 三.详细设计
 ## 界面设计
 设计登录界面，实现用户的身份验证和授权

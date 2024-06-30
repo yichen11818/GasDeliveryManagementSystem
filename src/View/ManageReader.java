@@ -20,12 +20,10 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.PageQueryCon;
-import Controller.ReaderCon;
-import Controller.ReaderTypeCon;
+import Controller.UserCon;
+import Controller.UserTypeCon;
 import Tool.InputLimit;
 import Tool.PubJdialog;
 import Tool.TableTool;
@@ -38,8 +36,8 @@ public class ManageReader {
 	String studentNumber, dept, classes, tele, email;
 	String readerTypeInfo;
 	boolean isCompile, refresh;
-	ReaderTypeCon readerTypeCon = new ReaderTypeCon();
-	ReaderCon readerCon = new ReaderCon();
+	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCon userCon = new UserCon();
 
 	protected JPanel addPanel2() throws SQLException {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -55,11 +53,11 @@ public class ManageReader {
 			jpanup_reader.add(jbt_reader[i]);
 		}
 		jtext_reader.setBounds(160, 20, 200, 30);
-		jtext_reader.addFocusListener(new InputLimit(jtext_reader, "学号/姓名/院系/班级"));//
+		jtext_reader.addFocusListener(new InputLimit(jtext_reader, "账号/姓名/院系/班级"));//
 		// 设置文诓提示的外部类监听
 		jcb_reader.setBounds(50, 20, 80, 30);
 		jcb_reader.addItem("全部");
-		String[] readerType = readerTypeCon.getReaderType();
+		String[] readerType = userTypeCon.getReaderType();
 		for (int k = 0; k < readerType.length; k++) {
 			jcb_reader.addItem(readerType[k]);
 		}
@@ -78,11 +76,11 @@ public class ManageReader {
 			}
 		});
 		Vector<String> columnNameReader = new Vector<String>();// 字段名
-		String[] columnReader = { "学号", "姓名", "性别", "读者类型", "院系", "班级", "手机号码", "电子邮箱" };
+		String[] columnReader = { "账号", "姓名", "性别", "读者类型", "院系", "班级", "手机号码", "电子邮箱" };
 		for (int k = 0; k < columnReader.length; k++) {
 			columnNameReader.add(columnReader[k]);
 		}
-		DefaultTableModel dfttable_reader = new DefaultTableModel(readerCon.seleReader(), columnNameReader);
+		DefaultTableModel dfttable_reader = new DefaultTableModel(userCon.seleReader(), columnNameReader);
 		JTable table_reader = new JTable(dfttable_reader) {
 			public boolean isCellEditable(int row, int column) {
 				return false;// 表格不允许被编辑
@@ -120,19 +118,19 @@ public class ManageReader {
 				dfttable_reader.fireTableDataChanged();
 				try {
 					if (readerTypeInfo == "*" || readerTypeInfo == null) {
-						if (jtext_reader.getText().equals("学号/姓名/院系/班级") || jtext_reader.getText().equals("")) {
-							dfttable_reader.setDataVector(readerCon.seleReader(), columnNameReader);
+						if (jtext_reader.getText().equals("账号/姓名/院系/班级") || jtext_reader.getText().equals("")) {
+							dfttable_reader.setDataVector(userCon.seleReader(), columnNameReader);
 						} else {
-							dfttable_reader.setDataVector(readerCon.queryReaderInfo(jtext_reader.getText(),
+							dfttable_reader.setDataVector(userCon.queryReaderInfo(jtext_reader.getText(),
 									jtext_reader.getText(), jtext_reader.getText(), jtext_reader.getText()),
 									columnNameReader);
 						}
 					} else {
-						if (jtext_reader.getText().equals("学号/姓名/院系/班级")) {
+						if (jtext_reader.getText().equals("账号/姓名/院系/班级")) {
 							jtext_reader.setText("");
 						}
 						dfttable_reader.setDataVector(
-								readerCon.seleReaderInfo(jtext_reader.getText(), jtext_reader.getText(),
+								userCon.seleReaderInfo(jtext_reader.getText(), jtext_reader.getText(),
 										jtext_reader.getText(), jtext_reader.getText(), readerTypeInfo),
 								columnNameReader);
 					}
@@ -162,7 +160,7 @@ public class ManageReader {
 					try {
 						int c = JOptionPane.showConfirmDialog(null, "是否确定删除此图书类型", "验证操作", JOptionPane.YES_NO_OPTION);
 						if (c == JOptionPane.YES_OPTION) {
-							readerCon.dropReader(studentNumber);
+							userCon.dropReader(studentNumber);
 							dfttable_reader.removeRow(table_reader.getSelectedRow());// 删除表格中的这一行
 						}
 					} catch (SQLException e1) {
@@ -178,7 +176,7 @@ public class ManageReader {
 		// 更新
 		jbt_reader[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JLabel[] jlab_reader = { new JLabel("学号："), new JLabel("院系："), new JLabel("班级："), new JLabel("手机号："),
+				JLabel[] jlab_reader = { new JLabel("账号："), new JLabel("院系："), new JLabel("班级："), new JLabel("手机号："),
 						new JLabel("邮箱：") };
 				JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("中文汉字"), new JLabel("中文汉字或者数字"),
 						new JLabel("13、14、15、17、18开头"), new JLabel("邮箱格式")};

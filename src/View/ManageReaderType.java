@@ -18,8 +18,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.ReaderCon;
-import Controller.ReaderTypeCon;
+import Controller.UserCon;
+import Controller.UserTypeCon;
 import Tool.PubJdialog;
 import Tool.TableTool;
 
@@ -31,8 +31,8 @@ import Tool.TableTool;
 public class ManageReaderType {
 	int a, rt_id=-1, maxcount, maxday,row;
 	String readerType;
-	ReaderTypeCon readerTypeCon = new ReaderTypeCon();
-	ReaderCon readerCon =new ReaderCon();
+	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCon userCon =new UserCon();
 	boolean isCompile, refresh;// 是否可以编辑
 
 	protected JPanel addPanel3() throws SQLException {
@@ -48,7 +48,7 @@ public class ManageReaderType {
 			jpanup_readerType.add(jbt_readerType[i]);
 		}
 		String[] columnreaderType = { "序号", "读者类型", "最大借阅数量", "最大借阅天数" };
-		Object[][] readerTypeData = readerTypeCon.queryReaderType();
+		Object[][] readerTypeData = userTypeCon.queryReaderType();
 		DefaultTableModel dfttable_readerType = new DefaultTableModel(readerTypeData, columnreaderType);
 		JTable table_readerType = new JTable(dfttable_readerType) {
 			public boolean isCellEditable(int row, int column) {
@@ -86,7 +86,7 @@ public class ManageReaderType {
 				try {
 					new PubJdialog(a).setVisible(true);
 					if(PubJdialog.success) {
-						dfttable_readerType.setDataVector(readerTypeCon.queryReaderType(), columnreaderType);
+						dfttable_readerType.setDataVector(userTypeCon.queryReaderType(), columnreaderType);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -101,11 +101,11 @@ public class ManageReaderType {
 					int c = JOptionPane.showConfirmDialog(null, "是否确定删除此读者类型", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
 						try {
-							if(readerCon.existReadertype(rt_id)) {
+							if(userCon.existReadertype(rt_id)) {
 								JOptionPane.showMessageDialog(null, "此读者类型已经有读者使用，请尝试将此读者类型的读者删除后在删除此读者类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 							}else {
 								System.out.println(rt_id);
-							readerTypeCon.deleteRederType(rt_id);
+							userTypeCon.deleteRederType(rt_id);
 							dfttable_readerType.removeRow(table_readerType.getSelectedRow());
 							}
 						} catch (SQLException e1) {

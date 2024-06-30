@@ -10,7 +10,7 @@ import Model.access.UserTypeAccess;
  * @author rsw
  *
  */
-public class ReaderTypeCon {
+public class UserTypeCon {
 	UserTypeAccess readerTypeDao = new UserTypeAccess();
 
 	/**

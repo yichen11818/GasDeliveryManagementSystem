@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.BookCon;
+import Controller.GasCon;
 import Controller.BorrowCon;
 import Controller.PageQueryCon;
 import Tool.InputLimit;
@@ -51,7 +51,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 	JLabel jlab_book = new JLabel();
 	int pageIndex = 1, pageCount;
 	UserBook userBook = new UserBook();
-	BookCon bookCon = new BookCon();
+	GasCon gasCon = new GasCon();
 	BorrowCon borrowCon = new BorrowCon();
 
 	protected JPanel addPanel0() throws SQLException {
@@ -87,24 +87,24 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 		jcb_bookType.setBounds(50, 20, 80, 30);
 		jcb_bookType.addItem("全部");
 		jcb_bookType.addItemListener(this);
-		for (int k = 0; k < bookCon.getB_type().size(); k++) {
-			jcb_bookType.addItem(bookCon.getB_type().get(k));
+		for (int k = 0; k < gasCon.getB_type().size(); k++) {
+			jcb_bookType.addItem(gasCon.getB_type().get(k));
 		}
 		jcb_bookType.setVisible(true);
 		jpanup_book.add(jcb_bookType);
 		// 分页显示
 		jlab_book.setBounds(400, 140, 150, 30);
-		pageCount = new PageQueryCon(bookCon.seleBook()).pageCount();
+		pageCount = new PageQueryCon(gasCon.seleBook()).pageCount();
 		jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 		jpanup_book.add(jlab_book);
 		columnNameBook = new Vector<String>();// 字段名
 		String[] columnBook = { "序号", "ISBN", "书名", "图书类型", "作者", "出版社", "价格", "库存量" };
 		Vector<Vector<Object>> bookData = null;
-		bookData = bookCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText());// 调用查询图书的方法
+		bookData = gasCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText());// 调用查询图书的方法
 		for (int k = 0; k < columnBook.length; k++) {
 			columnNameBook.add(columnBook[k]);
 		}
-		dfttable_book = new DefaultTableModel(new PageQueryCon(bookCon.seleBook()).setCurentPageIndex(),
+		dfttable_book = new DefaultTableModel(new PageQueryCon(gasCon.seleBook()).setCurentPageIndex(),
 				columnNameBook);
 		table_book = new JTable(dfttable_book) {
 			public boolean isCellEditable(int row, int column) {
@@ -166,7 +166,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 		String input = jtext_find.getText();
 		Vector<Vector<Object>> bookData = null;
 		try {
-			bookData = bookCon.getBook(input, input, input, b_type);
+			bookData = gasCon.getBook(input, input, input, b_type);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,10 +186,10 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 			if (b_type == "*" || b_type == null) {
 				try {
 					if (jtext_find.getText().equals("") || jtext_find.getText().equals("ISBN/书名/作者")) {
-						setTableMolel(new PageQueryCon(bookCon.seleBook()).setCurentPageIndex());
+						setTableMolel(new PageQueryCon(gasCon.seleBook()).setCurentPageIndex());
 					} else {
 						dfttable_book.setDataVector(
-								bookCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText()),
+								gasCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText()),
 								columnNameBook);
 					}
 				} catch (SQLException e1) {
@@ -223,7 +223,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 					int c = JOptionPane.showConfirmDialog(null, "是否确定删除此图书", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
 						if (!borrowCon.queryExistBook(b_id)) {
-							bookCon.dropBook(b_id);
+							gasCon.dropBook(b_id);
 							dfttable_book.removeRow(table_book.getSelectedRow());
 						} else {
 							JOptionPane.showMessageDialog(null, "此图书已经被借阅不能删除!!!", "操作失败", JOptionPane.ERROR_MESSAGE);
@@ -267,7 +267,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 		// 首页
 		else if (e.getSource() == page_jbt[0]) {
 			try {
-				setTableMolel(new PageQueryCon(bookCon.seleBook()).setCurentPageIndex());
+				setTableMolel(new PageQueryCon(gasCon.seleBook()).setCurentPageIndex());
 				pageIndex = 1;
 				jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 			} catch (SQLException e1) {
@@ -277,7 +277,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 			// 上一页
 		} else if (e.getSource() == page_jbt[1]) {
 			try {
-				setTableMolel(new PageQueryCon(bookCon.seleBook()).previousPage());
+				setTableMolel(new PageQueryCon(gasCon.seleBook()).previousPage());
 				if (pageIndex > 1) {
 					pageIndex--;
 					jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
@@ -289,7 +289,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 			// 下一页
 		} else if (e.getSource() == page_jbt[2]) {
 			try {
-				setTableMolel(new PageQueryCon(bookCon.seleBook()).nextPage());
+				setTableMolel(new PageQueryCon(gasCon.seleBook()).nextPage());
 				if (pageIndex < pageCount) {
 					pageIndex++;
 					jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
@@ -301,7 +301,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 			// 尾页
 		} else if (e.getSource() == page_jbt[3]) {
 			try {
-				setTableMolel(new PageQueryCon(bookCon.seleBook()).lastPage());
+				setTableMolel(new PageQueryCon(gasCon.seleBook()).lastPage());
 				pageIndex = pageCount;
 				jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 			} catch (SQLException e1) {
@@ -319,7 +319,7 @@ public class ManageBook extends JPanel implements ActionListener, ItemListener {
 					if (Integer.valueOf(jtext_page.getText()) > 0
 							&& Integer.valueOf(jtext_page.getText()) <= pageCount) {
 						setTableMolel(
-								new PageQueryCon(bookCon.seleBook()).jumpPage(Integer.valueOf(jtext_page.getText())));
+								new PageQueryCon(gasCon.seleBook()).jumpPage(Integer.valueOf(jtext_page.getText())));
 						pageIndex = Integer.valueOf(jtext_page.getText());
 						jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 					} else {

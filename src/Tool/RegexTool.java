@@ -3,9 +3,7 @@ package Tool;
 import java.util.regex.Pattern;
 
 /**
- * 正则表达式验证
- * @author rsw
- *
+ * 公共工具 正则表达式验证
  */
 public class RegexTool {
 	private static final String NAME="^([\u4e00-\u9fa5]{2,5})$";

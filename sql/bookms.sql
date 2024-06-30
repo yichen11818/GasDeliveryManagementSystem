@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `borrow`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `borrow` (
   `borrow_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '借阅信息id',
-  `r_number` varchar(32) NOT NULL COMMENT '学号',
+  `r_number` varchar(32) NOT NULL COMMENT '账号',
   `borrow_b_id` int(11) unsigned NOT NULL COMMENT '图书id',
   `borrowdate` int(10) unsigned NOT NULL COMMENT '借阅日期',
   `duedate` int(10) unsigned NOT NULL COMMENT '应还日期',
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `reader`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reader` (
-  `number` varchar(32) NOT NULL COMMENT '学号',
+  `number` varchar(32) NOT NULL COMMENT '账号',
   `name` varchar(30) NOT NULL COMMENT '姓名',
   `gender` char(3) DEFAULT NULL COMMENT '性别',
   `dept` varchar(30) DEFAULT NULL COMMENT '院系',

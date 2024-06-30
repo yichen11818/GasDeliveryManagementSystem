@@ -11,7 +11,7 @@ import Model.table.BookType;
  * @author rsw
  *
  */
-public class BookTypeCon {
+public class GasTypeCon {
 	GasTypeAccess bookTypeDao = new GasTypeAccess();
 
 	/**
