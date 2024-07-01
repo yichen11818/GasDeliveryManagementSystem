@@ -2,42 +2,42 @@ package Model.table;
 
 // ±Ì”≥…‰
 public class Total {
-	private Book book;
-	private BookType booktype;
-	private Reader reader;
-	private ReaderType readertype;
+	private Gas gas;
+	private GasType booktype;
+	private User user;
+	private UserType readertype;
 	private Borrow borrow;
 	private Administrator admi;
 
-	public Book getBook() {
-		return book;
+	public Gas getBook() {
+		return gas;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBook(Gas gas) {
+		this.gas = gas;
 	}
 
-	public BookType getBooktype() {
+	public GasType getBooktype() {
 		return booktype;
 	}
 
-	public void setBooktype(BookType booktype) {
+	public void setBooktype(GasType booktype) {
 		this.booktype = booktype;
 	}
 
-	public Reader getReader() {
-		return reader;
+	public User getReader() {
+		return user;
 	}
 
-	public void setReader(Reader reader) {
-		this.reader = reader;
+	public void setReader(User user) {
+		this.user = user;
 	}
 
-	public ReaderType getReadertype() {
+	public UserType getReadertype() {
 		return readertype;
 	}
 
-	public void setReadertype(ReaderType readertype) {
+	public void setReadertype(UserType readertype) {
 		this.readertype = readertype;
 	}
 

@@ -3,7 +3,7 @@ package Controller;
 import java.sql.SQLException;
 
 import Model.access.GasTypeAccess;
-import Model.table.BookType;
+import Model.table.GasType;
 
 /**
  * 图书类型表的控制器
@@ -28,9 +28,9 @@ public class GasTypeCon {
 	public Object[][] queryBookType() throws SQLException {
 		Object[][] bookTypeData = new Object[bookTypeDao.queryGasType().size()][2];
 		for (int i = 0; i < bookTypeData.length; i++) {
-			BookType bookType = bookTypeDao.queryGasType().get(i);
-			bookTypeData[i][0] = bookType.getBt_id();
-			bookTypeData[i][1] = bookType.getBt_name();
+			GasType gasType = bookTypeDao.queryGasType().get(i);
+			bookTypeData[i][0] = gasType.getBt_id();
+			bookTypeData[i][1] = gasType.getBt_name();
 		}
 		return bookTypeData;
 	}

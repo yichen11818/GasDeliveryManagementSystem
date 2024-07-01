@@ -1,4 +1,4 @@
-# book-manage-system
+# gas-manage-system
 ## 简介
 
 > 基于Java Swing + MySQL 的图书管理系统。

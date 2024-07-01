@@ -5,7 +5,7 @@ package Model.table;
  * @author rsw
  *
  */
-public class Reader {
+public class User {
 	private String number;
 	private String name;
 	private String gender;

@@ -4,7 +4,7 @@ package Model.table;
  * 读者类型表字段 映射
  * @author rsw
  */
-public class ReaderType {
+public class UserType {
 	private int rt_id;
 	private String rt_name;
 	private int maxcount;

@@ -1,11 +1,9 @@
 package Model.table;
 
 /**
- * 图书类型表字段 映射
- * 
- * @author rsw
+ * 煤气类型表字段 映射
  */
-public class BookType {
+public class GasType {
 	public int bt_id;
 	public String bt_name;
 

@@ -2,7 +2,7 @@ package View;
 
 import Controller.UserCon;
 import Controller.UserTypeCon;
-import Model.table.Reader;
+import Model.table.User;
 import Tool.InputLimit;
 import Tool.MD5Tool;
 
@@ -25,7 +25,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
     JPasswordField jpassword[] = new JPasswordField[2];
     String r_type = "本科", gender = "男";
     String[] hint = {"20开头的11位数字", "中文汉字", "中文汉字", "中文汉字加数字", "手机号格式", "邮箱格式", "任意输入"};
-    Reader reader = new Reader();
+    User user = new User();
     UserTypeCon userTypeCon = new UserTypeCon();
 
     public Login() throws SQLException {
@@ -65,8 +65,10 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         }
         jbt.setBounds(160, 500, 100, 40);
         this.setLayout(null);
-        this.setTitle("煤气送气管理系统");
+        this.setTitle("账号注册");
         this.setSize(400, 600);
+        ImageIcon icon = new ImageIcon("src/Images/icon.png");
+        this.setIconImage(icon.getImage());
         this.setLocationRelativeTo(null);// 设置窗体居中显示
         this.setResizable(false);// 窗口不能改变大小
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// 单击窗口关闭按钮,自动隐藏并释放该窗体

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.table.BookType;
+import Model.table.GasType;
 
 /**
  * 图书类型信息表的增删改查
@@ -38,20 +38,20 @@ public class GasTypeAccess {
 	/**
 	 * 查询图书类型及其序号
 	 */
-	public List<BookType> queryGasType() throws SQLException {
-		List<BookType> bookTypeData = new ArrayList<BookType>();
+	public List<GasType> queryGasType() throws SQLException {
+		List<GasType> gasTypeData = new ArrayList<GasType>();
 		Connection conn = Connect.connectMySQL();
 		String sql = "SELECT * FROM gasdms.booktype ORDER BY bt_id ASC";//查询并排序（升序）
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
-			BookType bookType=new BookType();
-			bookType.setBt_id(rs.getInt("bt_id"));
-			bookType.setBt_name(rs.getString("bt_name"));
-			bookTypeData.add(bookType);
+			GasType gasType =new GasType();
+			gasType.setBt_id(rs.getInt("bt_id"));
+			gasType.setBt_name(rs.getString("bt_name"));
+			gasTypeData.add(gasType);
 		}
 		Connect.closeMySQL();// 关闭连接
-		return bookTypeData;
+		return gasTypeData;
 	}
 	/**
 	 * 新增图书类型

@@ -4,7 +4,7 @@ package Model.table;
  * 图书信息表字段 映射
  * @author rsw
  */
-public class Book {
+public class Gas {
 	private int b_id;
 	private String ISBN;
 	private String b_name;
