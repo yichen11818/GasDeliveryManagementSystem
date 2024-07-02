@@ -19,7 +19,7 @@ public class ManageFace extends JFrame {
 	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// 创建选项卡窗格，选项卡标题在上方
 	JPanel[] jpan = new JPanel[6];
 	static String count;
-	ManageBook manageBook =new ManageBook();
+	ManageGas manageGas =new ManageGas();
 	ManageBookType manageBookType=new ManageBookType();
 	ManageReader manageReader=new ManageReader();
 	ManageReaderType  manageReaderType=new ManageReaderType();
@@ -37,7 +37,7 @@ public class ManageFace extends JFrame {
 		
 		jtab.setSize(WIDTH, HEIGHT);
 
-		jpan[0] = manageBook.addPanel0();
+		jpan[0] = manageGas.addPanel0();
 		jtab.addTab("图书信息管理", jpan[0]);
 		jtab.setSelectedIndex(0);
 

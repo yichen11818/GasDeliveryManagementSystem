@@ -35,12 +35,12 @@ import Tool.TableTool;
  * @author rsw
  *
  */
-public class ManageBook extends JPanel implements ActionListener, ItemListener {
+public class ManageGas extends JPanel implements ActionListener, ItemListener {
 	String ISBN, b_name, author, press, b_type;
 	int b_id = -1, inventory, row;
 	double price;
 	boolean isCompile, refresh;// 是否可以编辑
-	JButton[] jbt_bookFind = { new JButton("查询图书"), new JButton("新增图书"), new JButton("删除图书"), new JButton("修改图书") };
+	JButton[] jbt_bookFind = { new JButton("查询煤气"), new JButton("新增煤气"), new JButton("删除煤气"), new JButton("修改煤气") };
 	JButton[] page_jbt = { new JButton("首页"), new JButton("上一页"), new JButton("下一页"), new JButton("尾页"),
 			new JButton("跳转") };
 	JTextField jtext_find, jtext_page;
