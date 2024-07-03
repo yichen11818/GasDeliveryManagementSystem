@@ -17,10 +17,9 @@ import javax.swing.JTabbedPane;
 public class ManageFace extends JFrame {
 	final int WIDTH = 1000, HEIGHT = 730;
 	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// 创建选项卡窗格，选项卡标题在上方
-	JPanel[] jpan = new JPanel[6];
+	JPanel[] jpan = new JPanel[5];
 	static String count;
 	ManageGas manageGas =new ManageGas();
-	ManageBookType manageBookType=new ManageBookType();
 	ManageReader manageReader=new ManageReader();
 	ManageReaderType  manageReaderType=new ManageReaderType();
 	ManageBorrowInfo manageBorrowInfo =new  ManageBorrowInfo();
@@ -41,20 +40,17 @@ public class ManageFace extends JFrame {
 		jtab.addTab("图书信息管理", jpan[0]);
 		jtab.setSelectedIndex(0);
 
-		jpan[1] = manageBookType.addPanel1();
-		jtab.addTab("图书类型管理", jpan[1]);
+		jpan[1] = manageReader.addPanel2();
+		jtab.addTab("读者信息管理", jpan[1]);
 
-		jpan[2] = manageReader.addPanel2();
-		jtab.addTab("读者信息管理", jpan[2]);
+		jpan[2] = manageReaderType.addPanel3();
+		jtab.addTab("读者类型管理   ", jpan[2]);
 
-		jpan[3] = manageReaderType.addPanel3();
-		jtab.addTab("读者类型管理   ", jpan[3]);
-
-		jpan[4] = manageBorrowInfo.addPanel4();
-		jtab.addTab("图书借阅管理", jpan[4]);
+		jpan[3] = manageBorrowInfo.addPanel4();
+		jtab.addTab("图书借阅管理", jpan[3]);
 		
-		jpan[5] = manageSuper.addPanel5(count);
-		jtab.addTab("超级管理员", jpan[5]);
+		jpan[4] = manageSuper.addPanel5(count);
+		jtab.addTab("超级管理员", jpan[4]);
 
 		this.add(jtab);
 		this.addWindowListener(new WindowAdapter() {

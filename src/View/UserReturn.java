@@ -28,7 +28,7 @@ import Tool.TimeTool;
 public class UserReturn {
 	GasCon bookcon = new GasCon();
 	BorrowCon borrowcon = new BorrowCon();
-	UserBook userBook =new UserBook();
+	UserGas userGas =new UserGas();
 	Object[][] borrowDate = null;
 	String getBorrowName, reader;
 	int borrow_id = -1;

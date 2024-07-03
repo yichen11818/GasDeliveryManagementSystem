@@ -36,7 +36,7 @@ import Tool.TimeTool;
  * @author rsw
  *
  */
-public class UserBook extends JPanel implements ActionListener, ItemListener {
+public class UserGas extends JPanel implements ActionListener, ItemListener {
 	GasCon bookcon = new GasCon();
 	JTable table;
 	JTextField jtext, jtext_page;

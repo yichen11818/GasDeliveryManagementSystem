@@ -18,7 +18,7 @@ public class UserFace extends JFrame {
 	static String count;
 	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// 创建选项卡窗格，选项卡标题在上方
 	JPanel[] jpan = new JPanel[5];
-	UserBook userBook=new UserBook();
+	UserGas userGas =new UserGas();
 	UserReturn userReturn=new UserReturn();
 	UserMessage userMessage =new UserMessage();
 	public UserFace(String count) throws SQLException {
@@ -32,7 +32,7 @@ public class UserFace extends JFrame {
 		this.setVisible(true);// 使窗口显示
 		jtab.setSize(WIDTH, HEIGHT);
 		
-		jpan[0] = userBook.addPanel0();
+		jpan[0] = userGas.addPanel0();
 		jtab.addTab("图书查询借阅", jpan[0]);
 		jtab.setSelectedIndex(0);
 		

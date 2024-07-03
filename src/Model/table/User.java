@@ -8,9 +8,8 @@ package Model.table;
 public class User {
 	private String number;
 	private String name;
-	private String gender;
-	private String dept;
-	private String classes;
+	private String community;
+	private String buildings;
 	private String tele;
 	private String email;
 	private java.sql.Timestamp logindate;
@@ -32,30 +31,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getDept() {
-		return dept;
-	}
-
-	public void setDept(String dept) {
-		this.dept = dept;
-	}
-
-	public String getClasses() {
-		return classes;
-	}
-
-	public void setClasses(String classes) {
-		this.classes = classes;
 	}
 
 	public String getTele() {

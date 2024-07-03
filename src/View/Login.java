@@ -14,16 +14,17 @@ import java.sql.SQLException;
  * 注册界面
  */
 public class Login extends JFrame implements ActionListener, ItemListener {
-    JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("性别："), new JLabel("读者类型："), new JLabel("院系："),
+    JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("小区："), new JLabel("楼栋："), new JLabel("院系："),
             new JLabel("班级："), new JLabel("手机号码："), new JLabel("电子邮箱："), new JLabel("密保："), new JLabel("密码："),
             new JLabel("确认密码：")};// 声明标签数组
     JButton jbt = new JButton("确定");
+
     UserCon readercon = new UserCon();
     JTextField jtext[] = new JTextField[7];
-    JComboBox<String> jcb_readerType = new JComboBox<String>();
-    JComboBox<String> jcb_gender = new JComboBox<String>();
+    JComboBox<String> jcb_userCommunity = new JComboBox<String>();
+    JComboBox<String> jcb_buildings = new JComboBox<String>();
     JPasswordField jpassword[] = new JPasswordField[2];
-    String r_type = "本科", gender = "男";
+    String u_community = "金典小区", buildings = "2栋";
     String[] hint = {"20开头的11位数字", "中文汉字", "中文汉字", "中文汉字加数字", "手机号格式", "邮箱格式", "任意输入"};
     User user = new User();
     UserTypeCon userTypeCon = new UserTypeCon();
@@ -42,16 +43,15 @@ public class Login extends JFrame implements ActionListener, ItemListener {
             jtext[i].addFocusListener(new InputLimit(jtext[i], hint[i]));// 设置文诓提示的外部类监听
             this.add(jtext[i]);
         }
-        jcb_gender.setBounds(150, 100, 80, 30);
-        jcb_readerType.setBounds(150, 140, 80, 30);
-        jcb_gender.addItem("男");
-        jcb_gender.addItem("女");
+        jcb_buildings.setBounds(150, 140, 80, 30);
+        jcb_buildings.addItem("1栋");jcb_buildings.addItem("2栋");jcb_buildings.addItem("3栋");jcb_buildings.addItem("4栋");jcb_buildings.addItem("5栋");jcb_buildings.addItem("6栋");
+        jcb_userCommunity.setBounds(150, 100, 80, 30);
         String[] readerType = userTypeCon.getReaderType();
         for (int k = 0; k < readerType.length; k++) {
-            jcb_readerType.addItem(readerType[k]);
+            jcb_userCommunity.addItem(readerType[k]);
         }
-        jcb_readerType.setVisible(true);
-        jcb_gender.setVisible(true);
+        jcb_userCommunity.setVisible(true);
+        jcb_buildings.setVisible(true);
         for (int j = 0; j < jpassword.length; j++) {
             jpassword[j] = new JPasswordField();
             jpassword[j].setBounds(150, 380 + j * 40, 150, 30);
@@ -75,12 +75,12 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         this.setVisible(true);// 使窗口显示
         // 窗口添加组件
         this.add(jbt);
-        this.add(jcb_readerType);
-        this.add(jcb_gender);
+        this.add(jcb_userCommunity);
+        this.add(jcb_buildings);
         // 添加监听
         jbt.addActionListener(this);// 设置按钮的监听者
-        jcb_readerType.addItemListener(this);
-        jcb_gender.addItemListener(this);
+        jcb_userCommunity.addItemListener(this);
+        jcb_buildings.addItemListener(this);
         // 窗口关闭事件
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -124,8 +124,8 @@ public class Login extends JFrame implements ActionListener, ItemListener {
                     if (new String(jpassword[0].getPassword()).equals(new String(jpassword[1].getPassword()))) {
                         // 检查账号是否被注册
                         if (! readercon.isNumber(jtext[0].getText())) {
-                            readercon.insertReader(jtext[0].getText(), jtext[1].getText(), gender,
-                                    userTypeCon.queryReaderTypeID(r_type), jtext[2].getText(), jtext[3].getText(),
+                            readercon.insertReader(jtext[0].getText(), jtext[1].getText(), buildings,
+                                    userTypeCon.queryReaderTypeID(u_community), jtext[2].getText(), jtext[3].getText(),
                                     jtext[4].getText(), jtext[5].getText(), jtext[6].getText(),
                                     MD5Tool.string2MD5(new String(jpassword[0].getPassword())));
                             // 将密码进行MD5加密后在添加信息
@@ -160,8 +160,8 @@ public class Login extends JFrame implements ActionListener, ItemListener {
     public void itemStateChanged(ItemEvent e) {
         // TODO Auto-generated method stub
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            r_type = jcb_readerType.getSelectedItem().toString();
-            gender = jcb_gender.getSelectedItem().toString();
+            u_community = jcb_userCommunity.getSelectedItem().toString();
+            buildings = jcb_buildings.getSelectedItem().toString();
         }
     }
 }

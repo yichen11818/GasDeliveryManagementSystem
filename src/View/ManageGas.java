@@ -50,7 +50,7 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 	Vector<String> columnNameBook;
 	JLabel jlab_book = new JLabel();
 	int pageIndex = 1, pageCount;
-	UserBook userBook = new UserBook();
+	UserGas userGas = new UserGas();
 	GasCon gasCon = new GasCon();
 	BorrowCon borrowCon = new BorrowCon();
 
