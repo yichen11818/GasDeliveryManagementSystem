@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.UserCon;
-import Controller.UserTypeCon;
+import Controller.UserCommunityCon;
 import Tool.PubJdialog;
 import Tool.TableTool;
 
@@ -28,7 +28,7 @@ public class UserMessage {
 	boolean isAlter = false;
 	JButton alterX, alterM;
 	UserCon readercon = new UserCon();
-	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCommunityCon userCommunityCon = new UserCommunityCon();
 
 	/**
 	 * 注释
@@ -45,7 +45,7 @@ public class UserMessage {
 		alterM = new JButton("修改密码");
 		panel.setLayout(null);
 
-		Vector<Vector<Object>> readerInfo = readercon.queryReaderInfo(UserFace.count);
+		Vector<Vector<Object>> readerInfo = readercon.queryUserInfo(UserFace.count);
 		String[] columnReader = { "账号", "姓名", "性别", "院系", "班级", "手机号码", "电子邮箱" };
 		String[] columnReaderType = { "读者类型", "最大可借阅数量", "最大可借阅天数" };
 		Vector<String> columnNameReader = new Vector<String>();// 字段名
@@ -57,7 +57,7 @@ public class UserMessage {
 			columnNameReaderType.add(columnReaderType[k]);
 		}
 		DefaultTableModel dfttable_reader = new DefaultTableModel(readerInfo, columnNameReader);
-		DefaultTableModel dfttable_readerType = new DefaultTableModel(userTypeCon.queryPersonalType(UserFace.count),
+		DefaultTableModel dfttable_readerType = new DefaultTableModel(userCommunityCon.queryPersonalType(UserFace.count),
 				columnNameReaderType);
 
 		JTable table_reader = new JTable(dfttable_reader) {
@@ -102,10 +102,10 @@ public class UserMessage {
 				JTextField[] jtext_reader = new JTextField[5];
 				try {
 					Object[] readerUpdata = { UserFace.count,
-							readercon.queryReaderInfo(UserFace.count).elementAt(0).elementAt(3),
-							readercon.queryReaderInfo(UserFace.count).elementAt(0).elementAt(4),
-							readercon.queryReaderInfo(UserFace.count).elementAt(0).elementAt(5),
-							readercon.queryReaderInfo(UserFace.count).elementAt(0).elementAt(6) };
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(3),
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(4),
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(5),
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(6) };
 					new PubJdialog(210, 5, jlab_reader, jtext_reader, readerUpdata, 11, jlab_hint).setVisible(true);
 					if (PubJdialog.success) {
 						table_reader.setValueAt(jtext_reader[1].getText(), 0, 3);

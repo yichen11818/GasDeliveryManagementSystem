@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.GasCon;
 import Controller.BorrowCon;
 import Controller.PageQueryCon;
-import Controller.UserTypeCon;
+import Controller.UserCommunityCon;
 import Tool.InputLimit;
 import Tool.TableTool;
 import Tool.TimeTool;
@@ -57,7 +57,7 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			new JButton("跳转") };
 	JLabel jlab_book = new JLabel();
 	int pageIndex = 1, pageCount;
-	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCommunityCon userCommunityCon = new UserCommunityCon();
 
 	protected JPanel addPanel0() throws SQLException {
 		JPanel jpanup = new JPanel();
@@ -211,12 +211,12 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 				int c = JOptionPane.showConfirmDialog(null, "是否确定借阅此图书", "验证操作", JOptionPane.YES_NO_OPTION);
 				if (c == JOptionPane.YES_OPTION) {
 					try {
-						for (int i = 0; i < userTypeCon.queryPersonalType(UserFace.count).size(); i++) {
+						for (int i = 0; i < userCommunityCon.queryPersonalType(UserFace.count).size(); i++) {
 							// 根据账号查询出读者类型的每本书的可借阅天数
-							maxday = Integer.valueOf(userTypeCon.queryPersonalType(UserFace.count).elementAt(i)
+							maxday = Integer.valueOf(userCommunityCon.queryPersonalType(UserFace.count).elementAt(i)
 									.elementAt(2).toString());
 							// 同理，得可借阅数量
-							maxcount = Integer.valueOf(userTypeCon.queryPersonalType(UserFace.count).elementAt(i)
+							maxcount = Integer.valueOf(userCommunityCon.queryPersonalType(UserFace.count).elementAt(i)
 									.elementAt(1).toString());
 						}
 						// 已借阅的图书数量

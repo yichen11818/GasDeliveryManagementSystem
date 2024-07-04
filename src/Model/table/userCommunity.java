@@ -4,18 +4,18 @@ package Model.table;
  * 读者类型表字段 映射
  * @author rsw
  */
-public class UserType {
-	private int rt_id;
-	private String rt_name;
+public class userCommunity {
+	private int u_id;
+	private String u_community;
 	private int maxcount;
 	private int maxday;
 
-	public void setRt_id(int rt_id) {
-		this.rt_id = rt_id;
+	public int getU_id() {
+		return u_id;
 	}
 
-	public void setRt_name(String rt_name) {
-		this.rt_name = rt_name;
+	public void setU_id(int u_id) {
+		this.u_id = u_id;
 	}
 
 	public void setMaxcount(int maxcount) {
@@ -26,12 +26,12 @@ public class UserType {
 		this.maxday = maxday;
 	}
 
-	public int getRt_id() {
-		return rt_id;
+	public String getU_community() {
+		return u_community;
 	}
 
-	public String getRt_name() {
-		return rt_name;
+	public void setU_community(String u_community) {
+		this.u_community = u_community;
 	}
 
 	public int getMaxcount() {

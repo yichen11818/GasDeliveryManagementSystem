@@ -149,7 +149,7 @@ CREATE TABLE `user` (
   `logindate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `password` char(32) NOT NULL,
   `keeppass` varchar(45) NOT NULL,
-  `reader_type` int(11) unsigned NOT NULL COMMENT '读者类型',
+  `user_community` int(11) unsigned NOT NULL COMMENT '读者类型',
   PRIMARY KEY (`number`),
   UNIQUE KEY `number_UNIQUE` (`number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='读者信息表';
@@ -173,12 +173,12 @@ DROP TABLE IF EXISTS `readertype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `readertype` (
-  `rt_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '读者类型id',
-  `rt_name` varchar(30) NOT NULL COMMENT '读者类型',
+  `u_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '读者类型id',
+  `u_community` varchar(30) NOT NULL COMMENT '读者类型',
   `maxcount` int(11) unsigned NOT NULL COMMENT '最大借阅数量',
   `maxday` int(11) unsigned NOT NULL COMMENT '最大借阅天数',
-  PRIMARY KEY (`rt_id`),
-  UNIQUE KEY `rt_name_UNIQUE` (`rt_name`)
+  PRIMARY KEY (`u_id`),
+  UNIQUE KEY `rt_name_UNIQUE` (`u_community`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='读者类型信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

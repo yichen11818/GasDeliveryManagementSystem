@@ -1,7 +1,7 @@
 package View;
 
 import Controller.UserCon;
-import Controller.UserTypeCon;
+import Controller.UserCommunityCon;
 import Model.table.User;
 import Tool.InputLimit;
 import Tool.MD5Tool;
@@ -14,23 +14,23 @@ import java.sql.SQLException;
  * 注册界面
  */
 public class Login extends JFrame implements ActionListener, ItemListener {
-    JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("小区："), new JLabel("楼栋："), new JLabel("院系："),
-            new JLabel("班级："), new JLabel("手机号码："), new JLabel("电子邮箱："), new JLabel("密保："), new JLabel("密码："),
+    JLabel[] jlab = {new JLabel("账号："), new JLabel("姓名："), new JLabel("小区："), new JLabel("楼栋："),
+            new JLabel("手机号码："), new JLabel("电子邮箱："), new JLabel("密保："), new JLabel("密码："),
             new JLabel("确认密码：")};// 声明标签数组
     JButton jbt = new JButton("确定");
 
     UserCon readercon = new UserCon();
-    JTextField jtext[] = new JTextField[7];
+    JTextField jtext[] = new JTextField[5];
     JComboBox<String> jcb_userCommunity = new JComboBox<String>();
     JComboBox<String> jcb_buildings = new JComboBox<String>();
     JPasswordField jpassword[] = new JPasswordField[2];
     String u_community = "金典小区", buildings = "2栋";
     String[] hint = {"20开头的11位数字", "中文汉字", "中文汉字", "中文汉字加数字", "手机号格式", "邮箱格式", "任意输入"};
     User user = new User();
-    UserTypeCon userTypeCon = new UserTypeCon();
+    UserCommunityCon userCommunityCon = new UserCommunityCon();
 
     public Login() throws SQLException {
-        int[] inuput_int = {11, 5, 10, 10, 11, 20, 15};// 输入框限制输入位数
+        int[] inuput_int = {11, 5, 11, 20, 15};// 输入框限制输入位数
         for (int i = 0; i < jtext.length; i++) {
             jtext[i] = new JTextField();
             if (i < 2) {
@@ -46,9 +46,9 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         jcb_buildings.setBounds(150, 140, 80, 30);
         jcb_buildings.addItem("1栋");jcb_buildings.addItem("2栋");jcb_buildings.addItem("3栋");jcb_buildings.addItem("4栋");jcb_buildings.addItem("5栋");jcb_buildings.addItem("6栋");
         jcb_userCommunity.setBounds(150, 100, 80, 30);
-        String[] readerType = userTypeCon.getReaderType();
-        for (int k = 0; k < readerType.length; k++) {
-            jcb_userCommunity.addItem(readerType[k]);
+        String[] userCommunity = userCommunityCon.getUserCommunity();
+        for (int k = 0; k < userCommunity.length; k++) {
+            jcb_userCommunity.addItem(userCommunity[k]);
         }
         jcb_userCommunity.setVisible(true);
         jcb_buildings.setVisible(true);
@@ -98,9 +98,9 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         String[] regex = {InputLimit.STUDENTNUMBER, InputLimit.NAME, InputLimit.CHINESE, InputLimit.CHINESEMATH,
                 InputLimit.TELE, InputLimit.EMAIL, InputLimit.PASSWORD};
         // 验证账号（以20开头的11位数字）、验证姓名（中文）、验证手机号、验证邮箱、验证密码（6-16位数字或者字母）
-        String[] input = {jtext[0].getText(), jtext[1].getText(), jtext[2].getText(), jtext[3].getText(),
-                jtext[4].getText(), jtext[5].getText(), new String(jpassword[0].getPassword())};
-        String[] hintError = {"账号格式错误", "姓名格式错误", "院系格式出错", "班级格式出错", "手机号格式错误", "邮箱格式错误", "密码格式错误（6-16位数字或字母）"};
+        String[] input = {jtext[0].getText(), jtext[1].getText(),
+                jtext[2].getText(), jtext[3].getText(), new String(jpassword[0].getPassword())};
+        String[] hintError = {"账号格式错误", "姓名格式错误", "手机号格式错误", "邮箱格式错误", "密码格式错误（6-16位数字或字母）"};
         String message = "";
         boolean result[] = InputLimit.regular(regex, input);
         Object obj = e.getSource();
@@ -124,8 +124,9 @@ public class Login extends JFrame implements ActionListener, ItemListener {
                     if (new String(jpassword[0].getPassword()).equals(new String(jpassword[1].getPassword()))) {
                         // 检查账号是否被注册
                         if (! readercon.isNumber(jtext[0].getText())) {
-                            readercon.insertReader(jtext[0].getText(), jtext[1].getText(), buildings,
-                                    userTypeCon.queryReaderTypeID(u_community), jtext[2].getText(), jtext[3].getText(),
+                            readercon.insertReader(jtext[0].getText(), jtext[1].getText(), userCommunityCon.queryUserCommunityID(u_community),
+                                    buildings
+                                    , jtext[2].getText(), jtext[3].getText(),
                                     jtext[4].getText(), jtext[5].getText(), jtext[6].getText(),
                                     MD5Tool.string2MD5(new String(jpassword[0].getPassword())));
                             // 将密码进行MD5加密后在添加信息

@@ -3,15 +3,15 @@ package Controller;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import Model.access.UserTypeAccess;
+import Model.access.UserCommunityAccess;
 
 /**
  * 读者类型表的控制器
  * @author rsw
  *
  */
-public class UserTypeCon {
-	UserTypeAccess readerTypeDao = new UserTypeAccess();
+public class UserCommunityCon {
+	UserCommunityAccess readerTypeDao = new UserCommunityAccess();
 
 	/**
 	 * 查询读者类型表的全部数据
@@ -24,7 +24,7 @@ public class UserTypeCon {
 	/**
 	 * 查询读者类型
 	 */
-	public String[] getReaderType() throws SQLException {
+	public String[] getUserCommunity() throws SQLException {
 		Object[][] data_readerType = readerTypeDao.queryUserType();
 		String[] readerType = new String[data_readerType.length];
 		for (int i = 0; i < data_readerType.length; i++) {
@@ -35,9 +35,9 @@ public class UserTypeCon {
 	/**
 	 * 查询读者类型的ID
 	 */
-	public int queryReaderTypeID(String reader_type) throws SQLException {
-		int rt_id=readerTypeDao.queryUserTypeID(reader_type);
-		return rt_id;
+	public int queryUserCommunityID(String user_community) throws SQLException {
+		int u_id=readerTypeDao.queryUserTypeID(user_community);
+		return u_id;
 	}
 	/**
 	 * 查询个人权限
@@ -48,19 +48,19 @@ public class UserTypeCon {
 	/**
 	 * 新增读者类型
 	 */
-	public void insertReaderType(String rt_name,int maxcont,int maxday) throws SQLException {
-		readerTypeDao.insertUserType(rt_name, maxcont, maxday);
+	public void insertReaderType(String u_community,int maxcont,int maxday) throws SQLException {
+		readerTypeDao.insertUserType(u_community, maxcont, maxday);
 	}
 	/**
 	 * 删除读者类型
 	 */
-	public void deleteRederType(int rt_id) throws SQLException {
-		readerTypeDao.deleteUserType(rt_id);
+	public void deleteRederType(int u_id) throws SQLException {
+		readerTypeDao.deleteUserType(u_id);
 	}
 	/**
 	 * 更新读者类型
 	 */
-	public void updateRederType(String readerType,int maxcount,int maxday,int rt_id) throws SQLException {
-		readerTypeDao.updateUserType(readerType,maxcount ,maxday,rt_id);
+	public void updateRederType(String readerType,int maxcount,int maxday,int u_id) throws SQLException {
+		readerTypeDao.updateUserType(readerType,maxcount ,maxday,u_id);
 	}
 }

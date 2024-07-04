@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener {
 
     AdmiCon admiCon = new AdmiCon();
     Administrator admi = new Administrator();
-    UserCon readercon = new UserCon();
+    UserCon usercon = new UserCon();
 
     final int WIDTH = 700, HEIGHT = 530;//页面参数
     ImageIcon img_lading = new ImageIcon("src/Images/lading.jpg");
@@ -207,7 +207,7 @@ public class Main extends JFrame implements ActionListener {
                 if (number.equals("") || password.equals("")) { // 判断输入是否为空
                     JOptionPane.showMessageDialog(null, "输入数据为空", "输入错误", JOptionPane.ERROR_MESSAGE);
                 } else if (resurt) {
-                    if (readercon.queryRerader(number, password) && isuser == true) {
+                    if (usercon.queryRerader(number, password) && isuser == true) {
                         count = number;// 账号传回数据库
                         new UserFace(count);
                         this.dispose();

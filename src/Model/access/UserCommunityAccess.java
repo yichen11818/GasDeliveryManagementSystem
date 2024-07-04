@@ -12,7 +12,7 @@ import java.util.Vector;
  * @author rsw
  *
  */
-public class UserTypeAccess {
+public class UserCommunityAccess {
 
 	/**
 	 * 查询读者类型
@@ -20,7 +20,7 @@ public class UserTypeAccess {
 	 */
 	public Object[][] queryUserType() throws SQLException{
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT * from gasdms.readertype";
+		String sql = "SELECT * from gasdms.usercommunity";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		int len = 0;
@@ -31,8 +31,8 @@ public class UserTypeAccess {
 		rs.beforeFirst();
 		for(int i=0;i<len ;i++) {
 			rs.next();
-			data_readerType[i][0] = rs.getInt("rt_id");
-			data_readerType[i][1] = rs.getString("rt_name");
+			data_readerType[i][0] = rs.getInt("u_id");
+			data_readerType[i][1] = rs.getString("u_community");
 			data_readerType[i][2] = rs.getInt("maxcount");
 			data_readerType[i][3] = rs.getInt("maxday");
 		}
@@ -42,48 +42,48 @@ public class UserTypeAccess {
 	/**
 	 * 查询读者类型的ID
 	 */
-	public int queryUserTypeID(String reader_type) throws SQLException {
+	public int queryUserTypeID(String user_community) throws SQLException {
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT rt_id from gasdms.readertype WHERE rt_name=?";
+		String sql = "SELECT u_id from gasdms.usercommunity WHERE u_community=?";
 		PreparedStatement ptmt = conn.prepareStatement(sql);
-		ptmt.setString(1, reader_type);
+		ptmt.setString(1, user_community);
 		ResultSet rs = ptmt.executeQuery();
-		int rt_id=0;
+		int u_id=0;
 		while (rs.next()) {
-			rt_id=rs.getInt("rt_id");
+			u_id=rs.getInt("u_id");
 		}
 		Connect.closeMySQL();// 关闭连接
-		return rt_id;
+		return u_id;
 	}
 	/**
 	 * 查询个人权限
 	 */
 	public Vector<Vector<Object>> queryPersonalType(String count) throws SQLException {
 		int column=3;
-		String sql="SELECT rt_name,maxcount,maxday FROM gasdms.readertype "
-				+ "WHERE rt_id IN ( SELECT reader_type FROM gasdms.reader WHERE number=? )";
+		String sql="SELECT u_community FROM gasdms.usercommunity "
+				+ "WHERE u_id IN ( SELECT user_community FROM gasdms.user WHERE number=? )";
 		return Connect.queryExact_public(sql,count);	
 	}	
 	/**
 	 * 新增读者类型
 	 * @throws SQLException 
 	 */
-	public void insertUserType(String rt_name, int maxcont, int maxday) throws SQLException {
-		String sql = "INSERT INTO gasdms.readertype(rt_name,maxcount,maxday) VALUES(?,?,?)";
-		Connect.update_public(sql, rt_name,maxcont,maxday);
+	public void insertUserType(String u_community, int maxcont, int maxday) throws SQLException {
+		String sql = "INSERT INTO gasdms.usercommunity(u_community,maxcount,maxday) VALUES(?,?,?)";
+		Connect.update_public(sql, u_community,maxcont,maxday);
 	}
 	/**
 	 *删除读者类型
 	 */
-	public void deleteUserType(int rt_id) throws SQLException {
-		String sql = "DELETE FROM gasdms.readertype WHERE rt_id=?";
-		Connect.update_public(sql, rt_id);
+	public void deleteUserType(int u_id) throws SQLException {
+		String sql = "DELETE FROM gasdms.usercommunity WHERE u_id=?";
+		Connect.update_public(sql, u_id);
 	}
 	/**
 	 * 修改读者类型
 	 */
-	public void updateUserType(String readerType, int maxcount, int maxday, int rt_id) throws SQLException {
-		String sql = "UPDATE gasdms.readertype SET rt_name=?,maxcount=?,maxday=? WHERE rt_id=?";
-		Connect.update_public(sql,readerType,maxcount ,maxday,rt_id);
+	public void updateUserType(String readerType, int maxcount, int maxday, int u_id) throws SQLException {
+		String sql = "UPDATE gasdms.usercommunity SET u_community=?,maxcount=?,maxday=? WHERE u_id=?";
+		Connect.update_public(sql,readerType,maxcount ,maxday,u_id);
 	}
 }

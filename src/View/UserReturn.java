@@ -30,7 +30,7 @@ public class UserReturn {
 	BorrowCon borrowcon = new BorrowCon();
 	UserGas userGas =new UserGas();
 	Object[][] borrowDate = null;
-	String getBorrowName, reader;
+	String getBorrowName, user;
 	int borrow_id = -1;
 
 	protected JPanel addPanel1() {

@@ -20,7 +20,7 @@ public class ManageFace extends JFrame {
 	JPanel[] jpan = new JPanel[5];
 	static String count;
 	ManageGas manageGas =new ManageGas();
-	ManageReader manageReader=new ManageReader();
+	ManageUser manageUser =new ManageUser();
 	ManageReaderType  manageReaderType=new ManageReaderType();
 	ManageBorrowInfo manageBorrowInfo =new  ManageBorrowInfo();
 	ManageSuper manageSuper =new  ManageSuper();	
@@ -40,7 +40,7 @@ public class ManageFace extends JFrame {
 		jtab.addTab("图书信息管理", jpan[0]);
 		jtab.setSelectedIndex(0);
 
-		jpan[1] = manageReader.addPanel2();
+		jpan[1] = manageUser.addPanel2();
 		jtab.addTab("读者信息管理", jpan[1]);
 
 		jpan[2] = manageReaderType.addPanel3();

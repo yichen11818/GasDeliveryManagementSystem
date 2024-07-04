@@ -15,7 +15,7 @@ public class User {
 	private java.sql.Timestamp logindate;
 	private String password;
 	private String keeppass;
-	private int reader_type;
+	private int user_community;
 
 	public String getNumber() {
 		return number;
@@ -74,11 +74,11 @@ public class User {
 	}
 
 	public int getReader_type() {
-		return reader_type;
+		return user_community;
 	}
 
-	public void setReader_type(int reader_type) {
-		this.reader_type = reader_type;
+	public void setReader_type(int user_community) {
+		this.user_community = user_community;
 	}
 
 }

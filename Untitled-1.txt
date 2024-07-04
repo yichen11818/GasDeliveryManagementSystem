@@ -1,0 +1,7 @@
+`reader_type`->user_community
+`gender` -> buildings
+reader_type community
+ r_type  u_community
+rt_id u_id
+rt_name u_community
+readertype usercommunity

@@ -23,7 +23,7 @@ import Controller.AdmiCon;
 import Controller.GasCon;
 import Controller.GasTypeCon;
 import Controller.UserCon;
-import Controller.UserTypeCon;
+import Controller.UserCommunityCon;
 
 /**
  * 公共的对话框类
@@ -32,7 +32,7 @@ public class PubJdialog extends JDialog {
 	UserCon readercon = new UserCon();
 	GasCon gasCon = new GasCon();
 	GasTypeCon gasTypeCon = new GasTypeCon();
-	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCommunityCon userCommunityCon = new UserCommunityCon();
 	AdmiCon admiCon = new AdmiCon();
 	String number, b_type;// r_number 读者账号 b_type 图书类型
 	int booktype = 1, a;// 图书类型的id
@@ -73,7 +73,7 @@ public class PubJdialog extends JDialog {
 						if (resurt && new String(jpassword[2].getPassword())
 								.equals(new String(jpassword[3].getPassword()))) {
 							if (isUser == true) {
-								readercon.updateReaderPass(alterPass, number, password, keepPass);
+								readercon.updateUserPass(alterPass, number, password, keepPass);
 							} else {
 								admiCon.updateAdmiPass(alterPass, number, password, keepPass);
 							}
@@ -241,7 +241,7 @@ public class PubJdialog extends JDialog {
 								}
 							}
 							if (message.equals("")) {
-								userTypeCon.insertReaderType(jtext_readerType[0].getText().toString(),
+								userCommunityCon.insertReaderType(jtext_readerType[0].getText().toString(),
 										Integer.parseInt(jtext_readerType[1].getText()),
 										Integer.parseInt(jtext_readerType[2].getText()));
 								success=true;
@@ -583,9 +583,9 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									readercon.updateReader(jtext_update[1].getText(), jtext_update[2].getText(),
-											jtext_update[3].getText(), jtext_update[4].getText(),
-											jtext_update[0].getText());
+									readercon.updateUser(jtext_update[0].getText(),jtext_update[1].getText(), jtext_update[2].getText()
+                                    );
+
 									JOptionPane.showMessageDialog(null, "信息修改成功", "操作成功",
 											JOptionPane.INFORMATION_MESSAGE);
 									dispose();
@@ -611,7 +611,7 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									userTypeCon.updateRederType(jtext_update[1].getText(),
+									userCommunityCon.updateRederType(jtext_update[1].getText(),
 											Integer.valueOf(jtext_update[2].getText()),
 											Integer.valueOf(jtext_update[3].getText()),
 											Integer.valueOf(jtext_update[0].getText()));
@@ -666,9 +666,9 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									readercon.updateReader(jtext_update[1].getText(), jtext_update[2].getText(),
-											jtext_update[3].getText(), jtext_update[4].getText(),
-											jtext_update[0].getText());
+									readercon.updateUser(jtext_update[1].getText(), jtext_update[2].getText(),
+											jtext_update[3].getText()
+                                    );
 									JOptionPane.showMessageDialog(null, "信息修改成功", "操作成功",
 											JOptionPane.INFORMATION_MESSAGE);
 									dispose();

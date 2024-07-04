@@ -5,7 +5,7 @@ public class Total {
 	private Gas gas;
 	private GasType booktype;
 	private User user;
-	private UserType readertype;
+	private userCommunity usercommunity;
 	private Borrow borrow;
 	private Administrator admi;
 
@@ -33,12 +33,12 @@ public class Total {
 		this.user = user;
 	}
 
-	public UserType getReadertype() {
-		return readertype;
+	public userCommunity getReadertype() {
+		return usercommunity;
 	}
 
-	public void setReadertype(UserType readertype) {
-		this.readertype = readertype;
+	public void setReadertype(userCommunity usercommunity) {
+		this.usercommunity = usercommunity;
 	}
 
 	public Borrow getBorrow() {

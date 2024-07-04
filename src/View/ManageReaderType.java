@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.UserCon;
-import Controller.UserTypeCon;
+import Controller.UserCommunityCon;
 import Tool.PubJdialog;
 import Tool.TableTool;
 
@@ -29,9 +29,9 @@ import Tool.TableTool;
  *
  */
 public class ManageReaderType {
-	int a, rt_id=-1, maxcount, maxday,row;
+	int a, u_id=-1, maxcount, maxday,row;
 	String readerType;
-	UserTypeCon userTypeCon = new UserTypeCon();
+	UserCommunityCon userCommunityCon = new UserCommunityCon();
 	UserCon userCon =new UserCon();
 	boolean isCompile, refresh;// 是否可以编辑
 
@@ -48,7 +48,7 @@ public class ManageReaderType {
 			jpanup_readerType.add(jbt_readerType[i]);
 		}
 		String[] columnreaderType = { "序号", "读者类型", "最大借阅数量", "最大借阅天数" };
-		Object[][] readerTypeData = userTypeCon.queryReaderType();
+		Object[][] readerTypeData = userCommunityCon.queryReaderType();
 		DefaultTableModel dfttable_readerType = new DefaultTableModel(readerTypeData, columnreaderType);
 		JTable table_readerType = new JTable(dfttable_readerType) {
 			public boolean isCellEditable(int row, int column) {
@@ -65,7 +65,7 @@ public class ManageReaderType {
 					}
 					row=table_readerType.getSelectedRow();
 					readerType = table_readerType.getValueAt(table_readerType.getSelectedRow(), 1).toString();
-					rt_id = Integer
+					u_id = Integer
 							.valueOf(table_readerType.getValueAt(table_readerType.getSelectedRow(), 0).toString());
 					maxcount = Integer
 							.valueOf(table_readerType.getValueAt(table_readerType.getSelectedRow(), 2).toString());
@@ -86,26 +86,26 @@ public class ManageReaderType {
 				try {
 					new PubJdialog(a).setVisible(true);
 					if(PubJdialog.success) {
-						dfttable_readerType.setDataVector(userTypeCon.queryReaderType(), columnreaderType);
+						dfttable_readerType.setDataVector(userCommunityCon.queryReaderType(), columnreaderType);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				rt_id = TableTool.cancelTableSelected(table_readerType, rt_id);
+				u_id = TableTool.cancelTableSelected(table_readerType, u_id);
 			}
 		});
 		// 删除读者类型
 		jbt_readerType[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (rt_id != -1) {
+				if (u_id != -1) {
 					int c = JOptionPane.showConfirmDialog(null, "是否确定删除此读者类型", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
 						try {
-							if(userCon.existReadertype(rt_id)) {
+							if(userCon.existReadertype(u_id)) {
 								JOptionPane.showMessageDialog(null, "此读者类型已经有读者使用，请尝试将此读者类型的读者删除后在删除此读者类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 							}else {
-								System.out.println(rt_id);
-							userTypeCon.deleteRederType(rt_id);
+								System.out.println(u_id);
+							userCommunityCon.deleteRederType(u_id);
 							dfttable_readerType.removeRow(table_readerType.getSelectedRow());
 							}
 						} catch (SQLException e1) {
@@ -116,7 +116,7 @@ public class ManageReaderType {
 				} else {
 					JOptionPane.showMessageDialog(null, "您没有选中读者类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
-				rt_id = TableTool.cancelTableSelected(table_readerType, rt_id);
+				u_id = TableTool.cancelTableSelected(table_readerType, u_id);
 			}
 		});
 		// 修改读者类型
@@ -127,8 +127,8 @@ public class ManageReaderType {
 				JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("中文汉字"), new JLabel("整数"),
 						new JLabel("整数")};
 				JTextField[] jtext_readerType = new JTextField[4];
-				Object[] readerTypeUpdata = { rt_id, readerType, maxcount, maxday };
-				if (rt_id != -1) {
+				Object[] readerTypeUpdata = { u_id, readerType, maxcount, maxday };
+				if (u_id != -1) {
 					try {
 						// 弹出修改读者类型的对话框
 						new PubJdialog(180, 4, jlab_readerType, jtext_readerType, readerTypeUpdata, 3,jlab_hint).setVisible(true);
@@ -145,7 +145,7 @@ public class ManageReaderType {
 				} else {
 					JOptionPane.showMessageDialog(null, "您没有选中读者类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
-				rt_id = TableTool.cancelTableSelected(table_readerType, rt_id);
+				u_id = TableTool.cancelTableSelected(table_readerType, u_id);
 			}
 		});
 		return panel;
