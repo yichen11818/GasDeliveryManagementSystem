@@ -23,16 +23,16 @@ public class GasTypeAccess {
 	 */
 	public int queryGasTypeid(String bt_name) throws SQLException {
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT bt_id from gasdms.booktype WHERE bt_name=?";
+		String sql = "SELECT bt_id from gasdms.gastype WHERE bt_name=?";
 		PreparedStatement pr = conn.prepareStatement(sql);
 		pr.setString(1, bt_name);
 		ResultSet rs = pr.executeQuery();
-		int booktype = 0;
+		int gastype = 0;
 		while (rs.next()) { // 遍历数据库的数据
-			booktype = rs.getInt("bt_id");
+			gastype = rs.getInt("bt_id");
 		}
 		Connect.closeMySQL();// 关闭连接
-		return booktype;
+		return gastype;
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class GasTypeAccess {
 	public List<GasType> queryGasType() throws SQLException {
 		List<GasType> gasTypeData = new ArrayList<GasType>();
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT * FROM gasdms.booktype ORDER BY bt_id ASC";//查询并排序（升序）
+		String sql = "SELECT * FROM gasdms.gastype ORDER BY bt_id ASC";//查询并排序（升序）
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -57,12 +57,12 @@ public class GasTypeAccess {
 	 * 新增图书类型
 	 */
 	public int insertGasType(String bt_name) throws SQLException {
-		String sql = "INSERT INTO gasdms.booktype(bt_name) VALUES(?);";
+		String sql = "INSERT INTO gasdms.gastype(bt_name) VALUES(?);";
 		Connect.update_public(sql, bt_name);
 	
 		int id=0;
 		Connection conn = Connect.connectMySQL();
-		String insterID="SELECT bt_id FROM gasdms.booktype WHERE bt_name=?";
+		String insterID="SELECT bt_id FROM gasdms.gastype WHERE bt_name=?";
 		PreparedStatement pr = conn.prepareStatement(insterID);
 		pr.setString(1, bt_name);
 		ResultSet rs = pr.executeQuery();
@@ -75,15 +75,15 @@ public class GasTypeAccess {
 	 * 删除图书类型
 	 */
 	public void deleteGasType(int bt_id) throws SQLException {
-		String sql = "DELETE FROM gasdms.booktype WHERE bt_id=?";
+		String sql = "DELETE FROM gasdms.gastype WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
 	/**
 	 * 
 	 * 修改图书类型
 	 */
-	public void updateGasType(String input_bookType, int bt_id) throws SQLException {
-		String sql = "UPDATE gasdms.booktype SET bt_name='"+input_bookType+"' WHERE bt_id=?";
+	public void updateGasType(String input_gasType, int bt_id) throws SQLException {
+		String sql = "UPDATE gasdms.gastype SET bt_name='"+input_gasType+"' WHERE bt_id=?";
 		Connect.update_public(sql, bt_id);
 	}
 }

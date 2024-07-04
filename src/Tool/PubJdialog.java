@@ -35,8 +35,8 @@ public class PubJdialog extends JDialog {
 	UserCommunityCon userCommunityCon = new UserCommunityCon();
 	AdmiCon admiCon = new AdmiCon();
 	String number, b_type;// r_number 读者账号 b_type 图书类型
-	int booktype = 1, a;// 图书类型的id
-	JTextField[] jtext_readerType;
+	int gastype = 1, a;// 图书类型的id
+	JTextField[] jtext_userCommunity;
 
 	/**
 	 * 用户端修改读者密码的输入对话框
@@ -101,9 +101,9 @@ public class PubJdialog extends JDialog {
 	public PubJdialog() throws SQLException {
 		JLabel[] jlab = { new JLabel("ISBN："), new JLabel("书名："), new JLabel("图书类型："), new JLabel("作者："),
 				new JLabel("出版社："), new JLabel("价格："), new JLabel("库存量：") };
-		JTextField[] jtext_insterBook = new JTextField[6];
-		JComboBox<String> jcb_bookType = new JComboBox<String>();
-		JButton jbt_interBook = new JButton("确人");
+		JTextField[] jtext_insterGas = new JTextField[6];
+		JComboBox<String> jcb_gasType = new JComboBox<String>();
+		JButton jbt_interGas = new JButton("确人");
 		String[] hint = { "10位数字", "中文或英语字母或数字", "中文和英语字母", "中文和英语字母", "1-2位小数", "整数" };
 		JPanel jpan = new JPanel();
 
@@ -118,32 +118,32 @@ public class PubJdialog extends JDialog {
 			jlab[i].setBounds(20, 20 + i * 40, 100, 30);
 			jpan.add(jlab[i]);
 		}
-		for (int i = 0; i < jtext_insterBook.length; i++) {
-			jtext_insterBook[i] = new JTextField();
+		for (int i = 0; i < jtext_insterGas.length; i++) {
+			jtext_insterGas[i] = new JTextField();
 			if (i < 2)
-				jtext_insterBook[i].setBounds(120, 20 + i * 40, 150, 30);
+				jtext_insterGas[i].setBounds(120, 20 + i * 40, 150, 30);
 			if (i >= 2)
-				jtext_insterBook[i].setBounds(120, 140 + (i - 2) * 40, 150, 30);
-			jtext_insterBook[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
-			jpan.add(jtext_insterBook[i]);
-			jtext_insterBook[i].addFocusListener(new InputLimit(jtext_insterBook[i], hint[i]));// 设置文诓提示的外部类监听
+				jtext_insterGas[i].setBounds(120, 140 + (i - 2) * 40, 150, 30);
+			jtext_insterGas[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
+			jpan.add(jtext_insterGas[i]);
+			jtext_insterGas[i].addFocusListener(new InputLimit(jtext_insterGas[i], hint[i]));// 设置文诓提示的外部类监听
 		}
-		jcb_bookType.setBounds(120, 100, 100, 30);
+		jcb_gasType.setBounds(120, 100, 100, 30);
 		for (int k = 0; k < gasCon.getB_type().size(); k++) {
-			jcb_bookType.addItem(gasCon.getB_type().get(k));
+			jcb_gasType.addItem(gasCon.getB_type().get(k));
 		}
-		jcb_bookType.setVisible(true);
-		jbt_interBook.setBounds(150, 330, 100, 40);
-		jpan.add(jcb_bookType);
-		jpan.add(jbt_interBook);
+		jcb_gasType.setVisible(true);
+		jbt_interGas.setBounds(150, 330, 100, 40);
+		jpan.add(jcb_gasType);
+		jpan.add(jbt_interGas);
 		add(jpan);
 		// 获取下拉框的数据
-		jcb_bookType.addItemListener(new ItemListener() {
+		jcb_gasType.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				b_type = jcb_bookType.getSelectedItem().toString();
+				b_type = jcb_gasType.getSelectedItem().toString();
 				try {
 					if (e.getStateChange() == ItemEvent.SELECTED) {// 防止下拉框选中两次
-						booktype = gasTypeCon.queryBTid(b_type);
+						gastype = gasTypeCon.queryBTid(b_type);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -151,13 +151,13 @@ public class PubJdialog extends JDialog {
 			}
 		});
 		// 新增图书
-		jbt_interBook.addActionListener(new ActionListener() {
+		jbt_interGas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] regex = { InputLimit.ISBN, InputLimit.CHINESEENGLISHMATH, InputLimit.CHINESEENGLISH,
 						InputLimit.CHINESEENGLISH, InputLimit.DECIMAL, InputLimit.INT };
-				String[] input = { jtext_insterBook[0].getText(), jtext_insterBook[1].getText(),
-						jtext_insterBook[2].getText(), jtext_insterBook[3].getText(), jtext_insterBook[4].getText(),
-						jtext_insterBook[5].getText() };
+				String[] input = { jtext_insterGas[0].getText(), jtext_insterGas[1].getText(),
+						jtext_insterGas[2].getText(), jtext_insterGas[3].getText(), jtext_insterGas[4].getText(),
+						jtext_insterGas[5].getText() };
 				String[] hintError = { "ISBN格式错误", "书名格式错误", "作者格式出错", "出版社格式出错", "价格格式错误", "库存量格式错误" };
 				boolean result[] = InputLimit.regular(regex, input);
 				String message = "";
@@ -171,11 +171,11 @@ public class PubJdialog extends JDialog {
 						}
 						if (message.equals("")) {// 进行正则验证
 							// ISBN不存在才可以新增
-							if (!gasCon.isISBN(jtext_insterBook[0].getText())) {
-								gasCon.insterBook(jtext_insterBook[0].getText(), jtext_insterBook[1].getText(),
-										booktype, jtext_insterBook[2].getText(), jtext_insterBook[3].getText(),
-										Double.valueOf(jtext_insterBook[4].getText()),
-										Integer.parseInt(jtext_insterBook[5].getText()));
+							if (!gasCon.isISBN(jtext_insterGas[0].getText())) {
+								gasCon.insterGas(jtext_insterGas[0].getText(), jtext_insterGas[1].getText(),
+										gastype, jtext_insterGas[2].getText(), jtext_insterGas[3].getText(),
+										Double.valueOf(jtext_insterGas[4].getText()),
+										Integer.parseInt(jtext_insterGas[5].getText()));
 								JOptionPane.showMessageDialog(null, "新增图书成功", "操作成功", JOptionPane.ERROR_MESSAGE);
 								dispose();
 							} else {
@@ -202,36 +202,36 @@ public class PubJdialog extends JDialog {
 	 */
 	public PubJdialog(int a) throws SQLException {
 		this.a = a;
-		JLabel[] jlab_readerType = { new JLabel("读者类型："), new JLabel("最大借阅数量："), new JLabel("最大借阅天数：") };
-		jtext_readerType = new JTextField[3];
+		JLabel[] jlab_userCommunity = { new JLabel("小区名："), new JLabel("最大户数："), new JLabel("当前户数：") };
+		jtext_userCommunity = new JTextField[3];
 		JPanel jpan_admi = new JPanel(new GridLayout(3, 2));
-		JButton jbt_readerType = new JButton("确人新增读者类型");
+		JButton jbt_userCommunity = new JButton("确认新增小区");
 		String[] hint = { "中文汉字", "整数", "整数" };
-		setTitle("新增读者类型");
+		setTitle("新增小区");
 		setModal(true);// 是否阻止在显示的时候将内容输入其他窗口,只能操作此对话框
 		setSize(300, 180);// 对话框的大小
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);// 关闭后销毁对话框
 		setLocationRelativeTo(null);
 		int[] inuput_int = { 10, 3, 3 };// 输入框限制输入位数
-		for (int i = 0; i < jtext_readerType.length; i++) {
-			jlab_readerType[i].setHorizontalAlignment(0);
-			jtext_readerType[i] = new JTextField();
-			jpan_admi.add(jlab_readerType[i]);
-			jpan_admi.add(jtext_readerType[i]);
-			jtext_readerType[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
-			jtext_readerType[i].addFocusListener(new InputLimit(jtext_readerType[i], hint[i]));// 设置文诓提示的外部类监听
+		for (int i = 0; i < jtext_userCommunity.length; i++) {
+			jlab_userCommunity[i].setHorizontalAlignment(0);
+			jtext_userCommunity[i] = new JTextField();
+			jpan_admi.add(jlab_userCommunity[i]);
+			jpan_admi.add(jtext_userCommunity[i]);
+			jtext_userCommunity[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
+			jtext_userCommunity[i].addFocusListener(new InputLimit(jtext_userCommunity[i], hint[i]));// 设置文诓提示的外部类监听
 		}
-		add(jbt_readerType, BorderLayout.SOUTH);
+		add(jbt_userCommunity, BorderLayout.SOUTH);
 		add(jpan_admi);
-		jbt_readerType.addActionListener(new ActionListener() {
+		jbt_userCommunity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!InputLimit.inputIsNull(jtext_readerType)) {
+				if (!InputLimit.inputIsNull(jtext_userCommunity)) {
 					int c = JOptionPane.showConfirmDialog(null, "是否确定新增此读者类型", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
 						try {
 							String[] regex = { InputLimit.CHINESE, InputLimit.INT, InputLimit.INT };
-							String[] input = { jtext_readerType[0].getText(), jtext_readerType[1].getText(),
-									jtext_readerType[2].getText() };
+							String[] input = { jtext_userCommunity[0].getText(), jtext_userCommunity[1].getText(),
+									jtext_userCommunity[2].getText() };
 							String[] hintError = { "读者类型格式错误", "最大借阅数量格式错误", "最大借阅天数格式出错" };
 							String message = "";
 							boolean result[] = InputLimit.regular(regex, input);
@@ -241,9 +241,9 @@ public class PubJdialog extends JDialog {
 								}
 							}
 							if (message.equals("")) {
-								userCommunityCon.insertReaderType(jtext_readerType[0].getText().toString(),
-										Integer.parseInt(jtext_readerType[1].getText()),
-										Integer.parseInt(jtext_readerType[2].getText()));
+								userCommunityCon.insertReaderType(jtext_userCommunity[0].getText().toString(),
+										Integer.parseInt(jtext_userCommunity[1].getText()),
+										Integer.parseInt(jtext_userCommunity[2].getText()));
 								success=true;
 								JOptionPane.showMessageDialog(null, "信息修改成功", "操作成功", JOptionPane.INFORMATION_MESSAGE);
 								dispose();
@@ -305,14 +305,14 @@ public class PubJdialog extends JDialog {
 	}
 
 	/**
-	 * 忘记密码的功能
+	 * 忘记密码
 	 */
 	public PubJdialog(String forgetPass, String count) throws SQLException {
 		JLabel[] jlab = { new JLabel("新密码："), new JLabel("确认密码：") };
 		JPasswordField[] jpassword = new JPasswordField[2];
 		JPanel jpan = new JPanel(new GridLayout(2, 2));
 		JButton jbt = new JButton("确人");
-		setTitle("修改读者密码,请输入6-16位的数字或者字母");
+		setTitle("修改用户密码,请输入6-16位的数字或者字母");
 		setModal(true);// 是否阻止在显示的时候将内容输入其他窗口,只能操作此对话框
 		setSize(350, 150);// 对话框的大小
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);// 关闭后销毁对话框
@@ -552,7 +552,7 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									gasCon.updateBook(jtext_update[1].getText().toString(),
+									gasCon.updateGas(jtext_update[1].getText().toString(),
 											jtext_update[2].getText().toString(), jtext_update[3].getText().toString(),
 											jtext_update[4].getText().toString(),
 											Double.valueOf(jtext_update[5].getText().toString()),

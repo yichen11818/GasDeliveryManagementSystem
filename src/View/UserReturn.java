@@ -26,7 +26,7 @@ import Tool.TimeTool;
  *
  */
 public class UserReturn {
-	GasCon bookcon = new GasCon();
+	GasCon gascon = new GasCon();
 	BorrowCon borrowcon = new BorrowCon();
 	UserGas userGas =new UserGas();
 	Object[][] borrowDate = null;
@@ -97,10 +97,10 @@ public class UserReturn {
 				if (borrow_id != -1) {
 					int c = JOptionPane.showConfirmDialog(null, "是否确定归还此图书", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
-						String returnBook = "inventory=inventory+1";
+						String returnGas = "inventory=inventory+1";
 						try {
 							// 增加实际归还时间
-							if(borrowcon.returnBorrow(TimeTool.getNewStamep(), borrow_id,bookcon.seleB_name(getBorrowName))) {
+							if(borrowcon.returnBorrow(TimeTool.getNewStamep(), borrow_id,gascon.seleB_name(getBorrowName))) {
 							dfttableBorrow.removeRow(tableBorrow.getSelectedRow());// 归还图书，删除选中的此行
 							JOptionPane.showMessageDialog(null, "您已经成功归还《" + getBorrowName + "》", "操作成功",
 									JOptionPane.INFORMATION_MESSAGE);

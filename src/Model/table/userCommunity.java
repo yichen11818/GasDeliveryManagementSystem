@@ -8,7 +8,7 @@ public class userCommunity {
 	private int u_id;
 	private String u_community;
 	private int maxcount;
-	private int maxday;
+	private int nowcount;
 
 	public int getU_id() {
 		return u_id;
@@ -22,8 +22,8 @@ public class userCommunity {
 		this.maxcount = maxcount;
 	}
 
-	public void setMaxday(int maxday) {
-		this.maxday = maxday;
+	public int getMaxday() {
+		return nowcount;
 	}
 
 	public String getU_community() {
@@ -38,7 +38,7 @@ public class userCommunity {
 		return maxcount;
 	}
 
-	public int getMaxday() {
-		return maxday;
+	public void setMaxday(int nowcount) {
+		this.nowcount = nowcount;
 	}
 }

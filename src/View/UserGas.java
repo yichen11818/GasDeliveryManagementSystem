@@ -37,7 +37,7 @@ import Tool.TimeTool;
  *
  */
 public class UserGas extends JPanel implements ActionListener, ItemListener {
-	GasCon bookcon = new GasCon();
+	GasCon gascon = new GasCon();
 	JTable table;
 	JTextField jtext, jtext_page;
 	JScrollPane scrollPane;
@@ -50,12 +50,12 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 	int b_id = -1, inventory;
 	JTextField[] borrow = new JTextField[2];
 	BorrowCon borrowcon = new BorrowCon();
-	int row_get, maxday, maxcount, borrowingCount;// maxday读者借阅天数
+	int row_get, nowcount, maxcount, borrowingCount;// nowcount读者借阅天数
 	JButton jbt, jbtBorrow;
 	Vector<String> columnName;
 	JButton[] page_jbt = { new JButton("首页"), new JButton("上一页"), new JButton("下一页"), new JButton("尾页"),
 			new JButton("跳转") };
-	JLabel jlab_book = new JLabel();
+	JLabel jlab_gas = new JLabel();
 	int pageIndex = 1, pageCount;
 	UserCommunityCon userCommunityCon = new UserCommunityCon();
 
@@ -76,15 +76,15 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 		jtext_page.addFocusListener(new InputLimit(jtext_page, "页数"));// 设置文诓提示的外部类监听
 		jtext.addFocusListener(new InputLimit(jtext, "ISBN/书名/作者"));// 设置文诓提示的外部类监听
 		jcb.setBounds(200, 20, 80, 30);
-		jlab_book.setBounds(400, 140, 150, 30);
-		pageCount = new PageQueryCon(bookcon.seleBook()).pageCount();
-		jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+		jlab_gas.setBounds(400, 140, 150, 30);
+		pageCount = new PageQueryCon(gascon.seleGas()).pageCount();
+		jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 		/*
 		 * for循添加图书类型
 		 */
 		jcb.addItem("全部");
-		for (int k = 0; k < bookcon.getB_type().size(); k++) {
-			jcb.addItem(bookcon.getB_type().get(k));
+		for (int k = 0; k < gascon.getB_type().size(); k++) {
+			jcb.addItem(gascon.getB_type().get(k));
 		}
 		jcb.setVisible(true);
 
@@ -110,7 +110,7 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			columnName.add(columnStr[i]);
 		}
 		// 设置表格模型的数据
-		dfttable = new DefaultTableModel(new PageQueryCon(bookcon.seleBook()).setCurentPageIndex(), columnName);
+		dfttable = new DefaultTableModel(new PageQueryCon(gascon.seleGas()).setCurentPageIndex(), columnName);
 
 		// 设置表格的编辑状态
 		table = new JTable(dfttable) {
@@ -145,7 +145,7 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 		jpanup.add(jcb);
 		jpanup.add(jtext);
 		jpanup.add(jtext_page);
-		jpanup.add(jlab_book);
+		jpanup.add(jlab_gas);
 		this.add(jpanup, BorderLayout.NORTH);
 		this.add(scrollPane);
 		// 下拉框事件
@@ -169,15 +169,15 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 	 */
 	public void setTableModels() {
 		String input = jtext.getText();
-		Vector<Vector<Object>> bookData = null;
+		Vector<Vector<Object>> gasData = null;
 		try {
-			bookData = bookcon.getBook(input, input, input, b_type);
+			gasData = gascon.getGas(input, input, input, b_type);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (int i = 0; i < bookData.size(); i++) {
-			dfttable.setDataVector(bookData, columnName);// 设定模型数据和字段,初始化该表
+		for (int i = 0; i < gasData.size(); i++) {
+			dfttable.setDataVector(gasData, columnName);// 设定模型数据和字段,初始化该表
 		}
 		table.getColumn("书名").setPreferredWidth(170);// 设置指定列的宽度
 		table.getColumn("出版社").setPreferredWidth(120);// 设置指定列的宽度
@@ -190,9 +190,9 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			if (b_type == "*" || b_type == null) {
 				try {
 					if (jtext.getText().equals("") || jtext.getText().equals("ISBN/书名/作者")) {
-						setTableMolel(new PageQueryCon(bookcon.seleBook()).setCurentPageIndex());
+						setTableMolel(new PageQueryCon(gascon.seleGas()).setCurentPageIndex());
 					} else {
-						dfttable.setDataVector(bookcon.getVector(jtext.getText(), jtext.getText(), jtext.getText()),
+						dfttable.setDataVector(gascon.getVector(jtext.getText(), jtext.getText(), jtext.getText()),
 								columnName);
 					}
 				} catch (SQLException e1) {
@@ -213,7 +213,7 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 					try {
 						for (int i = 0; i < userCommunityCon.queryPersonalType(UserFace.count).size(); i++) {
 							// 根据账号查询出读者类型的每本书的可借阅天数
-							maxday = Integer.valueOf(userCommunityCon.queryPersonalType(UserFace.count).elementAt(i)
+							nowcount = Integer.valueOf(userCommunityCon.queryPersonalType(UserFace.count).elementAt(i)
 									.elementAt(2).toString());
 							// 同理，得可借阅数量
 							maxcount = Integer.valueOf(userCommunityCon.queryPersonalType(UserFace.count).elementAt(i)
@@ -222,9 +222,9 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 						// 已借阅的图书数量
 						borrowingCount = borrowcon.queryBorrowInfo(UserFace.count, UserFace.count, false).length;
 						int borrowdate = TimeTool.getNewStamep();
-						int duedate = TimeTool.getNewStamep() + maxday * 86400;// 1天86400秒
+						int duedate = TimeTool.getNewStamep() + nowcount * 86400;// 1天86400秒
 						if (borrowingCount <= maxcount) {
-							if (borrowcon.queryIsBorrowBook(b_id, UserFace.count) == false) {
+							if (borrowcon.queryIsBorrowGas(b_id, UserFace.count) == false) {
 								// 插入借阅时间和应该归还时间，并将图书对应的库存量-1（事务）
 								if (borrowcon.insertBorrow(UserFace.count, b_id, borrowdate, duedate, b_id)) {
 
@@ -260,9 +260,9 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			// 首页
 		} else if (e.getSource() == page_jbt[0]) {
 			try {
-				setTableMolel(new PageQueryCon(bookcon.seleBook()).setCurentPageIndex());
+				setTableMolel(new PageQueryCon(gascon.seleGas()).setCurentPageIndex());
 				pageIndex = 1;
-				jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+				jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -270,10 +270,10 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			// 上一页
 		} else if (e.getSource() == page_jbt[1]) {
 			try {
-				setTableMolel(new PageQueryCon(bookcon.seleBook()).previousPage());
+				setTableMolel(new PageQueryCon(gascon.seleGas()).previousPage());
 				if (pageIndex > 1) {
 					pageIndex--;
-					jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+					jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -282,10 +282,10 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			// 下一页
 		} else if (e.getSource() == page_jbt[2]) {
 			try {
-				setTableMolel(new PageQueryCon(bookcon.seleBook()).nextPage());
+				setTableMolel(new PageQueryCon(gascon.seleGas()).nextPage());
 				if (pageIndex < pageCount) {
 					pageIndex++;
-					jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+					jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -294,9 +294,9 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 			// 尾页
 		} else if (e.getSource() == page_jbt[3]) {
 			try {
-				setTableMolel(new PageQueryCon(bookcon.seleBook()).lastPage());
+				setTableMolel(new PageQueryCon(gascon.seleGas()).lastPage());
 				pageIndex = pageCount;
-				jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+				jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -312,9 +312,9 @@ public class UserGas extends JPanel implements ActionListener, ItemListener {
 					if (Integer.valueOf(jtext_page.getText()) > 0
 							&& Integer.valueOf(jtext_page.getText()) <= pageCount) {
 						setTableMolel(
-								new PageQueryCon(bookcon.seleBook()).jumpPage(Integer.valueOf(jtext_page.getText())));
+								new PageQueryCon(gascon.seleGas()).jumpPage(Integer.valueOf(jtext_page.getText())));
 						pageIndex = Integer.valueOf(jtext_page.getText());
-						jlab_book.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
+						jlab_gas.setText("第" + pageIndex + "页/" + "共" + pageCount + "页");
 					} else {
 						JOptionPane.showMessageDialog(null, "请输入正确的页数", "操作失败", JOptionPane.ERROR_MESSAGE);
 					}

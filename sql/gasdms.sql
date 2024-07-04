@@ -58,7 +58,7 @@ CREATE TABLE `gas` (
   `b_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图书id',
   `ISBN` char(10) NOT NULL COMMENT 'ISBN',
   `b_name` varchar(45) NOT NULL COMMENT '书名',
-  `booktype` int(11) unsigned NOT NULL COMMENT '图书类型',
+  `gastype` int(11) unsigned NOT NULL COMMENT '图书类型',
   `author` varchar(45) NOT NULL COMMENT '作者',
   `press` varchar(45) DEFAULT NULL COMMENT '出版社',
   `price` double(4,2) unsigned DEFAULT NULL COMMENT '价格',
@@ -79,13 +79,13 @@ INSERT INTO `gas` VALUES (6,'1596845632','反倒是',4,'擦拭','时代',37.30,0
 UNLOCK TABLES;
 
 --
--- Table structure for table `booktype`
+-- Table structure for table `gastype`
 --
 
-DROP TABLE IF EXISTS `booktype`;
+DROP TABLE IF EXISTS `gastype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `booktype` (
+CREATE TABLE `gastype` (
   `bt_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图书类型id',
   `bt_name` varchar(45) NOT NULL COMMENT '图书类型',
   PRIMARY KEY (`bt_id`)
@@ -93,13 +93,13 @@ CREATE TABLE `booktype` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `booktype`
+-- Dumping data for table `gastype`
 --
 
-LOCK TABLES `booktype` WRITE;
-/*!40000 ALTER TABLE `booktype` DISABLE KEYS */;
-INSERT INTO `booktype` VALUES (1,'计算机'),(2,'爱情'),(4,'伦理'),(5,'兽医'),(19,'政治'),(53,'发女');
-/*!40000 ALTER TABLE `booktype` ENABLE KEYS */;
+LOCK TABLES `gastype` WRITE;
+/*!40000 ALTER TABLE `gastype` DISABLE KEYS */;
+INSERT INTO `gastype` VALUES (1,'计算机'),(2,'爱情'),(4,'伦理'),(5,'兽医'),(19,'政治'),(53,'发女');
+/*!40000 ALTER TABLE `gastype` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -176,7 +176,7 @@ CREATE TABLE `readertype` (
   `u_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '读者类型id',
   `u_community` varchar(30) NOT NULL COMMENT '读者类型',
   `maxcount` int(11) unsigned NOT NULL COMMENT '最大借阅数量',
-  `maxday` int(11) unsigned NOT NULL COMMENT '最大借阅天数',
+  `nowcount` int(11) unsigned NOT NULL COMMENT '最大借阅天数',
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `rt_name_UNIQUE` (`u_community`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='读者类型信息表';

@@ -12,27 +12,27 @@ import Model.table.GasType;
  *
  */
 public class GasTypeCon {
-	GasTypeAccess bookTypeDao = new GasTypeAccess();
+	GasTypeAccess gasTypeDao = new GasTypeAccess();
 
 	/**
 	 * 查询图书类型id
 	 */
 	public int queryBTid(String bt_name) throws SQLException {
-		int bookType = bookTypeDao.queryGasTypeid(bt_name);
-		return bookType;
+		int gasType = gasTypeDao.queryGasTypeid(bt_name);
+		return gasType;
 	}
 
 	/**
 	 * 查看图书类型
 	 */
-	public Object[][] queryBookType() throws SQLException {
-		Object[][] bookTypeData = new Object[bookTypeDao.queryGasType().size()][2];
-		for (int i = 0; i < bookTypeData.length; i++) {
-			GasType gasType = bookTypeDao.queryGasType().get(i);
-			bookTypeData[i][0] = gasType.getBt_id();
-			bookTypeData[i][1] = gasType.getBt_name();
+	public Object[][] queryGasType() throws SQLException {
+		Object[][] gasTypeData = new Object[gasTypeDao.queryGasType().size()][2];
+		for (int i = 0; i < gasTypeData.length; i++) {
+			GasType gasType = gasTypeDao.queryGasType().get(i);
+			gasTypeData[i][0] = gasType.getBt_id();
+			gasTypeData[i][1] = gasType.getBt_name();
 		}
-		return bookTypeData;
+		return gasTypeData;
 	}
 
 	/**
@@ -41,15 +41,15 @@ public class GasTypeCon {
 	 * @param bt_name
 	 * @throws SQLException
 	 */
-	public int insertBookType(String bt_name) throws SQLException {
-		return bookTypeDao.insertGasType(bt_name);
+	public int insertGasType(String bt_name) throws SQLException {
+		return gasTypeDao.insertGasType(bt_name);
 	}
 
 	/**
 	 * 删除图书类型
 	 */
-	public void deleteBookType(int bt_id) throws SQLException {
-		bookTypeDao.deleteGasType(bt_id);
+	public void deleteGasType(int bt_id) throws SQLException {
+		gasTypeDao.deleteGasType(bt_id);
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class GasTypeCon {
 	 * @param bt_id
 	 * @throws SQLException
 	 */
-	public void updateBookType(String input_bookType, int bt_id) throws SQLException {
-		bookTypeDao.updateGasType(input_bookType, bt_id);
+	public void updateGasType(String input_gasType, int bt_id) throws SQLException {
+		gasTypeDao.updateGasType(input_gasType, bt_id);
 	}
 
 }

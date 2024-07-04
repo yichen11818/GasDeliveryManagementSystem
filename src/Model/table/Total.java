@@ -3,26 +3,26 @@ package Model.table;
 // ±Ì”≥…‰
 public class Total {
 	private Gas gas;
-	private GasType booktype;
+	private GasType gastype;
 	private User user;
 	private userCommunity usercommunity;
 	private Borrow borrow;
 	private Administrator admi;
 
-	public Gas getBook() {
+	public Gas getGas() {
 		return gas;
 	}
 
-	public void setBook(Gas gas) {
+	public void setGas(Gas gas) {
 		this.gas = gas;
 	}
 
-	public GasType getBooktype() {
-		return booktype;
+	public GasType getGastype() {
+		return gastype;
 	}
 
-	public void setBooktype(GasType booktype) {
-		this.booktype = booktype;
+	public void setGastype(GasType gastype) {
+		this.gastype = gastype;
 	}
 
 	public User getReader() {

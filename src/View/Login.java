@@ -24,7 +24,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
     JComboBox<String> jcb_userCommunity = new JComboBox<String>();
     JComboBox<String> jcb_buildings = new JComboBox<String>();
     JPasswordField jpassword[] = new JPasswordField[2];
-    String u_community = "金典小区", buildings = "2栋";
+    String u_community = "金典小区", buildings = "1栋";
     String[] hint = {"20开头的11位数字", "中文汉字", "中文汉字", "中文汉字加数字", "手机号格式", "邮箱格式", "任意输入"};
     User user = new User();
     UserCommunityCon userCommunityCon = new UserCommunityCon();
@@ -54,7 +54,7 @@ public class Login extends JFrame implements ActionListener, ItemListener {
         jcb_buildings.setVisible(true);
         for (int j = 0; j < jpassword.length; j++) {
             jpassword[j] = new JPasswordField();
-            jpassword[j].setBounds(150, 380 + j * 40, 150, 30);
+            jpassword[j].setBounds(150, 300 + j * 40, 150, 30); // 调整位置
             this.add(jpassword[j]);
             jpassword[j].setDocument(new InputLimit(16));
         }
@@ -63,10 +63,10 @@ public class Login extends JFrame implements ActionListener, ItemListener {
             jlab[k].setHorizontalAlignment(4);
             this.add(jlab[k]);
         }
-        jbt.setBounds(160, 500, 100, 40);
+        jbt.setBounds(160, 380, 100, 40);
         this.setLayout(null);
         this.setTitle("账号注册");
-        this.setSize(400, 600);
+        this.setSize(400, 500);
         ImageIcon icon = new ImageIcon("src/Images/icon.png");
         this.setIconImage(icon.getImage());
         this.setLocationRelativeTo(null);// 设置窗体居中显示

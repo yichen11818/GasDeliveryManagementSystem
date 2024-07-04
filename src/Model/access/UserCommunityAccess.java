@@ -34,7 +34,7 @@ public class UserCommunityAccess {
 			data_readerType[i][0] = rs.getInt("u_id");
 			data_readerType[i][1] = rs.getString("u_community");
 			data_readerType[i][2] = rs.getInt("maxcount");
-			data_readerType[i][3] = rs.getInt("maxday");
+			data_readerType[i][3] = rs.getInt("nowcount");
 		}
 		Connect.closeMySQL();// 关闭连接
 		return data_readerType;
@@ -68,9 +68,9 @@ public class UserCommunityAccess {
 	 * 新增读者类型
 	 * @throws SQLException 
 	 */
-	public void insertUserType(String u_community, int maxcont, int maxday) throws SQLException {
-		String sql = "INSERT INTO gasdms.usercommunity(u_community,maxcount,maxday) VALUES(?,?,?)";
-		Connect.update_public(sql, u_community,maxcont,maxday);
+	public void insertUserType(String u_community, int maxcont, int nowcount) throws SQLException {
+		String sql = "INSERT INTO gasdms.usercommunity(u_community,maxcount,nowcount) VALUES(?,?,?)";
+		Connect.update_public(sql, u_community,maxcont,nowcount);
 	}
 	/**
 	 *删除读者类型
@@ -82,8 +82,8 @@ public class UserCommunityAccess {
 	/**
 	 * 修改读者类型
 	 */
-	public void updateUserType(String readerType, int maxcount, int maxday, int u_id) throws SQLException {
-		String sql = "UPDATE gasdms.usercommunity SET u_community=?,maxcount=?,maxday=? WHERE u_id=?";
-		Connect.update_public(sql,readerType,maxcount ,maxday,u_id);
+	public void updateUserType(String readerType, int maxcount, int nowcount, int u_id) throws SQLException {
+		String sql = "UPDATE gasdms.usercommunity SET u_community=?,maxcount=?,nowcount=? WHERE u_id=?";
+		Connect.update_public(sql,readerType,maxcount ,nowcount,u_id);
 	}
 }

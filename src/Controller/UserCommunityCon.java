@@ -48,8 +48,8 @@ public class UserCommunityCon {
 	/**
 	 * 新增读者类型
 	 */
-	public void insertReaderType(String u_community,int maxcont,int maxday) throws SQLException {
-		readerTypeDao.insertUserType(u_community, maxcont, maxday);
+	public void insertReaderType(String u_community,int maxcont,int nowcount) throws SQLException {
+		readerTypeDao.insertUserType(u_community, maxcont, nowcount);
 	}
 	/**
 	 * 删除读者类型
@@ -60,7 +60,7 @@ public class UserCommunityCon {
 	/**
 	 * 更新读者类型
 	 */
-	public void updateRederType(String readerType,int maxcount,int maxday,int u_id) throws SQLException {
-		readerTypeDao.updateUserType(readerType,maxcount ,maxday,u_id);
+	public void updateRederType(String readerType,int maxcount,int nowcount,int u_id) throws SQLException {
+		readerTypeDao.updateUserType(readerType,maxcount ,nowcount,u_id);
 	}
 }

@@ -21,13 +21,14 @@ public class ManageFace extends JFrame {
 	static String count;
 	ManageGas manageGas =new ManageGas();
 	ManageUser manageUser =new ManageUser();
-	ManageReaderType  manageReaderType=new ManageReaderType();
+	ManageGasType manageGasType =new ManageGasType();
+	ManageUserCommunity manageUserCommunity =new ManageUserCommunity();
 	ManageBorrowInfo manageBorrowInfo =new  ManageBorrowInfo();
 	ManageSuper manageSuper =new  ManageSuper();	
 	public ManageFace(String count) throws SQLException {
 		this.count=count;
 		this.setLayout(null);
-		this.setTitle("图书管理系统（管理员端）");
+		this.setTitle("煤气管理系统（管理员端）");
 		this.setSize(WIDTH, HEIGHT);
 		this.setLocationRelativeTo(null);// 设置窗体居中显示
 		this.setResizable(false);// 窗口不能改变大小
@@ -37,17 +38,20 @@ public class ManageFace extends JFrame {
 		jtab.setSize(WIDTH, HEIGHT);
 
 		jpan[0] = manageGas.addPanel0();
-		jtab.addTab("图书信息管理", jpan[0]);
+		jtab.addTab("煤气信息管理", jpan[0]);
 		jtab.setSelectedIndex(0);
 
-		jpan[1] = manageUser.addPanel2();
-		jtab.addTab("读者信息管理", jpan[1]);
+		jpan[1] = manageGasType.addPanel1();
+		jtab.addTab("煤气类型管理", jpan[1]);
 
-		jpan[2] = manageReaderType.addPanel3();
-		jtab.addTab("读者类型管理   ", jpan[2]);
+		jpan[1] = manageUser.addPanel2();
+		jtab.addTab("用户信息管理", jpan[1]);
+
+		jpan[2] = manageUserCommunity.addPanel3();
+		jtab.addTab("小区管理   ", jpan[2]);
 
 		jpan[3] = manageBorrowInfo.addPanel4();
-		jtab.addTab("图书借阅管理", jpan[3]);
+		jtab.addTab("用户煤气管理", jpan[3]);
 		
 		jpan[4] = manageSuper.addPanel5(count);
 		jtab.addTab("超级管理员", jpan[4]);

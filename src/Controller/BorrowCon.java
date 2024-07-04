@@ -66,13 +66,13 @@ public class BorrowCon {
 	 * 查询此书是否被借阅
 	 * @throws SQLException 
 	 */
-	public boolean queryExistBook(int borrow_b_id) throws SQLException {
-		return borrowdao.queryExistBook(borrow_b_id);
+	public boolean queryExistGas(int borrow_b_id) throws SQLException {
+		return borrowdao.queryExistGas(borrow_b_id);
 	}
 	/**
 	 * 查询此书是否被借阅
 	 */
-	public boolean queryIsBorrowBook(int borrow_b_id,String count)throws SQLException {
-		return borrowdao.queryIsBorrowBook(borrow_b_id, count);
+	public boolean queryIsBorrowGas(int borrow_b_id,String count)throws SQLException {
+		return borrowdao.queryIsBorrowGas(borrow_b_id, count);
 	}
 }

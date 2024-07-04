@@ -15,7 +15,7 @@ public class PageQueryCon {
 	protected int recordCount; // 总记录条数
 	protected static Vector<Vector<Object>> bigPageVector = new Vector<Vector<Object>>();
 	protected Vector<Vector<Object>> smallPageVector = new Vector<Vector<Object>>();
-	GasAccess bookDao = new GasAccess();
+	GasAccess gasDao = new GasAccess();
 
 	public PageQueryCon(){
 		

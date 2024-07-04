@@ -8,7 +8,7 @@ public class Gas {
 	private int b_id;
 	private String ISBN;
 	private String b_name;
-	private int booktype;
+	private int gastype;
 	private String author;
 	private double price;
 	private int invebtory;
@@ -37,12 +37,12 @@ public class Gas {
 		this.b_name = b_name;
 	}
 
-	public int getBooktype() {
-		return booktype;
+	public int getGastype() {
+		return gastype;
 	}
 
-	public void setBooktype(int booktype) {
-		this.booktype = booktype;
+	public void setGastype(int gastype) {
+		this.gastype = gastype;
 	}
 
 	public String getAuthor() {
