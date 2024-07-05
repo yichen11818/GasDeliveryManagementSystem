@@ -24,8 +24,8 @@ import Tool.PubJdialog;
 import Tool.TableTool;
 
 /**
- * 读者类型信息管理面板
- * @author rsw
+ * 用户类型信息管理面板
+ *  
  *
  */
 public class ManageUserCommunity {
@@ -103,7 +103,7 @@ public class ManageUserCommunity {
 					if (c == JOptionPane.YES_OPTION) {
 						try {
 							if(userCon.existReadertype(u_id)) {
-								JOptionPane.showMessageDialog(null, "此小区已经有读者使用，请尝试将此小区的读者删除后在删除此小区！", "操作失败", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, "此小区已经有用户使用，请尝试将此小区的用户删除后在删除此小区！", "操作失败", JOptionPane.ERROR_MESSAGE);
 							}else {
 								System.out.println(u_id);
 							userCommunityCon.deleteRederType(u_id);
@@ -129,7 +129,7 @@ public class ManageUserCommunity {
 				Object[] userCommunityUpdata = { u_id, userCommunity, maxcount ,nowcount};
 				if (u_id != -1) {
 					try {
-						// 弹出修改读者类型的对话框
+						// 弹出修改用户类型的对话框
 						new PubJdialog(180, 4, jlab_userCommunity, jtext_userCommunity, userCommunityUpdata, 3,jlab_hint).setVisible(true);
 						if (PubJdialog.success) {
 							table_userCommunity.setValueAt(jtext_userCommunity[1].getText(), row, 1);

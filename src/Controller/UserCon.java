@@ -53,21 +53,21 @@ public class UserCon {
 		return userDao.seleUser();
 	}
 
-	// 查询读者所有信息
+	// 查询用户所有信息
 	public Vector<Vector<Object>> queryUserInfo(String number, String name)
 			throws SQLException {
 		Vector<Vector<Object>> userInfo = userDao.queryUserInfo(number, name);
 		return userInfo;
 	}
 
-	// 查询读者的信息 模糊查寻 类型查询
+	// 查询用户的信息 模糊查寻 类型查询
 
 	public Vector<Vector<Object>> seleUserInfo(String number, String name,
 											   String user_community) throws SQLException {
 		return userDao.seleUserInfo(number, name, user_community);
 	}
 
-	// 删除读者
+	// 删除用户
 
 	public void dropReader(String studentNumber) throws SQLException {
 		userDao.dropUser(studentNumber);
@@ -86,8 +86,8 @@ public class UserCon {
 	}
 	
 	/**
-	 * 查询是否有读者具备此读者类型
-	 * 删除类读者类型前，保证没有读者应用此读者类型
+	 * 查询是否有用户具备此用户类型
+	 * 删除类用户类型前，保证没有用户应用此用户类型
 	 */
 	public boolean existReadertype(int u_id) throws SQLException {
 		return  userDao.existUsertype(u_id);

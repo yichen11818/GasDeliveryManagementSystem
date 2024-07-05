@@ -1,0 +1,80 @@
+Date : 2024-07-05 07:44:05
+Directory : c:\Users\11818\Desktop\GasDeliveryManagementSystem
+Total : 44 files,  4464 codes, 853 comments, 704 blanks, all 6021 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         40 |      4,069 |        811 |        466 |      5,346 |
+| Markdown |          3 |        260 |          0 |        210 |        470 |
+| SQL      |          1 |        135 |         42 |         28 |        205 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |         44 |      4,464 |        853 |        704 |      6,021 |
+| . (Files)                                                                                    |          2 |         77 |          0 |         26 |        103 |
+| doc                                                                                          |          1 |        183 |          0 |        184 |        367 |
+| sql                                                                                          |          1 |        135 |         42 |         28 |        205 |
+| src                                                                                          |         40 |      4,069 |        811 |        466 |      5,346 |
+| src\Controller                                                                               |          7 |        307 |        159 |         85 |        551 |
+| src\Model                                                                                    |         14 |        868 |        250 |        174 |      1,292 |
+| src\Model\access                                                                             |          7 |        544 |        224 |         69 |        837 |
+| src\Model\table                                                                              |          7 |        324 |         26 |        105 |        455 |
+| src\Tool                                                                                     |          6 |        857 |        176 |         65 |      1,098 |
+| src\View                                                                                     |         13 |      2,037 |        226 |        142 |      2,405 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                     | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\README.md                                 | Markdown |         38 |          0 |         23 |         61 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\doc\煤气管理系统需求分析.md                         | Markdown |        183 |          0 |        184 |        367 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\sql\gasdms.sql                            | SQL      |        135 |         42 |         28 |        205 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\AdmiCon.java               | Java     |         34 |         24 |         13 |         71 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\ChoseCon.java             | Java     |         51 |         21 |          7 |         79 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\GasCon.java                | Java     |         42 |         35 |         15 |         92 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\GasTypeCon.java            | Java     |         29 |         27 |         10 |         66 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\PageQueryCon.java          | Java     |         61 |          7 |         12 |         80 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\UserCommunityCon.java      | Java     |         35 |         26 |          6 |         67 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Controller\UserCon.java               | Java     |         55 |         19 |         22 |         96 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\AdmiAccess.java          | Java     |         40 |         27 |         10 |         77 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\ChoseAccess.java         | Java     |         81 |         26 |          7 |        114 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\Connect.java             | Java     |        129 |         39 |         12 |        180 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\GasAccess.java           | Java     |         88 |         37 |         12 |        137 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\GasTypeAccess.java       | Java     |         61 |         22 |          7 |         90 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\UserAccess.java          | Java     |         84 |         48 |         17 |        149 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\access\UserCommunityAccess.java | Java     |         61 |         25 |          4 |         90 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\Administrator.java        | Java     |         66 |          4 |         21 |         91 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\Chose.java               | Java     |         52 |          5 |         17 |         74 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\Gas.java                  | Java     |         52 |          4 |         17 |         73 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\GasType.java              | Java     |         17 |          3 |          7 |         27 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\Total.java                | Java     |         45 |          1 |         14 |         60 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\User.java                 | Java     |         61 |          5 |         19 |         85 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Model\table\userCommunity.java        | Java     |         31 |          4 |         10 |         45 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\InputLimit.java                  | Java     |         93 |         40 |         12 |        145 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\MD5Tool.java                     | Java     |         34 |         12 |          6 |         52 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\PubJdialog.java                  | Java     |        614 |         61 |         19 |        694 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\RegexTool.java                   | Java     |         44 |         33 |         13 |         90 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\TableTool.java                   | Java     |         29 |         14 |          6 |         49 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\Tool\TimeTool.java                    | Java     |         43 |         16 |          9 |         68 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\Login.java                       | Java     |        147 |         15 |          7 |        169 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\Main.java                        | Java     |        213 |         13 |         28 |        254 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageChoseInfo.java            | Java     |         79 |         10 |          6 |         95 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageFace.java                  | Java     |         54 |          5 |         12 |         71 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageGas.java                   | Java     |        321 |         41 |         18 |        380 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageGasType.java               | Java     |        144 |          8 |         10 |        162 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageSuper.java                 | Java     |        187 |         24 |         13 |        224 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageUser.java                  | Java     |        185 |         15 |          6 |        206 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\ManageUserCommunity.java         | Java     |        133 |         11 |          9 |        153 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\UserFace.java                    | Java     |         45 |          5 |          6 |         56 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\UserGas.java                     | Java     |        303 |         49 |         13 |        365 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\UserMessage.java                 | Java     |        106 |         17 |          8 |        131 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\src\View\UserReturn.java                  | Java     |        120 |         13 |          6 |        139 |
+| c:\Users\11818\Desktop\GasDeliveryManagementSystem\todo.md                                   | Markdown |         39 |          0 |          3 |         42 |
+| Total                                                                                        |          |      4,464 |        853 |        704 |      6,021 |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -6,16 +6,13 @@ import Model.access.GasTypeAccess;
 import Model.table.GasType;
 
 /**
- * 图书类型表的控制器
- * 
- * @author rsw
- *
+ * 煤气类型表的控制器
  */
 public class GasTypeCon {
 	GasTypeAccess gasTypeDao = new GasTypeAccess();
 
 	/**
-	 * 查询图书类型id
+	 * 查询煤气类型id
 	 */
 	public int queryBTid(String bt_name) throws SQLException {
 		int gasType = gasTypeDao.queryGasTypeid(bt_name);
@@ -23,7 +20,7 @@ public class GasTypeCon {
 	}
 
 	/**
-	 * 查看图书类型
+	 * 查看煤气类型
 	 */
 	public Object[][] queryGasType() throws SQLException {
 		Object[][] gasTypeData = new Object[gasTypeDao.queryGasType().size()][2];
@@ -36,7 +33,7 @@ public class GasTypeCon {
 	}
 
 	/**
-	 * 新增图书类型
+	 * 新增煤气类型
 	 * 
 	 * @param bt_name
 	 * @throws SQLException
@@ -46,14 +43,14 @@ public class GasTypeCon {
 	}
 
 	/**
-	 * 删除图书类型
+	 * 删除煤气类型
 	 */
 	public void deleteGasType(int bt_id) throws SQLException {
 		gasTypeDao.deleteGasType(bt_id);
 	}
 
 	/**
-	 * 修改图书类型
+	 * 修改煤气类型
 	 * 
 	 * @param bt_id
 	 * @throws SQLException

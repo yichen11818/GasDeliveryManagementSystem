@@ -23,21 +23,18 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.GasCon;
-import Controller.BorrowCon;
+import Controller.ChoseCon;
 import Controller.PageQueryCon;
 import Tool.InputLimit;
 import Tool.PubJdialog;
 import Tool.TableTool;
 
 /**
- * 图书信息管理面板
- * 
- * @author rsw
- *
+ * 煤气信息管理面板
  */
 public class ManageGas extends JPanel implements ActionListener, ItemListener {
-	String ISBN, b_name, author, press, b_type;
-	int b_id = -1, inventory, row;
+	String ISBN, g_name, author, b_type,gastype;
+	int g_id = -1, inventory, row;
 	double price;
 	boolean isCompile, refresh;// 是否可以编辑
 	public JTable table_gas;
@@ -52,7 +49,7 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 	int pageIndex = 1, pageCount;
 	UserGas userGas = new UserGas();
 	GasCon gasCon = new GasCon();
-	BorrowCon borrowCon = new BorrowCon();
+	ChoseCon choseCon = new ChoseCon();
 
 	protected JPanel addPanel0() throws SQLException {
 		JPanel jpanup_gas = new JPanel();
@@ -83,7 +80,7 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 		jtext_page.setBounds(650, 70, 80, 30);
 		jtext_page.setDocument(new InputLimit(4));// 限制输入
 		jtext_page.addFocusListener(new InputLimit(jtext_page, "页数"));// 设置文诓提示的外部类监听
-		jtext_find.addFocusListener(new InputLimit(jtext_find, "ISBN/书名/作者"));// 设置文诓提示的外部类监听
+		jtext_find.addFocusListener(new InputLimit(jtext_find, "煤气ID/煤气名/供应商名"));// 设置文诓提示的外部类监听
 		jcb_gasType.setBounds(50, 20, 80, 30);
 		jcb_gasType.addItem("类别筛选");
 		jcb_gasType.addItemListener(this);
@@ -100,7 +97,15 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 		columnNameGas = new Vector<String>();// 字段名
 		String[] columnGas = { "煤气ID", "煤气名", "供应商名", "煤气类型", "价格", "库存量" };
 		Vector<Vector<Object>> gasData = null;
-		gasData = gasCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText());// 调用查询图书的方法
+		String searchText = jtext_find.getText();
+		int searchId = -1;
+		try {
+			searchId = Integer.parseInt(searchText);
+		} catch (NumberFormatException ex) {
+			// 输入不是整数，不做处理
+		}
+		gasData = gasCon.getVector(searchId, searchText, searchText); // 调用查询煤气的方法
+
 		for (int k = 0; k < columnGas.length; k++) {
 			columnNameGas.add(columnGas[k]);
 		}
@@ -111,6 +116,7 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 				return false;// 表格不允许被编辑f
 			}
 		};
+
 		ListSelectionModel selectionModel = table_gas.getSelectionModel();// 创建表格选择器
 		selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 一次只能选择一个列表索引
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -120,13 +126,12 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 						return;
 					}
 					row = table_gas.getSelectedRow();
-					b_id = Integer.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 0).toString());
-					ISBN = table_gas.getValueAt(table_gas.getSelectedRow(), 1).toString();
-					b_name = table_gas.getValueAt(table_gas.getSelectedRow(), 2).toString();
-					author = table_gas.getValueAt(table_gas.getSelectedRow(), 4).toString();
-					press = table_gas.getValueAt(table_gas.getSelectedRow(), 5).toString();
-					price = Double.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 6).toString());
-					inventory = Integer.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 7).toString());
+					g_id = Integer.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 0).toString());
+					g_name = table_gas.getValueAt(table_gas.getSelectedRow(), 1).toString();
+					gastype = table_gas.getValueAt(table_gas.getSelectedRow(), 2).toString();
+					author = table_gas.getValueAt(table_gas.getSelectedRow(), 3).toString();
+					price = Double.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 4).toString());
+					inventory = Integer.valueOf(table_gas.getValueAt(table_gas.getSelectedRow(), 5).toString());
 				}
 			}
 		});
@@ -160,13 +165,13 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 	}
 
 	/**
-	 * 模糊查询、精确查询图书
+	 * 模糊查询、精确查询煤气
 	 */
 	public void setTableModels() {
 		String input = jtext_find.getText();
 		Vector<Vector<Object>> gasData = null;
 		try {
-			gasData = gasCon.getGas(input, input, input, b_type);
+			gasData = gasCon.getGas(Integer.parseInt(input), input, input, b_type);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,15 +186,15 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 
 	// 按钮事件
 	public void actionPerformed(ActionEvent e) {
-		// 查看图书
+		// 查看煤气
 		if (e.getSource() == jbt_gasFind[0]) {
 			if (b_type == "*" || b_type == null) {
 				try {
-					if (jtext_find.getText().equals("") || jtext_find.getText().equals("ISBN/书名/作者")) {
+					if (jtext_find.getText().equals("") || jtext_find.getText().equals("煤气ID/煤气名/供应商名")) {
 						setTableMolel(new PageQueryCon(gasCon.seleGas()).setCurentPageIndex());
 					} else {
 						dfttable_gas.setDataVector(
-								gasCon.getVector(jtext_find.getText(), jtext_find.getText(), jtext_find.getText()),
+								gasCon.getVector(Integer.parseInt(jtext_find.getText()), jtext_find.getText(), jtext_find.getText()),
 								columnNameGas);
 					}
 				} catch (SQLException e1) {
@@ -197,13 +202,13 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 					e1.printStackTrace();
 				}
 			} else {
-				if (jtext_find.getText().equals("ISBN/书名/作者")) {
+				if (jtext_find.getText().equals("煤气ID/煤气名/供应商名")) {
 					jtext_find.setText("");
 				}
 				setTableModels();// 调用精确查询、模糊查询的方法
 			}
 		}
-		// 新增图书
+		// 新增煤气
 		else if (e.getSource() == jbt_gasFind[1]) {
 			if (e.getSource() == jbt_gasFind[1]) {
 				try {
@@ -213,54 +218,53 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 					e1.printStackTrace();
 				}
 			}
-			TableTool.cancelTableSelected(table_gas, b_id);
+			TableTool.cancelTableSelected(table_gas, g_id);
 		}
-		// 删除图书
+		// 删除煤气
 		else if (e.getSource() == jbt_gasFind[2]) {
-			System.out.println(b_id);
+			System.out.println(g_id);
 			try {
-				if (b_id != -1) {
-					int c = JOptionPane.showConfirmDialog(null, "是否确定删除此图书", "验证操作", JOptionPane.YES_NO_OPTION);
+				if (g_id != -1) {
+					int c = JOptionPane.showConfirmDialog(null, "是否确定删除此煤气", "验证操作", JOptionPane.YES_NO_OPTION);
 					if (c == JOptionPane.YES_OPTION) {
-						if (!borrowCon.queryExistGas(b_id)) {
-							gasCon.dropGas(b_id);
+						if (!choseCon.queryExistGas(g_id)) {
+							gasCon.dropGas(g_id);
 							dfttable_gas.removeRow(table_gas.getSelectedRow());
 						} else {
-							JOptionPane.showMessageDialog(null, "此图书已经被借阅不能删除!!!", "操作失败", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "此煤气已经被借阅不能删除!!!", "操作失败", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "您没有选中图书！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "您没有选中煤气！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
-		// 更新图书
+		// 更新煤气
 		else if (e.getSource() == jbt_gasFind[3]) {
-			JLabel[] jlab_gas = { new JLabel("图书ID："), new JLabel("ISBN："), new JLabel("书名："), new JLabel("作者："),
-					new JLabel("出版社："), new JLabel("价格："), new JLabel("库存量：") };
-			JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("10位ISBN号"), new JLabel("中文汉字或者字母"),
-					new JLabel("中文汉字"), new JLabel("中文汉字或者字母"), new JLabel("1-2位小数"), new JLabel("整数") };
-			JTextField[] jtext_gas = new JTextField[7];
-			Object[] gasUpdata = { b_id, ISBN, b_name, author, press, price, inventory };
-			if (b_id != -1) {
+			JLabel[] jlab_gas = { new JLabel("煤气ID："), new JLabel("煤气名："), new JLabel("煤气类型："),new JLabel("供应商名："),
+					new JLabel("价格："), new JLabel("库存量："), new JLabel("") };
+			JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("中文汉字或者字母"),new JLabel("中文汉字"),
+					new JLabel("中文汉字"), new JLabel("1-2位小数"), new JLabel("整数"), new JLabel("") };
+
+			JTextField[] jtext_gas = new JTextField[6];
+			Object[] gasUpdata = { g_id, g_name, gastype, author, price, inventory };
+			if (g_id != -1) {
 				try {
-					new PubJdialog(270, 7, jlab_gas, jtext_gas, gasUpdata, 0, jlab_hint).setVisible(true);
+					new PubJdialog(270, 6, jlab_gas, jtext_gas,
+							gasUpdata, 0, jlab_hint).setVisible(true);
 					if (PubJdialog.success) {
-						table_gas.setValueAt(jtext_gas[1].getText(), row, 1);
-						table_gas.setValueAt(jtext_gas[2].getText(), row, 2);
-						table_gas.setValueAt(jtext_gas[3].getText(), row, 4);
-						table_gas.setValueAt(jtext_gas[4].getText(), row, 5);
-						table_gas.setValueAt(jtext_gas[5].getText(), row, 6);
-						table_gas.setValueAt(jtext_gas[6].getText(), row, 7);
+						for (int i = 1; i < jtext_gas.length; i++) {
+							table_gas.setValueAt(jtext_gas[i].getText(), row, i);
+						}
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "您没有选中图书！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "您没有选中煤气！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
@@ -335,9 +339,9 @@ public class ManageGas extends JPanel implements ActionListener, ItemListener {
 		}
 
 		/*
-		 * 每次点击按钮将图书id设为-1，即默认没有选中图书 并取消表格的选中状态 必须写在else if语句后，并且所有动作事件都是用else if语句来写的
+		 * 每次点击按钮将煤气id设为-1，即默认没有选中煤气 并取消表格的选中状态 必须写在else if语句后，并且所有动作事件都是用else if语句来写的
 		 */
-		b_id = TableTool.cancelTableSelected(table_gas, b_id);
+		g_id = TableTool.cancelTableSelected(table_gas, g_id);
 		// 尾页时，“下一页”和“尾页”按钮不可用
 		if (pageIndex == pageCount) {
 			page_jbt[2].setEnabled(false);

@@ -6,7 +6,7 @@ public class Total {
 	private GasType gastype;
 	private User user;
 	private userCommunity usercommunity;
-	private Borrow borrow;
+	private Chose chose;
 	private Administrator admi;
 
 	public Gas getGas() {
@@ -41,12 +41,12 @@ public class Total {
 		this.usercommunity = usercommunity;
 	}
 
-	public Borrow getBorrow() {
-		return borrow;
+	public Chose getChose() {
+		return chose;
 	}
 
-	public void setBorrow(Borrow borrow) {
-		this.borrow = borrow;
+	public void setChose(Chose chose) {
+		this.chose = chose;
 	}
 
 	public Administrator getAdmi() {

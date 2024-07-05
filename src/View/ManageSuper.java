@@ -17,7 +17,7 @@ import java.util.Vector;
 /**
  * 超级管理员面板
  *
- * @author rsw
+ *  
  */
 public class ManageSuper implements ActionListener {
     JButton[] jbt_super = {new JButton("查询管理员信息"), new JButton("新增管理员信息"), new JButton("删除管理员信息"),

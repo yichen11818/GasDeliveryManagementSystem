@@ -23,8 +23,8 @@ import Tool.InputLimit;
 import Tool.TableTool;
 
 /**
- * 图书类型信息管理面板
- * @author rsw
+ * 煤气类型信息管理面板
+ *  
  */
 public class ManageGasType {
 	GasTypeCon gasTypeCon = new GasTypeCon();
@@ -68,23 +68,23 @@ public class ManageGasType {
 		JScrollPane scrollPane = new JScrollPane(table_gasType);
 		panel.add(jpanup_gasType, BorderLayout.NORTH);
 		panel.add(scrollPane);
-		// 新增图书类型
+		// 新增煤气类型
 		jbt_gasType[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String input_gasType = JOptionPane.showInputDialog(null, "请您输入所要添加的图书类型", "新增图书类型",
+				String input_gasType = JOptionPane.showInputDialog(null, "请您输入所要添加的煤气类型", "新增煤气类型",
 						JOptionPane.YES_NO_OPTION);
 				try {
 					if (input_gasType != null && !input_gasType.equals("")) {
 						String regex =InputLimit.CHINESE ;
 						boolean result = InputLimit.regular(regex, input_gasType);
 						if (result) {
-							int c = JOptionPane.showConfirmDialog(null, "是否确定新增此图书类型", "验证操作",
+							int c = JOptionPane.showConfirmDialog(null, "是否确定新增此煤气类型", "验证操作",
 									JOptionPane.YES_NO_OPTION);
 							if (c == JOptionPane.YES_OPTION) {
 								gasTypeCon.insertGasType(input_gasType);
 								Object[] obj= {gasTypeCon.insertGasType(input_gasType),input_gasType};
 								dfttable_gasType.addRow(obj);
-								JOptionPane.showMessageDialog(null, "新增图书类型——"+input_gasType, "操作成功", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null, "新增煤气类型——"+input_gasType, "操作成功", JOptionPane.ERROR_MESSAGE);
 							}
 						} else {
 							JOptionPane.showMessageDialog(null, "您所输入的数据格式错误！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
@@ -98,15 +98,15 @@ public class ManageGasType {
 				bt_id = TableTool.cancelTableSelected(table_gasType, bt_id);
 			}
 		});
-		// 删除图书类型
+		// 删除煤气类型
 		jbt_gasType[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (bt_id != -1) {
-						int c = JOptionPane.showConfirmDialog(null, "是否确定删除此图书类型", "验证操作", JOptionPane.YES_NO_OPTION);
+						int c = JOptionPane.showConfirmDialog(null, "是否确定删除此煤气类型", "验证操作", JOptionPane.YES_NO_OPTION);
 						if (c == JOptionPane.YES_OPTION) {
 							if (gasCon.existGastype(bt_id)) {
-								JOptionPane.showMessageDialog(null, "此图书类型已经有图书使用，请尝试将此图书类型的图书删除后在删除此图书类型！！！", "操作失败",
+								JOptionPane.showMessageDialog(null, "此煤气类型已经有煤气使用，请尝试将此煤气类型的煤气删除后在删除此煤气类型！！！", "操作失败",
 										JOptionPane.ERROR_MESSAGE);
 							} else {
 								gasTypeCon.deleteGasType(bt_id);
@@ -114,7 +114,7 @@ public class ManageGasType {
 							}
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "您没有选中图书类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "您没有选中煤气类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -122,18 +122,18 @@ public class ManageGasType {
 				bt_id = TableTool.cancelTableSelected(table_gasType, bt_id);
 			}
 		});
-		// 修改图书类型
+		// 修改煤气类型
 		jbt_gasType[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (bt_id != -1) {
-					String input_gasType = JOptionPane.showInputDialog(null, "请您输入所要修改的图书类型(只能输入汉字)", "修改图书类型",
+					String input_gasType = JOptionPane.showInputDialog(null, "请您输入所要修改的煤气类型(只能输入汉字)", "修改煤气类型",
 							JOptionPane.YES_NO_OPTION);
 					try {
 						if (input_gasType != null && !input_gasType.equals("")) {
 							String regex = "^[\\u4e00-\\u9fa5]{0,}$";
 							boolean result = InputLimit.regular(regex, input_gasType);
 							if (result) {
-								int c = JOptionPane.showConfirmDialog(null, "是否确定修改此图书类型", "验证操作",
+								int c = JOptionPane.showConfirmDialog(null, "是否确定修改此煤气类型", "验证操作",
 										JOptionPane.YES_NO_OPTION);
 								if (c == JOptionPane.YES_OPTION) {
 									gasTypeCon.updateGasType(input_gasType, bt_id);
@@ -151,7 +151,7 @@ public class ManageGasType {
 						e1.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "未选择图书类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "未选择煤气类型！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
 				bt_id = TableTool.cancelTableSelected(table_gasType, bt_id);
 			}

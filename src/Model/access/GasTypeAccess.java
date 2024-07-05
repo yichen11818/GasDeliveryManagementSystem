@@ -11,14 +11,14 @@ import java.util.List;
 import Model.table.GasType;
 
 /**
- * 图书类型信息表的增删改查
- * @author rsw
+ * 煤气类型信息表的增删改查
+ *  
  *
  */
 public class GasTypeAccess {
 	
 	/**
-	 * 查询图书类型的id
+	 * 查询煤气类型的id
 	 * @throws SQLException 
 	 */
 	public int queryGasTypeid(String bt_name) throws SQLException {
@@ -36,7 +36,7 @@ public class GasTypeAccess {
 	}
 	
 	/**
-	 * 查询图书类型及其序号
+	 * 查询煤气类型及其序号
 	 */
 	public List<GasType> queryGasType() throws SQLException {
 		List<GasType> gasTypeData = new ArrayList<GasType>();
@@ -54,7 +54,7 @@ public class GasTypeAccess {
 		return gasTypeData;
 	}
 	/**
-	 * 新增图书类型
+	 * 新增煤气类型
 	 */
 	public int insertGasType(String bt_name) throws SQLException {
 		String sql = "INSERT INTO gasdms.gastype(bt_name) VALUES(?);";
@@ -72,7 +72,7 @@ public class GasTypeAccess {
 		return id;
 	}
 	/**
-	 * 删除图书类型
+	 * 删除煤气类型
 	 */
 	public void deleteGasType(int bt_id) throws SQLException {
 		String sql = "DELETE FROM gasdms.gastype WHERE bt_id=?";
@@ -80,7 +80,7 @@ public class GasTypeAccess {
 	}
 	/**
 	 * 
-	 * 修改图书类型
+	 * 修改煤气类型
 	 */
 	public void updateGasType(String input_gasType, int bt_id) throws SQLException {
 		String sql = "UPDATE gasdms.gastype SET bt_name='"+input_gasType+"' WHERE bt_id=?";

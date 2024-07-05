@@ -2,7 +2,7 @@ package Model.table;
 
 /**
  * 读者信息表字段 映射
- * @author rsw
+ *  
  *
  */
 public class User {

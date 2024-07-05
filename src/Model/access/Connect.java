@@ -5,7 +5,7 @@ import java.util.Vector;
 
 /**
  * 公共的sql连接及增删改查方法
- * @author rsw
+ *  
  *
  */
 public class Connect {

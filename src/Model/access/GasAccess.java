@@ -8,42 +8,42 @@ import java.sql.Statement;
 import java.util.Vector;
 
 /**
- * 图书信息表的增删改查
+ * 煤气信息表的增删改查
  * 
- * @author rsw
+ *  
  *
  */
 public class GasAccess {
 	/**
-	   * 精确查询、模糊查询（不包含图书类型）
+	   * 精确查询、模糊查询（不包含煤气类型）
 	 */
-	public Vector<Vector<Object>> inithavesold(String ISBN, String b_name, String author) throws SQLException {
-		String sql = "SELECT b_id,ISBN,b_name,bt_name,author,press,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype "
-				+ "ON gasdms.gas.gastype=gasdms.gastype.bt_id WHERE (ISBN LIKE ? OR b_name LIKE ? OR author LIKE ? )";
-		return Connect.queryDim_public(sql, ISBN, b_name, author);
+	public Vector<Vector<Object>> inithavesold(int g_id, String g_name, String author) throws SQLException {
+		String sql = "SELECT g_id,g_name,gastype,author,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype "
+				+ "ON gasdms.gas.gastype=gasdms.gastype.bt_id WHERE (g_id LIKE ? OR g_name LIKE ? OR author LIKE ? )";
+		return Connect.queryDim_public(sql, g_id, g_name, author);
 	}
 
 	/**
-	 * 查询全部图书
+	 * 查询全部煤气
 	 */
 	public Vector<Vector<Object>> seleGas() throws SQLException {
-		String sql = "SELECT b_id,ISBN,b_name,bt_name,author,press,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype "
+		String sql = "SELECT g_id,g_name,gastype,author,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype "
 				+ "ON gasdms.gas.gastype=gasdms.gastype.bt_id ";
 		return Connect.queryExact_public(sql);
 	}
 
 	/**
-	 * 精确查询、模糊查询（包含图书类型）
+	 * 精确查询、模糊查询（包含煤气类型）
 	 */
-	public Vector<Vector<Object>> queryGas(String ISBN, String b_name, String author, String b_type)
+	public Vector<Vector<Object>> queryGas(int g_id, String g_name, String author, String b_type)
 			throws SQLException {
-		String sql = "SELECT b_id,ISBN,b_name,bt_name,author,press,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype  "
-				+ " ON gasdms.gas.gastype=gasdms.gastype.bt_id WHERE (ISBN LIKE ? OR b_name LIKE ? OR author LIKE ? ) AND bt_name=? ";
+		String sql = "SELECT g_id,g_name,gastype,author,price,inventory from gasdms.gas LEFT JOIN gasdms.gastype  "
+				+ " ON gasdms.gas.gastype=gasdms.gastype.bt_id WHERE (g_id LIKE ? OR g_name LIKE ? OR author LIKE ? ) AND bt_name=? ";
 		Vector<Vector<Object>> dataVector = new Vector<Vector<Object>>(); // 存储所有数据，里面每个小的Vector是存单行的
 		Connection conn = Connect.connectMySQL();// 调用数据库的连接方法
 		PreparedStatement ptmt = conn.prepareStatement(sql);
-		ptmt.setString(1, "%" + ISBN + "%");
-		ptmt.setString(2, "%" + b_name + "%");
+		ptmt.setString(1, "%" + g_id+ "%");
+		ptmt.setString(2, "%" + g_name + "%");
 		ptmt.setString(3, "%" + author + "%");
 		ptmt.setString(4, b_type);
 		ResultSet rs = ptmt.executeQuery();
@@ -60,7 +60,7 @@ public class GasAccess {
 	}
 
 	/**
-	 * 查询图书类型
+	 * 查询煤气类型
 	 */
 	public Vector<String> seleGas_type() throws SQLException {
 		Connection conn = Connect.connectMySQL();
@@ -76,11 +76,11 @@ public class GasAccess {
 	}
 
 	/**
-	 * 查询图书类型id
+	 * 查询煤气类型id
 	 */
 	public int seleGas_name(String name) throws SQLException {
 		Connection conn = Connect.connectMySQL();
-		String sql = "SELECT b_id from gasdms.gas WHERE b_name=?";
+		String sql = "SELECT g_id from gasdms.gas WHERE g_name=?";
 		int count = 0;
 		PreparedStatement pr = conn.prepareStatement(sql);
 		pr.setString(1, name);
@@ -93,33 +93,33 @@ public class GasAccess {
 	}
 
 	/**
-	 * 删除图书
+	 * 删除煤气
 	 */
-	public void dropGas(int b_id) throws SQLException {
-		String sql = "DELETE FROM gasdms.gas WHERE b_id=?";
-		Connect.update_public(sql, b_id);
+	public void dropGas(int g_id) throws SQLException {
+		String sql = "DELETE FROM gasdms.gas WHERE g_id=?";
+		Connect.update_public(sql, g_id);
 	}
 
 	/**
-	 * 新增图书
+	 * 新增煤气
 	 */
-	public void insterGas(String ISBN, String b_name, int gastype, String author, String press, double price,
+	public void insterGas(int g_id, String g_name, int gastype, String author, double price,
 						  int inventory) throws SQLException {
-		String sql = "INSERT INTO gasdms.gas(ISBN,b_name,gastype,author,press,price,inventory) VALUES(?,?,?,?,?,?,?)";
-		Connect.update_public(sql, ISBN, b_name, gastype, author, press, price, inventory);
+		String sql = "INSERT INTO gasdms.gas(g_id,g_name,gastype,author,price,inventory) VALUES(?,?,?,?,?,?)";
+		Connect.update_public(sql, g_id, g_name, gastype,author, price, inventory);
 	}
 
 	/**
-	 * 修改图书信息
+	 * 修改煤气信息
 	 */
-	public void updateGas(String ISBN, String b_name, String author, String press, double price, int inventory,
-						  int b_id) throws SQLException {
-		String sql = "UPDATE gasdms.gas SET ISBN=?,b_name=?,author=?,press=?,price=?,inventory=? WHERE b_id=?";
-		Connect.update_public(sql, ISBN, b_name, author, press, price, inventory, b_id);
+	public void updateGas(int g_id, String g_name,  int gastype, String author,double price, int inventory
+						 ) throws SQLException {
+		String sql = "UPDATE gasdms.gas SET g_name=?,gastype=? ,author=?,price=?,inventory=? WHERE g_id=?";
+		Connect.update_public(sql, g_id, g_name,gastype, author, price, inventory);
 	}
 
 	/**
-	 * 查询是否有图书具备此图书类型 删除类图书类型前，保证没有图书应用此图书类型
+	 * 查询是否有煤气具备此煤气类型 删除类煤气类型前，保证没有煤气应用此煤气类型
 	 */
 	public boolean existGastype(int bt_id) throws SQLException {
 		String sql = "SELECT gastype FROM gasdms.gas WHERE gastype=?";
@@ -127,10 +127,10 @@ public class GasAccess {
 	}
 
 	/**
-	 * 查询图书ISBN是否存在 若存在，不能注册
+	 * 查询煤气g_id是否存在 若存在，不能注册
 	 */
-	public boolean isISBN(String ISBN) throws SQLException {
-		String sql = "SELECT ISBN FROM gasdms.gas WHERE ISBN=?";
-		return Connect.exist(sql, ISBN);
+	public boolean isgasId(int g_id) throws SQLException {
+		String sql = "SELECT ISBN FROM gasdms.gas WHERE g_id=?";
+		return Connect.exist(sql, g_id);
 	}
 }

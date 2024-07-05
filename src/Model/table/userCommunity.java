@@ -1,8 +1,8 @@
 package Model.table;
 
 /**
- * 读者类型表字段 映射
- * @author rsw
+ * 用户类型表字段 映射
+ *  
  */
 public class userCommunity {
 	private int u_id;

@@ -21,7 +21,7 @@ import Tool.TableTool;
 /**
  * 用户信息界面
  * 
- * @author rsw
+ *  
  *
  */
 public class UserMessage {
@@ -46,8 +46,8 @@ public class UserMessage {
 		panel.setLayout(null);
 
 		Vector<Vector<Object>> readerInfo = readercon.queryUserInfo(UserFace.count);
-		String[] columnReader = { "账号", "姓名", "性别", "院系", "班级", "手机号码", "电子邮箱" };
-		String[] columnReaderType = { "读者类型", "最大可借阅数量", "最大可借阅天数" };
+		String[] columnReader = { "账号", "姓名", "楼栋", "电话", "邮箱", "注册时间" };
+		String[] columnReaderType = { "小区", "最大户数", "当前户数" };
 		Vector<String> columnNameReader = new Vector<String>();// 字段名
 		Vector<String> columnNameReaderType = new Vector<String>();// 字段名
 		for (int k = 0; k < columnReader.length; k++) {
@@ -95,23 +95,23 @@ public class UserMessage {
 		//修改个人信息
 		alterX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JLabel[] jlab_reader = { new JLabel("账号："), new JLabel("院系："), new JLabel("班级："), new JLabel("手机号："),
+				JLabel[] jlab_reader = { new JLabel("账号："), new JLabel("姓名："), new JLabel("楼栋："), new JLabel("手机号："),
 						new JLabel("邮箱：") };
 				JLabel[] jlab_hint = { new JLabel("不可修改"), new JLabel("中文汉字"), new JLabel("中文汉字加数字"),
 						new JLabel("13、14、15、17、18开头"), new JLabel("邮箱格式") };
 				JTextField[] jtext_reader = new JTextField[5];
 				try {
 					Object[] readerUpdata = { UserFace.count,
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(1),
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(2),
 							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(3),
-							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(4),
-							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(5),
-							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(6) };
+							readercon.queryUserInfo(UserFace.count).elementAt(0).elementAt(4) };
 					new PubJdialog(210, 5, jlab_reader, jtext_reader, readerUpdata, 11, jlab_hint).setVisible(true);
 					if (PubJdialog.success) {
-						table_reader.setValueAt(jtext_reader[1].getText(), 0, 3);
-						table_reader.setValueAt(jtext_reader[2].getText(), 0, 4);
-						table_reader.setValueAt(jtext_reader[3].getText(), 0, 5);
-						table_reader.setValueAt(jtext_reader[4].getText(), 0, 6);
+						table_reader.setValueAt(jtext_reader[1].getText(), 0, 1);
+						table_reader.setValueAt(jtext_reader[2].getText(), 0, 2);
+						table_reader.setValueAt(jtext_reader[3].getText(), 0, 3);
+						table_reader.setValueAt(jtext_reader[4].getText(), 0, 4);
 						PubJdialog.success=false;
 					}
 				} catch (SQLException e1) {

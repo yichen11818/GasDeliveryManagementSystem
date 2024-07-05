@@ -7,16 +7,14 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 /**
- * 读者信息表的增删改查
+ * 用户信息表的增删改查
  * 
- * @author rsw
+ *  
  *
  */
 public class UserAccess {
 
-	/**
-	 * 注册时向reader表中添加信息S
-	 */
+	
 	public void insertUser(String r_number, String r_name, String community, String buildings,
 						   String r_tele, String r_email, String keeppass, String r_password) throws SQLException {
 		String sql = "INSERT INTO gasdms.user(number,name,community,buildings,tele,email,keeppass,password) VALUES(?,?,?,?,?,?,?,?)";
@@ -25,7 +23,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 查询账号是否存在 用于用户注册和新增读者（保证账号唯一性）
+	 * 查询账号是否存在 用于用户注册和新增用户（保证账号唯一性）
 	 */
 	public boolean isExist(String r_number) throws SQLException {
 		String sql = "SELECT number FROM gasdms.user WHERE number=?";
@@ -49,7 +47,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 修改读者信息
+	 * 修改用户信息
 	 */
 	public void updateUser(  String tele, String email, String number)
 			throws SQLException {
@@ -70,7 +68,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 查询 全部读者
+	 * 查询 全部用户
 	 */
 	public Vector<Vector<Object>> seleUser() throws SQLException {
 		String sql = "SELECT number,name,buildings,u_community,tele,email,logindate from gasdms.user,gasdms.usercommunity where gasdms.user.user_community=gasdms.usercommunity.u_id";
@@ -78,7 +76,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 查询读者的信息 模糊查寻
+	 * 查询用户的信息 模糊查寻
 	 */
 	public Vector<Vector<Object>> queryUserInfo(String number, String name)
 			throws SQLException {
@@ -88,7 +86,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 查询读者的信息 模糊查寻 类型查询 重写原因，读者类型如果模糊查寻，会出现读者类型相似性问题
+	 * 查询用户的信息 模糊查寻 类型查询 重写原因，用户类型如果模糊查寻，会出现用户类型相似性问题
 	 */
 	public Vector<Vector<Object>> seleUserInfo(String number, String name,
 											   String user_type) throws SQLException {
@@ -114,7 +112,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 删除读者信息
+	 * 删除用户信息
 	 */
 	public void dropUser(String studentNumber) throws SQLException {
 		String sql = "DELETE FROM gasdms.user WHERE number=?";
@@ -138,7 +136,7 @@ public class UserAccess {
 	}
 
 	/**
-	 * 查询是否有读者具备此读者类型 删除类读者类型前，保证没有读者应用此读者类型
+	 * 查询是否有用户具备此用户类型 删除类用户类型前，保证没有用户应用此用户类型
 	 */
 	public boolean existUsertype(int u_id) throws SQLException {
 		String sql = "SELECT user_community FROM gasdms.user WHERE user_community=?";

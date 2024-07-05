@@ -29,7 +29,7 @@ import Tool.PubJdialog;
 import Tool.TableTool;
 
 /**
- * 读者信息管理面板
+ * 用户信息管理面板
  */
 public class ManageUser {
 	int row;
@@ -76,7 +76,7 @@ public class ManageUser {
 			}
 		});
 		Vector<String> columnNameUser = new Vector<String>();// 字段名
-		String[] columnUser = { "账号", "姓名", "小区", "楼栋", "手机号码", "电子邮箱" };
+		String[] columnUser = { "账号", "姓名", "楼栋", "小区", "手机号码", "电子邮箱" };
 		for (int k = 0; k < columnUser.length; k++) {
 			columnNameUser.add(columnUser[k]);
 		}
@@ -166,7 +166,7 @@ public class ManageUser {
 						e1.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "您没有选中读者！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "您没有选中用户！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
 				studentNumber = TableTool.setNull(table_user, studentNumber);
 			}
@@ -182,12 +182,13 @@ public class ManageUser {
 				Object[] readerUpdata = { studentNumber, tele, email };
 				if (studentNumber != null) {
 					try {
-						new PubJdialog(210, 5, jlab_user, jtext_user, readerUpdata, 2,jlab_hint).setVisible(true);
+						new PubJdialog(210, 5, jlab_user, jtext_user,
+								readerUpdata, 2,jlab_hint).setVisible(true);
 						if (PubJdialog.success) {
-							table_user.setValueAt(jtext_user[1].getText(), row, 4);
-							table_user.setValueAt(jtext_user[2].getText(), row, 5);
-							table_user.setValueAt(jtext_user[3].getText(), row, 6);
-							table_user.setValueAt(jtext_user[4].getText(), row, 7);
+							table_user.setValueAt(jtext_user[1].getText(), row, 1);
+							table_user.setValueAt(jtext_user[2].getText(), row, 2);
+							table_user.setValueAt(jtext_user[3].getText(), row, 3);
+							table_user.setValueAt(jtext_user[4].getText(), row, 4);
 							PubJdialog.success=false;
 						}
 					} catch (SQLException e1) {
@@ -195,7 +196,7 @@ public class ManageUser {
 						e1.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "您没有选中读者！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "您没有选中用户！！！", "操作失败", JOptionPane.ERROR_MESSAGE);
 				}
 				studentNumber = TableTool.setNull(table_user, studentNumber);
 			}

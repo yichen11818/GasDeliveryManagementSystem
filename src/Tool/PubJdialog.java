@@ -95,7 +95,7 @@ public class PubJdialog extends JDialog {
 
 	/**
 	 * 管理员端新增图书的输入对话框 构造方法的重载
-	 * 
+	 *
 	 * 新增图书的对话框
 	 */
 	public PubJdialog() throws SQLException {
@@ -171,9 +171,9 @@ public class PubJdialog extends JDialog {
 						}
 						if (message.equals("")) {// 进行正则验证
 							// ISBN不存在才可以新增
-							if (!gasCon.isISBN(jtext_insterGas[0].getText())) {
-								gasCon.insterGas(jtext_insterGas[0].getText(), jtext_insterGas[1].getText(),
-										gastype, jtext_insterGas[2].getText(), jtext_insterGas[3].getText(),
+							if (!gasCon.isGASID(Integer.parseInt(jtext_insterGas[0].getText()))) {
+								gasCon.insterGas(Integer.parseInt(jtext_insterGas[0].getText()), jtext_insterGas[1].getText(),
+										gastype, jtext_insterGas[2].getText(),
 										Double.valueOf(jtext_insterGas[4].getText()),
 										Integer.parseInt(jtext_insterGas[5].getText()));
 								JOptionPane.showMessageDialog(null, "新增图书成功", "操作成功", JOptionPane.ERROR_MESSAGE);
@@ -484,7 +484,7 @@ public class PubJdialog extends JDialog {
 	public PubJdialog(int dialogHeight, int dialogRow, JLabel[] jlab_update, JTextField[] jtext_update,
 			Object[] alterData, int tablePanelIndex, JLabel[] jlab_hint) throws SQLException {
 		JPanel jpan_update = new JPanel(new GridLayout(dialogRow, 3));
-		JButton jbt_update = new JButton("确人");
+		JButton jbt_update = new JButton("确认");
 		boolean[] isAlter_boolean = new boolean[jtext_update.length];
 		setTitle("修改功能");
 		setModal(true);// 是否阻止在显示的时候将内容输入其他窗口,只能操作此对话框
@@ -494,7 +494,7 @@ public class PubJdialog extends JDialog {
 		for (int i = 0; i < jtext_update.length; i++) {
 			jtext_update[i] = new JTextField();
 			if (tablePanelIndex == 0) {
-				int[] inuput_int = { 11, 10, 10, 10, 11, 10, 3 };// 输入框限制输入位数
+				int[] inuput_int = { 11, 10, 10, 11,10,10, 3 };// 输入框限制输入位数
 				jtext_update[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
 			} else if (tablePanelIndex == 2) {
 				int[] inuput_int = { 11, 10, 10, 11, 20 };// 输入框限制输入位数
@@ -510,6 +510,11 @@ public class PubJdialog extends JDialog {
 				jtext_update[i].setDocument(new InputLimit(inuput_int[i]));// 限制输入
 			}
 			jlab_update[i].setHorizontalAlignment(0);
+			if (jlab_update[i] == null) {
+				System.out.println("jlab_update[" + i + "] is null");
+			} else {
+				System.out.println("jlab_update[" + i + "]: " +jlab_update[i].toString());
+			}
 			jtext_update[i].setText(alterData[i].toString());
 			jlab_hint[i].setForeground(Color.RED);
 			jpan_update.add(jlab_update[i]);
@@ -537,13 +542,11 @@ public class PubJdialog extends JDialog {
 							 * 判断第几个选项卡窗格的修改功能 0为修改图书信息
 							 */
 							if (tablePanelIndex == 0) {
-								String[] regex = { InputLimit.ISBN, InputLimit.CHINESEENGLISHMATH,
-										InputLimit.CHINESEENGLISH, InputLimit.CHINESEENGLISH, InputLimit.DECIMAL,
-										InputLimit.INT };
+								String[] regex = { InputLimit.INT, InputLimit.CHINESEENGLISHMATH,
+										InputLimit.INT,InputLimit.CHINESE,InputLimit.DECIMAL, InputLimit.INT };
 								String[] input = { jtext_update[1].getText(), jtext_update[2].getText(),
-										jtext_update[3].getText(), jtext_update[4].getText(), jtext_update[5].getText(),
-										jtext_update[6].getText() };
-								String[] hintError = { "ISBN格式错误", "书名格式错误", "作者格式出错", "出版社格式出错", "价格格式错误", "库存量格式错误" };
+										jtext_update[3].getText(), jtext_update[4].getText(),jtext_update[5].getText(),jtext_update[6].getText()};
+								String[] hintError = { "煤气ID格式错误", "煤气名格式错误","煤气类型格式错误" ,"供应商名格式出错", "价格格式错误", "库存量格式错误" };
 								String message = "";
 								boolean result[] = InputLimit.regular(regex, input);
 								for (int i = 0; i < result.length; i++) {
@@ -552,12 +555,10 @@ public class PubJdialog extends JDialog {
 									}
 								}
 								if (message.equals("")) {
-									gasCon.updateGas(jtext_update[1].getText().toString(),
-											jtext_update[2].getText().toString(), jtext_update[3].getText().toString(),
-											jtext_update[4].getText().toString(),
-											Double.valueOf(jtext_update[5].getText().toString()),
-											Integer.valueOf(jtext_update[6].getText().toString()),
-											Integer.valueOf(jtext_update[0].getText().toString()));
+									gasCon.updateGas(Integer.valueOf(jtext_update[1].getText().toString()),
+											jtext_update[2].getText().toString(), Integer.valueOf(jtext_update[3].getText().toString()),
+											jtext_update[4].getText().toString(), Double.valueOf(jtext_update[5].getText().toString()),
+											Integer.valueOf(jtext_update[6].getText().toString()));
 									JOptionPane.showMessageDialog(null, "信息修改成功", "操作成功",
 											JOptionPane.INFORMATION_MESSAGE);
 									dispose();

@@ -8,14 +8,14 @@ import java.sql.Statement;
 import java.util.Vector;
 
 /**
- * 读者类型信息表的增删改查
- * @author rsw
+ * 用户类型信息表的增删改查
+ *  
  *
  */
 public class UserCommunityAccess {
 
 	/**
-	 * 查询读者类型
+	 * 查询用户类型
 	 * @throws SQLException 
 	 */
 	public Object[][] queryUserType() throws SQLException{
@@ -40,7 +40,7 @@ public class UserCommunityAccess {
 		return data_readerType;
 	}
 	/**
-	 * 查询读者类型的ID
+	 * 查询用户类型的ID
 	 */
 	public int queryUserTypeID(String user_community) throws SQLException {
 		Connection conn = Connect.connectMySQL();
@@ -60,12 +60,12 @@ public class UserCommunityAccess {
 	 */
 	public Vector<Vector<Object>> queryPersonalType(String count) throws SQLException {
 		int column=3;
-		String sql="SELECT u_community FROM gasdms.usercommunity "
+		String sql="SELECT u_community,maxcount,nowcount FROM gasdms.usercommunity "
 				+ "WHERE u_id IN ( SELECT user_community FROM gasdms.user WHERE number=? )";
 		return Connect.queryExact_public(sql,count);	
 	}	
 	/**
-	 * 新增读者类型
+	 * 新增用户类型
 	 * @throws SQLException 
 	 */
 	public void insertUserType(String u_community, int maxcont, int nowcount) throws SQLException {
@@ -73,14 +73,14 @@ public class UserCommunityAccess {
 		Connect.update_public(sql, u_community,maxcont,nowcount);
 	}
 	/**
-	 *删除读者类型
+	 *删除用户类型
 	 */
 	public void deleteUserType(int u_id) throws SQLException {
 		String sql = "DELETE FROM gasdms.usercommunity WHERE u_id=?";
 		Connect.update_public(sql, u_id);
 	}
 	/**
-	 * 修改读者类型
+	 * 修改用户类型
 	 */
 	public void updateUserType(String readerType, int maxcount, int nowcount, int u_id) throws SQLException {
 		String sql = "UPDATE gasdms.usercommunity SET u_community=?,maxcount=?,nowcount=? WHERE u_id=?";

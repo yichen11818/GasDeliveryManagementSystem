@@ -10,7 +10,7 @@ import javax.swing.JTabbedPane;
 
 /**
  * 用户端界面
- * @author rsw
+ *  
  *
  */
 public class UserFace extends JFrame {
@@ -19,12 +19,12 @@ public class UserFace extends JFrame {
 	JTabbedPane jtab = new JTabbedPane(JTabbedPane.TOP);// 创建选项卡窗格，选项卡标题在上方
 	JPanel[] jpan = new JPanel[5];
 	UserGas userGas =new UserGas();
-	UserReturn userReturn=new UserReturn();
+	UserCloseGas userCloseGas =new UserCloseGas();
 	UserMessage userMessage =new UserMessage();
 	public UserFace(String count) throws SQLException {
 		this.count = count;
 		this.setLayout(null);
-		this.setTitle("图书管理系统（用户端）");
+		this.setTitle("煤气管理系统（用户端）");
 		this.setSize(WIDTH, HEIGHT);
 		this.setLocationRelativeTo(null);// 设置窗体居中显示
 		this.setResizable(false);// 窗口不能改变大小
@@ -33,11 +33,11 @@ public class UserFace extends JFrame {
 		jtab.setSize(WIDTH, HEIGHT);
 		
 		jpan[0] = userGas.addPanel0();
-		jtab.addTab("图书查询借阅", jpan[0]);
+		jtab.addTab("煤气选择", jpan[0]);
 		jtab.setSelectedIndex(0);
 		
-		jpan[1] = userReturn.addPanel1();
-		jtab.addTab("借阅归还信息管理", jpan[1]);
+		jpan[1] = userCloseGas.addPanel1();
+		jtab.addTab("煤气使用管理", jpan[1]);
 
 		jpan[2] = userMessage.addPanel2();
 		jtab.addTab("个人信息管理", jpan[2]);
