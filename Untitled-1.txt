@@ -4,7 +4,8 @@ reader_type community
  r_type  u_community
 rt_id u_id
 rt_name u_community
-readertype usercommunity
-"煤气ID", "煤气名", "供应商名", "煤气类型", "价格", "库存量" 
+readertype u"煤气ID", "煤气名", , "煤气类型","供应商名", double"价格",inbt "库存量" sercommunity
+
+g_id, g_name, gastype, author, price, inventory
  "序号", "小区名", "总户数" };
  书名-> 煤气名

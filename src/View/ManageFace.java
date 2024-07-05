@@ -23,7 +23,7 @@ public class ManageFace extends JFrame {
 	ManageUser manageUser =new ManageUser();
 	ManageGasType manageGasType =new ManageGasType();
 	ManageUserCommunity manageUserCommunity =new ManageUserCommunity();
-	ManageBorrowInfo manageBorrowInfo =new  ManageBorrowInfo();
+	ManageChoseInfo manageChoseInfo =new  ManageChoseInfo();
 	ManageSuper manageSuper =new  ManageSuper();	
 	public ManageFace(String count) throws SQLException {
 		this.count=count;
@@ -50,7 +50,7 @@ public class ManageFace extends JFrame {
 		jpan[2] = manageUserCommunity.addPanel3();
 		jtab.addTab("小区管理   ", jpan[2]);
 
-		jpan[3] = manageBorrowInfo.addPanel4();
+		jpan[3] = manageChoseInfo.addPanel4();
 		jtab.addTab("用户煤气管理", jpan[3]);
 		
 		jpan[4] = manageSuper.addPanel5(count);

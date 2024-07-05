@@ -182,12 +182,13 @@ public class ManageUser {
 				Object[] readerUpdata = { studentNumber, tele, email };
 				if (studentNumber != null) {
 					try {
-						new PubJdialog(210, 5, jlab_user, jtext_user, readerUpdata, 2,jlab_hint).setVisible(true);
+						new PubJdialog(210, 5, jlab_user, jtext_user,
+								readerUpdata, 2,jlab_hint).setVisible(true);
 						if (PubJdialog.success) {
-							table_user.setValueAt(jtext_user[1].getText(), row, 4);
-							table_user.setValueAt(jtext_user[2].getText(), row, 5);
-							table_user.setValueAt(jtext_user[3].getText(), row, 6);
-							table_user.setValueAt(jtext_user[4].getText(), row, 7);
+							table_user.setValueAt(jtext_user[1].getText(), row, 1);
+							table_user.setValueAt(jtext_user[2].getText(), row, 2);
+							table_user.setValueAt(jtext_user[3].getText(), row, 3);
+							table_user.setValueAt(jtext_user[4].getText(), row, 4);
 							PubJdialog.success=false;
 						}
 					} catch (SQLException e1) {

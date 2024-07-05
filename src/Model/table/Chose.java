@@ -5,21 +5,21 @@ package Model.table;
  * @author rsw
  *
  */
-public class Borrow {
-	private int borrow_id;
+public class Chose {
+	private int chose_id;
 	private String r_number;
-	private int borrow_b_id;
-	private int borrowdate;
+	private int chose_b_id;
+	private int chosedate;
 	private int duedate;
 	private int returndate;
 	private boolean isreturn;
 
-	public int getBorrow_id() {
-		return borrow_id;
+	public int getChose_id() {
+		return chose_id;
 	}
 
-	public void setBorrow_id(int borrow_id) {
-		this.borrow_id = borrow_id;
+	public void setChose_id(int chose_id) {
+		this.chose_id = chose_id;
 	}
 
 	public String getR_number() {
@@ -30,20 +30,20 @@ public class Borrow {
 		this.r_number = r_number;
 	}
 
-	public int getBorrow_b_id() {
-		return borrow_b_id;
+	public int getChose_b_id() {
+		return chose_b_id;
 	}
 
-	public void setBorrow_b_id(int borrow_b_id) {
-		this.borrow_b_id = borrow_b_id;
+	public void setChose_b_id(int chose_b_id) {
+		this.chose_b_id = chose_b_id;
 	}
 
-	public int getBorrowdate() {
-		return borrowdate;
+	public int getChosedate() {
+		return chosedate;
 	}
 
-	public void setBorrowdate(int borrowdate) {
-		this.borrowdate = borrowdate;
+	public void setChosedate(int chosedate) {
+		this.chosedate = chosedate;
 	}
 
 	public int getDuedate() {

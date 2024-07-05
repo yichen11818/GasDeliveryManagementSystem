@@ -5,36 +5,27 @@ package Model.table;
  * @author rsw
  */
 public class Gas {
-	private int b_id;
-	private String ISBN;
-	private String b_name;
+	private int g_id;
+	private String g_name;
 	private int gastype;
 	private String author;
 	private double price;
 	private int invebtory;
 
-	public int getB_id() {
-		return b_id;
+	public int getG_id() {
+		return g_id;
 	}
 
-	public void setB_id(int b_id) {
-		this.b_id = b_id;
-	}
-
-	public String getISBN() {
-		return ISBN;
-	}
-
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setG_id(int g_id) {
+		this.g_id = g_id;
 	}
 
 	public String getB_name() {
-		return b_name;
+		return g_name;
 	}
 
-	public void setB_name(String b_name) {
-		this.b_name = b_name;
+	public void setB_name(String g_name) {
+		this.g_name = g_name;
 	}
 
 	public int getGastype() {

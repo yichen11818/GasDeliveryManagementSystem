@@ -60,7 +60,7 @@ public class UserCommunityAccess {
 	 */
 	public Vector<Vector<Object>> queryPersonalType(String count) throws SQLException {
 		int column=3;
-		String sql="SELECT u_community FROM gasdms.usercommunity "
+		String sql="SELECT u_community,maxcount,nowcount FROM gasdms.usercommunity "
 				+ "WHERE u_id IN ( SELECT user_community FROM gasdms.user WHERE number=? )";
 		return Connect.queryExact_public(sql,count);	
 	}	
